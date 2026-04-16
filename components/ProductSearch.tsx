@@ -3,12 +3,13 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import { products } from '@/lib/products'
+import { discountedFmt } from '@/lib/price'
 
 const INDEX = products.map((p) => ({
   slug: p.slug,
   name: p.name,
   category: p.category,
-  price: p.price,
+  price: discountedFmt(p.priceNum),
   haystack: `${p.name} ${p.category} ${p.tags?.join(' ') ?? ''}`.toLowerCase(),
 }))
 

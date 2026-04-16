@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Product } from '@/lib/products'
+import { discountedFmt } from '@/lib/price'
 
 export default function HeroCarousel({ items }: { items: Product[] }) {
   const [i, setI] = useState(0)
@@ -58,7 +59,10 @@ export default function HeroCarousel({ items }: { items: Product[] }) {
                 >
                   {it.name}
                 </Link>
-                <span className="text-lg font-bold text-ink-900">{it.price}</span>
+                <span className="flex items-baseline gap-1.5">
+                  <span className="text-lg font-black text-ink-900">{discountedFmt(it.priceNum)}</span>
+                  <span className="text-xs font-medium text-ink-400 line-through">{it.price}</span>
+                </span>
               </div>
               <Link
                 href={`/go/${it.slug}`}

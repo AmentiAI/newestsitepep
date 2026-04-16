@@ -1,6 +1,8 @@
 import Link from 'next/link'
 import Image from 'next/image'
 import type { Product } from '@/lib/products'
+import { discountedFmt } from '@/lib/price'
+import { SITE } from '@/lib/site'
 import Rating from './Rating'
 
 export default function ProductCard({ p }: { p: Product }) {
@@ -22,13 +24,19 @@ export default function ProductCard({ p }: { p: Product }) {
             {p.badge}
           </span>
         )}
+        <span className="absolute right-2 top-2 rounded-md bg-red-600 px-2 py-0.5 text-xs font-black text-white shadow-sm">
+          -{SITE.promoPercent}%
+        </span>
       </div>
       <div className="flex flex-1 flex-col gap-2 p-4">
         <div className="text-xs font-semibold uppercase tracking-wide text-brand-600">{p.category}</div>
         <div className="font-semibold text-ink-900">{p.name}</div>
         <Rating slug={p.slug} compact />
         <div className="mt-auto flex items-center justify-between pt-2">
-          <span className="font-bold text-ink-900">{p.price}</span>
+          <span className="flex items-baseline gap-1.5">
+            <span className="font-bold text-ink-900">{discountedFmt(p.priceNum)}</span>
+            <span className="text-xs font-medium text-ink-400 line-through">{p.price}</span>
+          </span>
           <span className="text-xs font-bold text-brand-600">Buy →</span>
         </div>
       </div>

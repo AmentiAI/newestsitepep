@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { products, getProduct } from '@/lib/products'
 import { contentFor } from '@/lib/content'
 import { SITE } from '@/lib/site'
+import { discountedFmt } from '@/lib/price'
 import { productJsonLd, breadcrumbJsonLd, faqJsonLd, JsonLd } from '@/lib/schema'
 import Rating from '@/components/Rating'
 import ProductCard from '@/components/ProductCard'
@@ -78,24 +79,22 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             <p className="mt-3 leading-relaxed text-ink-700">{c.overview}</p>
           )}
 
-          <div className="mt-6 flex items-baseline gap-3">
-            <span className="text-3xl font-bold text-ink-900">{p.price}</span>
-            <span className="text-sm text-ink-500">USD · ships lyophilized</span>
+          <div className="mt-6 flex flex-wrap items-baseline gap-3">
+            <span className="text-3xl font-black text-ink-900">{discountedFmt(p.priceNum)}</span>
+            <span className="text-xl font-medium text-ink-400 line-through">{p.price}</span>
+            <span className="rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white">
+              SAVE {SITE.promoPercent}%
+            </span>
           </div>
-
-          <div className="mt-4 inline-flex items-center gap-2 rounded-md border-2 border-brand-400 bg-brand-50 px-3 py-2 text-sm font-semibold text-ink-900">
-            <span className="inline-block h-2 w-2 rounded-full bg-brand-500" />
-            Save {SITE.promoPercent}% with code{' '}
-            <span className="rounded bg-brand-400 px-1.5 py-0.5 font-black text-ink-900">{SITE.promoCode}</span>
-          </div>
+          <div className="mt-1 text-sm text-ink-500">USD · ships lyophilized · discount auto-applied</div>
 
           <Link
             href={`/go/${p.slug}`}
             target="_blank"
             rel="noopener nofollow sponsored"
-            className="btn-yellow mt-4 inline-flex items-center gap-2"
+            className="btn-yellow mt-5 inline-flex items-center gap-2"
           >
-            Buy now — {SITE.promoPercent}% off with {SITE.promoCode} →
+            Buy now →
           </Link>
 
           <div className="mt-4 flex flex-wrap gap-2">

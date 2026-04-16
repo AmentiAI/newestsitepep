@@ -3,7 +3,6 @@ import './globals.css'
 import { SITE } from '@/lib/site'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
-import AnnouncementBar from '@/components/AnnouncementBar'
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.baseUrl),
@@ -43,7 +42,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="en">
       <body className="bg-tide-gradient min-h-screen flex flex-col">
-        <AnnouncementBar />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />

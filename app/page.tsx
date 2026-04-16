@@ -59,7 +59,7 @@ export default function HomePage() {
             </p>
             <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
               <Link href="/products" className="btn-yellow">
-                Buy now — {SITE.promoPercent}% off ({SITE.promoCode})
+                Buy research peptides — {SITE.promoPercent}% off sitewide
               </Link>
               <Link
                 href="/go/shop"
