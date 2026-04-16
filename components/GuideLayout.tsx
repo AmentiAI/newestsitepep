@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { products } from '@/lib/products'
 import ProductCard from './ProductCard'
+import RelatedLinks from './RelatedLinks'
 
 export default function GuideLayout({
   eyebrow,
@@ -8,12 +9,14 @@ export default function GuideLayout({
   lead,
   children,
   related,
+  crossLinks,
 }: {
   eyebrow: string
   title: string
   lead: string
   children: React.ReactNode
   related?: string[]
+  crossLinks?: React.ComponentProps<typeof RelatedLinks>['keys']
 }) {
   const relatedProducts = (related ?? [])
     .map((s) => products.find((p) => p.slug === s))
@@ -38,6 +41,10 @@ export default function GuideLayout({
             {relatedProducts.map((p) => <ProductCard key={p.slug} p={p} />)}
           </div>
         </section>
+      )}
+
+      {crossLinks && crossLinks.length > 0 && (
+        <RelatedLinks keys={crossLinks} />
       )}
 
       <div className="mt-12 card bg-brand-50 border-brand-400 p-6">

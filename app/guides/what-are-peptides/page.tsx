@@ -18,6 +18,7 @@ export default function Page() {
       title="What Are Peptides? A Beginner's Guide"
       lead="Peptides are short chains of amino acids — the same building blocks proteins are made of, just smaller. That size difference turns out to matter a lot for biology, pharmacology, and the way peptides have come to dominate the research-compound space."
       related={['bpc-157-10mg', 'semaglutide-6mg', 'ghk-cu-50mg', 'ipamorelin-10mg']}
+      crossLinks={['glossary', 'recon', 'calc', 'wheretobuy', 'stacks', 'products']}
     >
       <H2>Peptide vs protein: where's the line?</H2>
       <P>

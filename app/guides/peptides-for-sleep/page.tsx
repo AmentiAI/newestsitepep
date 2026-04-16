@@ -18,6 +18,7 @@ export default function Page() {
       title="Peptides for Sleep and Cognitive Support"
       lead="The sleep and nootropic peptide space is narrower than the fat-loss or growth-axis categories — but it's dominated by compounds with decades of research behind them, most of it from Russian neuropharmacology groups."
       related={['selank-10mg', 'n-acetyl-semax-amidate-30mg', 'dsip-delta-sleep-inducing-peptide-10mg', 'pinealon-20mg']}
+      crossLinks={['basics', 'glossary', 'calc', 'recon', 'stacks', 'products']}
     >
       <H2>DSIP: the original "sleep peptide"</H2>
       <P>

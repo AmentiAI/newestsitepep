@@ -18,6 +18,7 @@ export default function Page() {
       title="Peptides for Fat Loss: GLP-1, GIP, and Beyond"
       lead="The peptide fat-loss space has exploded. What used to be a single-drug conversation (semaglutide) is now a receptor-coverage arms race — dual agonists, triple agonists, and combinations with amylin analogs. Here's how the major players compare."
       related={['semaglutide-6mg', 'tirzepatide-15mg', 'retatrutide-10mg', 'cagri-sema-blend-5mg-cagrilintide-5mg-sema-10mg']}
+      crossLinks={['sema', 'stacks', 'calc', 'recon', 'wheretobuy', 'products']}
     >
       <H2>Semaglutide: the GLP-1 benchmark</H2>
       <P>

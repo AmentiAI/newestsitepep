@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import RelatedLinks from '@/components/RelatedLinks'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -90,6 +91,8 @@ export default function Page() {
           </section>
         ))}
       </div>
+
+      <RelatedLinks keys={['basics', 'calc', 'recon', 'stacks', 'sema', 'products']} />
 
       <section className="mt-12 card bg-brand-50 border-brand-400 p-6 sm:p-8">
         <h2 className="text-xl font-bold text-ink-900">Ready to browse compounds?</h2>

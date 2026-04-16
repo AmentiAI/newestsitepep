@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import Link from 'next/link'
+import RelatedLinks from '@/components/RelatedLinks'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -81,6 +82,8 @@ export default function GuidesIndex() {
           </Link>
         ))}
       </div>
+
+      <RelatedLinks title="Tools and references" keys={['calc', 'recon', 'glossary', 'wheretobuy', 'products', 'looksmaxxing']} />
     </div>
   )
 }

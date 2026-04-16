@@ -18,6 +18,7 @@ export default function Page() {
       title="Semaglutide vs Tirzepatide vs Retatrutide"
       lead="Three generations of the same idea, each adding more receptors. Semaglutide activates one receptor. Tirzepatide activates two. Retatrutide activates three. Here's the detailed comparison."
       related={['semaglutide-6mg', 'tirzepatide-15mg', 'retatrutide-15mg', 'cagri-sema-blend-5mg-cagrilintide-5mg-sema-10mg']}
+      crossLinks={['fatloss', 'stacks', 'calc', 'recon', 'wheretobuy', 'products']}
     >
       <H2>Receptor coverage at a glance</H2>
       <UL>

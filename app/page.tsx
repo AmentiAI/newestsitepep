@@ -3,6 +3,7 @@ import { products, categories } from '@/lib/products'
 import { familyForSlug } from '@/lib/content'
 import ProductCard from '@/components/ProductCard'
 import HeroCarousel from '@/components/HeroCarousel'
+import RelatedLinks from '@/components/RelatedLinks'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -51,9 +52,10 @@ export default function HomePage() {
               For All Your Peptides
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-700 sm:mt-6 sm:text-lg">
-              {SITE.name} is a curated index — organised by pathway, with lot-matched
-              certificates of analysis and a single source for purchase. No upsells,
-              no mystery stacks. Just a clean list you can actually navigate.
+              Buy research peptides the clean way. {SITE.name} is a one-stop index
+              for purchasing lot-matched, COA-backed vials — organised by pathway,
+              priced transparently, routed through a single vetted supplier. No
+              upsells, no mystery stacks. Just a catalogue you can actually buy from.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
               <Link href="/products" className="btn-yellow">Browse the catalogue</Link>
@@ -106,6 +108,10 @@ export default function HomePage() {
         <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">
           {grid.map((p) => <ProductCard key={p.slug} p={p} />)}
         </div>
+      </section>
+
+      <section className="mx-auto max-w-7xl px-4 sm:px-6">
+        <RelatedLinks title="Start here" keys={['wheretobuy', 'calc', 'recon', 'glossary', 'guides', 'looksmaxxing']} />
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">

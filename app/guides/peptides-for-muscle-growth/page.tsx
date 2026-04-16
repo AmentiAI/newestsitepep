@@ -18,6 +18,7 @@ export default function Page() {
       title="Peptides for Muscle Growth and Recovery"
       lead="The muscle-growth peptide conversation splits cleanly in two: compounds that amplify the growth-hormone axis, and compounds that accelerate soft-tissue recovery between training. The best-documented stacks combine one from each lane."
       related={['ipamorelin-10mg', 'cjc-1295-no-dac-10mg', 'igf-1-lr3-1mg', 'bpc-157-10mg']}
+      crossLinks={['stacks', 'bpc', 'calc', 'recon', 'glossary', 'products']}
     >
       <H2>The growth-hormone axis: two receptors, two peptide classes</H2>
       <P>

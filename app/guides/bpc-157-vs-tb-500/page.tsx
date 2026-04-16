@@ -23,6 +23,7 @@ export default function Page() {
         'bpc-157-tb-500-blend-bpc-157-10mg-tb-500-10mg',
         'bpc-157-tb-500-blend-bpc-157-5mg-tb-500-5mg',
       ]}
+      crossLinks={['stacks', 'muscle', 'recon', 'calc', 'glossary', 'products']}
     >
       <H2>The 30-second version</H2>
       <UL>

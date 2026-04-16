@@ -21,6 +21,7 @@ export default function Looksmaxxing() {
       eyebrow="Looksmaxxing"
       title="Looksmaxxing Peptides: The Complete Stack Breakdown"
       lead="Looksmaxxing communities talk about peptides a lot — GHK-Cu for skin, Melanotan II for tan, PT-141 for libido, the growth-axis stacks for lean mass, BPC-157/TB-500 for recovery between training. Here's what each compound actually does, which vials make sense to start with, and which combinations pop up most."
+      crossLinks={['skin', 'muscle', 'fatloss', 'stacks', 'calc', 'products']}
       related={[
         'ghk-cu-50mg',
         'melanotan-2-10mg',

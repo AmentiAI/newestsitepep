@@ -8,6 +8,7 @@ import { SITE } from '@/lib/site'
 import { productJsonLd, breadcrumbJsonLd, faqJsonLd, JsonLd } from '@/lib/schema'
 import Rating from '@/components/Rating'
 import ProductCard from '@/components/ProductCard'
+import RelatedLinks from '@/components/RelatedLinks'
 
 export const dynamic = 'force-static'
 export const revalidate = 86400
@@ -189,6 +190,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           </div>
         </section>
       )}
+
+      <RelatedLinks keys={['calc', 'recon', 'glossary', 'wheretobuy', 'stacks', 'guides']} />
 
       <JsonLd data={productJsonLd(p)} />
       <JsonLd

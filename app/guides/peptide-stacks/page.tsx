@@ -17,6 +17,7 @@ export default function Page() {
       eyebrow="Stacks Guide"
       title="Popular Peptide Stacks Explained"
       lead="Most research-peptide work pairs compounds that hit different arms of the same system. Here's a breakdown of the combinations that keep appearing in the literature and why they make sense."
+      crossLinks={['bpc', 'sema', 'muscle', 'fatloss', 'calc', 'recon']}
       related={[
         'bpc-157-tb-500-blend-bpc-157-10mg-tb-500-10mg',
         'ipamorelin-cjc-1295-blend-cjc-1295-5mg-ipa-5mg',

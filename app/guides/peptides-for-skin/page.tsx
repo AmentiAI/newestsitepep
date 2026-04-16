@@ -18,6 +18,7 @@ export default function Page() {
       title="Peptides for Skin, Hair, and Anti-Aging"
       lead="Cosmetic peptide research has a much longer history than most people assume. GHK-Cu appeared in the dermatology literature in the 1970s. Here's what the current catalogue of skin-and-aging peptides actually covers and how the formats differ."
       related={['ghk-cu-50mg', 'epitalon-50mg', 'glow-blend-50mg', 'klow-blend-80mg']}
+      crossLinks={['looksmaxxing', 'stacks', 'bpc', 'recon', 'glossary', 'products']}
     >
       <H2>GHK-Cu: the copper peptide</H2>
       <P>
