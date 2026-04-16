@@ -2,16 +2,101 @@
 
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
+import Image from 'next/image'
 import { products } from '@/lib/products'
 import { discountedFmt } from '@/lib/price'
 
-const INDEX = products.map((p) => ({
+type Row = {
+  slug: string
+  name: string
+  category: string
+  price: string
+  image: string
+  nameLower: string
+  tokens: string[]
+  tags: string[]
+}
+
+const INDEX: Row[] = products.map((p) => ({
   slug: p.slug,
   name: p.name,
   category: p.category,
   price: discountedFmt(p.priceNum),
-  haystack: `${p.name} ${p.category} ${p.tags?.join(' ') ?? ''}`.toLowerCase(),
+  image: p.image,
+  nameLower: p.name.toLowerCase(),
+  tokens: p.name.toLowerCase().split(/[\s\-\/(),]+/).filter(Boolean),
+  tags: (p.tags ?? []).map((t) => t.toLowerCase()),
 }))
+
+// Tiny Levenshtein for typo tolerance on short tokens.
+function lev(a: string, b: string, cap = 3) {
+  if (Math.abs(a.length - b.length) > cap) return cap + 1
+  const m = a.length
+  const n = b.length
+  const dp: number[] = Array(n + 1)
+  for (let j = 0; j <= n; j++) dp[j] = j
+  for (let i = 1; i <= m; i++) {
+    let prev = dp[0]
+    dp[0] = i
+    let rowMin = dp[0]
+    for (let j = 1; j <= n; j++) {
+      const tmp = dp[j]
+      dp[j] =
+        a[i - 1] === b[j - 1]
+          ? prev
+          : 1 + Math.min(prev, dp[j], dp[j - 1])
+      prev = tmp
+      if (dp[j] < rowMin) rowMin = dp[j]
+    }
+    if (rowMin > cap) return cap + 1
+  }
+  return dp[n]
+}
+
+function scoreToken(row: Row, token: string): number {
+  if (!token) return 0
+  if (row.nameLower === token) return 1000
+  if (row.nameLower.startsWith(token)) return 600
+  let best = 0
+  for (const t of row.tokens) {
+    if (t === token) best = Math.max(best, 550)
+    else if (t.startsWith(token)) best = Math.max(best, 420)
+    else if (t.includes(token)) best = Math.max(best, 260)
+    else if (token.length >= 4) {
+      const d = lev(t, token, 2)
+      if (d === 1) best = Math.max(best, 200)
+      else if (d === 2) best = Math.max(best, 120)
+    }
+  }
+  if (row.nameLower.includes(token)) best = Math.max(best, 180)
+  if (row.category.toLowerCase().includes(token)) best = Math.max(best, 90)
+  for (const tag of row.tags) {
+    if (tag === token) best = Math.max(best, 150)
+    else if (tag.includes(token)) best = Math.max(best, 70)
+  }
+  return best
+}
+
+function search(q: string): Row[] {
+  const tokens = q.toLowerCase().split(/\s+/).filter(Boolean)
+  if (tokens.length === 0) return []
+  const scored: Array<{ row: Row; score: number }> = []
+  for (const row of INDEX) {
+    let total = 0
+    let missed = false
+    for (const tok of tokens) {
+      const s = scoreToken(row, tok)
+      if (s === 0) {
+        missed = true
+        break
+      }
+      total += s
+    }
+    if (!missed) scored.push({ row, score: total })
+  }
+  scored.sort((a, b) => b.score - a.score || a.row.name.length - b.row.name.length)
+  return scored.slice(0, 8).map((x) => x.row)
+}
 
 export default function ProductSearch({ className = '' }: { className?: string }) {
   const [q, setQ] = useState('')
@@ -19,11 +104,7 @@ export default function ProductSearch({ className = '' }: { className?: string }
   const [active, setActive] = useState(0)
   const boxRef = useRef<HTMLDivElement>(null)
 
-  const results = useMemo(() => {
-    const term = q.trim().toLowerCase()
-    if (!term) return []
-    return INDEX.filter((p) => p.haystack.includes(term)).slice(0, 8)
-  }, [q])
+  const results = useMemo(() => (q.trim() ? search(q.trim()) : []), [q])
 
   useEffect(() => {
     function onClick(e: MouseEvent) {
@@ -82,23 +163,35 @@ export default function ProductSearch({ className = '' }: { className?: string }
       </div>
 
       {open && q.trim() && (
-        <div className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded-md border-2 border-ink-200 bg-white shadow-lg">
+        <div className="absolute left-0 right-0 top-full z-50 mt-1 overflow-hidden rounded-md border-2 border-ink-200 bg-white shadow-xl">
           {results.length === 0 ? (
-            <div className="px-4 py-3 text-sm text-ink-500">No matches for "{q}"</div>
+            <div className="px-4 py-4 text-sm text-ink-500">
+              No matches for <span className="font-semibold text-ink-900">"{q}"</span>. Try a
+              compound family like "bpc" or "tirzepatide".
+            </div>
           ) : (
-            <ul>
+            <ul className="max-h-[70vh] overflow-y-auto">
               {results.map((r, i) => (
                 <li key={r.slug}>
                   <Link
                     href={`/products/${r.slug}`}
                     onClick={() => setOpen(false)}
-                    className={`flex items-center justify-between gap-3 px-4 py-2.5 text-sm ${
+                    className={`flex items-center gap-3 px-3 py-2.5 text-sm ${
                       i === active ? 'bg-brand-50' : 'hover:bg-ink-50'
                     }`}
                   >
-                    <span>
-                      <span className="font-semibold text-ink-900">{r.name}</span>
-                      <span className="ml-2 text-xs font-bold uppercase tracking-wide text-brand-600">
+                    <span className="relative block h-12 w-12 shrink-0 overflow-hidden rounded-md border border-ink-200 bg-ink-50">
+                      <Image
+                        src={r.image}
+                        alt=""
+                        fill
+                        sizes="48px"
+                        className="object-contain p-1"
+                      />
+                    </span>
+                    <span className="min-w-0 flex-1">
+                      <span className="block truncate font-semibold text-ink-900">{r.name}</span>
+                      <span className="block text-xs font-bold uppercase tracking-wide text-brand-600">
                         {r.category}
                       </span>
                     </span>
