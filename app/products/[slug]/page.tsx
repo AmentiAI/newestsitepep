@@ -83,13 +83,19 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
             <span className="text-sm text-ink-500">USD · ships lyophilized</span>
           </div>
 
+          <div className="mt-4 inline-flex items-center gap-2 rounded-md border-2 border-brand-400 bg-brand-50 px-3 py-2 text-sm font-semibold text-ink-900">
+            <span className="inline-block h-2 w-2 rounded-full bg-brand-500" />
+            Save {SITE.promoPercent}% with code{' '}
+            <span className="rounded bg-brand-400 px-1.5 py-0.5 font-black text-ink-900">{SITE.promoCode}</span>
+          </div>
+
           <Link
             href={`/go/${p.slug}`}
             target="_blank"
             rel="noopener nofollow sponsored"
-            className="btn-yellow mt-6 inline-flex items-center gap-2"
+            className="btn-yellow mt-4 inline-flex items-center gap-2"
           >
-            Buy now →
+            Buy now — {SITE.promoPercent}% off with {SITE.promoCode} →
           </Link>
 
           <div className="mt-4 flex flex-wrap gap-2">

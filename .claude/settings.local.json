@@ -6,7 +6,8 @@
       "Bash(npm install *)",
       "Bash(npm run *)",
       "Bash(ls .next/server/app/products/*.html)",
-      "Bash(node *)"
+      "Bash(node *)",
+      "Bash(grep -l \"Curated reference\" /mnt/c/Users/Wilso/newestsitepep/.next/server/app/*.html)"
     ]
   }
 }

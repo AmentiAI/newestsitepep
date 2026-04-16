@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { SITE } from '@/lib/site'
+import ProductSearch from './ProductSearch'
 
 const LINKS = [
   { href: '/products', label: 'Catalogue' },
@@ -17,8 +18,8 @@ export default function Nav() {
 
   return (
     <header className="sticky top-0 z-40 border-b-4 border-brand-400 bg-white">
-      <div className="mx-auto flex max-w-7xl items-center justify-between px-4 py-4 sm:px-6 sm:py-5 md:py-6">
-        <Link href="/" className="flex items-center gap-2 sm:gap-3" onClick={() => setOpen(false)}>
+      <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 sm:px-6 sm:py-5 md:py-6 lg:gap-8">
+        <Link href="/" className="flex shrink-0 items-center gap-2 sm:gap-3" onClick={() => setOpen(false)}>
           <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand-400 text-ink-900 font-black text-lg shadow-sm sm:h-11 sm:w-11 sm:text-xl">
             T
           </span>
@@ -27,8 +28,13 @@ export default function Nav() {
           </span>
         </Link>
 
+        {/* Desktop search — center */}
+        <div className="hidden flex-1 md:block lg:max-w-md xl:max-w-lg">
+          <ProductSearch />
+        </div>
+
         {/* Desktop nav */}
-        <nav className="hidden items-center gap-6 text-base font-semibold text-ink-700 lg:flex xl:gap-8">
+        <nav className="ml-auto hidden items-center gap-5 text-base font-semibold text-ink-700 lg:flex xl:gap-7">
           {LINKS.map((l) => (
             <Link key={l.href} href={l.href} className="hover:text-brand-600">
               {l.label}
@@ -49,7 +55,7 @@ export default function Nav() {
           aria-label="Toggle menu"
           aria-expanded={open}
           onClick={() => setOpen((v) => !v)}
-          className="inline-flex h-11 w-11 items-center justify-center rounded-md border-2 border-ink-200 text-ink-900 lg:hidden"
+          className="ml-auto inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-md border-2 border-ink-200 text-ink-900 lg:hidden"
         >
           <svg
             viewBox="0 0 24 24"
@@ -74,6 +80,11 @@ export default function Nav() {
             )}
           </svg>
         </button>
+      </div>
+
+      {/* Mobile search */}
+      <div className="border-t border-ink-100 bg-white px-4 py-3 sm:px-6 md:hidden">
+        <ProductSearch />
       </div>
 
       {/* Mobile menu panel */}

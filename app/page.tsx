@@ -58,7 +58,9 @@ export default function HomePage() {
               upsells, no mystery stacks. Just a catalogue you can actually buy from.
             </p>
             <div className="mt-6 flex flex-wrap gap-3 sm:mt-8">
-              <Link href="/products" className="btn-yellow">Browse the catalogue</Link>
+              <Link href="/products" className="btn-yellow">
+                Buy now — {SITE.promoPercent}% off ({SITE.promoCode})
+              </Link>
               <Link
                 href="/go/shop"
                 target="_blank"
