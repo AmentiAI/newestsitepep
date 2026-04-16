@@ -46,8 +46,9 @@ export default function HomePage() {
               <span className="inline-block h-1 w-8 bg-brand-400" /> Peptide Catalogue
             </div>
             <h1 className="mt-4 max-w-3xl text-4xl font-black tracking-tight text-ink-900 sm:text-5xl md:text-6xl lg:text-7xl">
-              Catch the tide.<br />
-              Peptides, documented clearly.
+              <span className="text-brand-500">TideMaxxing</span><br />
+              The One Stop Shop<br />
+              For All Your Peptides
             </h1>
             <p className="mt-5 max-w-2xl text-base leading-relaxed text-ink-700 sm:mt-6 sm:text-lg">
               {SITE.name} is a curated index — organised by pathway, with lot-matched
