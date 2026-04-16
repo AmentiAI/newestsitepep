@@ -1,6 +1,7 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { useState } from 'react'
 import { SITE } from '@/lib/site'
 import ProductSearch from './ProductSearch'
@@ -20,9 +21,14 @@ export default function Nav() {
     <header className="sticky top-0 z-40 border-b-4 border-brand-400 bg-white">
       <div className="mx-auto flex max-w-7xl items-center gap-4 px-4 py-4 sm:px-6 sm:py-5 md:py-6 lg:gap-8">
         <Link href="/" className="flex shrink-0 items-center gap-2 sm:gap-3" onClick={() => setOpen(false)}>
-          <span className="inline-flex h-9 w-9 items-center justify-center rounded-full bg-brand-400 text-ink-900 font-black text-lg shadow-sm sm:h-11 sm:w-11 sm:text-xl">
-            T
-          </span>
+          <Image
+            src="/logo.png"
+            alt={SITE.name}
+            width={44}
+            height={44}
+            className="h-9 w-9 rounded-full object-contain sm:h-11 sm:w-11"
+            priority
+          />
           <span className="text-xl font-black tracking-tight text-ink-900 sm:text-2xl">
             {SITE.name}
           </span>

@@ -7,7 +7,8 @@
       "Bash(npm run *)",
       "Bash(ls .next/server/app/products/*.html)",
       "Bash(node *)",
-      "Bash(grep -l \"Curated reference\" /mnt/c/Users/Wilso/newestsitepep/.next/server/app/*.html)"
+      "Bash(grep -l \"Curated reference\" /mnt/c/Users/Wilso/newestsitepep/.next/server/app/*.html)",
+      "Bash(grep -E \"\\\\.\\(tsx|jsx|ts|js\\)$\")"
     ]
   }
 }
