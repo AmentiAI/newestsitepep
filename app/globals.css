@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: light;
+}
+
+html, body {
+  background: #ffffff;
+  color: #1c1917;
+}
+
+.card {
+  @apply rounded-xl border border-ink-200 bg-white;
+}
+
+.btn-yellow {
+  @apply rounded-md bg-brand-400 px-5 py-3 font-semibold text-ink-900 hover:bg-brand-300 transition;
+}
+
+.btn-outline {
+  @apply rounded-md border-2 border-brand-400 bg-white px-5 py-3 font-semibold text-ink-900 hover:bg-brand-50 transition;
+}
+
+.prose-body p {
+  @apply text-ink-700 leading-relaxed;
+}

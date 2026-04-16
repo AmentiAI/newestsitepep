@@ -1,0 +1,11 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:phiogen.is)",
+      "Bash(node scripts/generate-products.mjs)",
+      "Bash(npm install *)",
+      "Bash(npm run *)",
+      "Bash(ls .next/server/app/products/*.html)"
+    ]
+  }
+}
