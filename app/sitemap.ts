@@ -22,6 +22,10 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/looksmaxxing`, lastModified: now, priority: 0.9 },
     { url: `${base}/guides`, lastModified: now, priority: 0.8 },
     { url: `${base}/faq`, lastModified: now, priority: 0.5 },
+    { url: `${base}/where-to-buy-peptides`, lastModified: now, priority: 0.9 },
+    { url: `${base}/dosage-calculator`, lastModified: now, priority: 0.8 },
+    { url: `${base}/peptide-glossary`, lastModified: now, priority: 0.7 },
+    { url: `${base}/reconstitution-guide`, lastModified: now, priority: 0.8 },
     ...GUIDE_SLUGS.map((s) => ({
       url: `${base}/guides/${s}`,
       lastModified: now,

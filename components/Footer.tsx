@@ -18,6 +18,10 @@ export default function Footer() {
             <li><Link href="/products" className="hover:text-brand-600">Full Catalogue</Link></li>
             <li><Link href="/looksmaxxing" className="hover:text-brand-600">Looksmaxxing</Link></li>
             <li><Link href="/guides" className="hover:text-brand-600">Guides</Link></li>
+            <li><Link href="/where-to-buy-peptides" className="hover:text-brand-600">Where to Buy</Link></li>
+            <li><Link href="/dosage-calculator" className="hover:text-brand-600">Dosage Calculator</Link></li>
+            <li><Link href="/reconstitution-guide" className="hover:text-brand-600">Reconstitution</Link></li>
+            <li><Link href="/peptide-glossary" className="hover:text-brand-600">Glossary</Link></li>
             <li><Link href="/faq" className="hover:text-brand-600">FAQ</Link></li>
           </ul>
         </div>

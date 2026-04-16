@@ -20,10 +20,9 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const p = getProduct(params.slug)
   if (!p) return {}
   const c = contentFor(p.slug)
-  const description = c?.overview
-    ? c.overview.slice(0, 158)
-    : p.shortDescription
-  const title = `${p.name} — ${p.category} Research Compound`
+  const baseDesc = c?.overview ? c.overview.slice(0, 140) : p.shortDescription
+  const description = `Buy ${p.name} research peptide — ${baseDesc}`.slice(0, 200)
+  const title = `Buy ${p.name} — ${p.category} Research Peptide | ${SITE.name}`
   return {
     title,
     description,

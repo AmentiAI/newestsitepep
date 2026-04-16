@@ -29,7 +29,7 @@ export default function ProductCard({ p }: { p: Product }) {
         <Rating slug={p.slug} compact />
         <div className="mt-auto flex items-center justify-between pt-2">
           <span className="font-bold text-ink-900">{p.price}</span>
-          <span className="text-xs font-semibold text-brand-600">View →</span>
+          <span className="text-xs font-bold text-brand-600">Buy →</span>
         </div>
       </div>
     </Link>

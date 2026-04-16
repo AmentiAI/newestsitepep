@@ -8,7 +8,8 @@ const LINKS = [
   { href: '/products', label: 'Catalogue' },
   { href: '/looksmaxxing', label: 'Looksmaxxing' },
   { href: '/guides', label: 'Guides' },
-  { href: '/faq', label: 'FAQ' },
+  { href: '/dosage-calculator', label: 'Calculator' },
+  { href: '/peptide-glossary', label: 'Glossary' },
 ]
 
 export default function Nav() {
