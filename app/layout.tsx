@@ -7,7 +7,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.baseUrl),
   title: {
-    default: `${SITE.name} — Research Peptide Catalogue`,
+    default: `${SITE.name} — Buy Research Peptides Online | One-Stop Shop`,
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
@@ -15,10 +15,16 @@ export const metadata: Metadata = {
     type: 'website',
     url: SITE.baseUrl,
     siteName: SITE.name,
-    title: SITE.name,
+    title: `${SITE.name} — Buy Research Peptides Online`,
     description: SITE.description,
+    images: [{ url: '/og-image.png', width: 1200, height: 1200, alt: SITE.name }],
   },
-  twitter: { card: 'summary_large_image', title: SITE.name, description: SITE.description },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE.name} — Buy Research Peptides Online`,
+    description: SITE.description,
+    images: ['/og-image.png'],
+  },
   robots: { index: true, follow: true },
   manifest: '/site.webmanifest',
   icons: {
