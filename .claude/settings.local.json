@@ -9,7 +9,10 @@
       "Bash(node *)",
       "Bash(grep -l \"Curated reference\" /mnt/c/Users/Wilso/newestsitepep/.next/server/app/*.html)",
       "Bash(grep -E \"\\\\.\\(tsx|jsx|ts|js\\)$\")",
-      "WebFetch(domain:www.uoking.com)"
+      "WebFetch(domain:www.uoking.com)",
+      "Bash(npx tsc *)",
+      "Bash(echo \"EXIT=$?\")",
+      "Bash(npx next *)"
     ]
   }
 }
