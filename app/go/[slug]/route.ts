@@ -2,10 +2,9 @@ import { NextResponse } from 'next/server'
 import { parents, resolveSlug } from '@/lib/catalog'
 import { SITE } from '@/lib/site'
 
-// Legacy affiliate redirect path. New per-variant redirects live at
-// /out/[slug]. /go/[slug] is kept for older internal links — it resolves
-// parent slugs to the parent's default variant, variant slugs to the
-// variant's own affiliate URL, and the special "shop" key to SITE.shopUrl.
+// Legacy affiliate redirect — /out/<slug> is the current path. Kept for old
+// internal links. Resolves parent slugs to the parent's default variant URL,
+// variant slugs to their own affiliate URL, "shop" to SITE.shopUrl.
 
 const PARENT_DEFAULT = new Map<string, string>(
   parents.map((p) => [p.slug, p.defaultVariant.affiliateUrl]),
