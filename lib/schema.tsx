@@ -2,23 +2,28 @@ import { SITE } from './site'
 import type { Product } from './products'
 import { ratingFor } from './rating'
 
-export function productJsonLd(p: Product) {
+export function productJsonLd(p: Product, description?: string) {
   const r = ratingFor(p.slug)
+  const url = `${SITE.baseUrl}/products/${p.slug}`
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: p.name,
-    description: p.shortDescription,
+    description: description ?? p.shortDescription,
     image: p.image,
+    url,
     sku: p.slug,
+    mpn: p.slug,
     brand: { '@type': 'Brand', name: SITE.name },
     category: p.category,
     offers: {
       '@type': 'Offer',
-      url: `${SITE.baseUrl}/products/${p.slug}`,
+      url,
       price: p.priceNum.toFixed(2),
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
+      itemCondition: 'https://schema.org/NewCondition',
+      seller: { '@type': 'Organization', name: SITE.name },
     },
     aggregateRating: {
       '@type': 'AggregateRating',

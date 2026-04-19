@@ -12,7 +12,8 @@
       "WebFetch(domain:www.uoking.com)",
       "Bash(npx tsc *)",
       "Bash(echo \"EXIT=$?\")",
-      "Bash(npx next *)"
+      "Bash(npx next *)",
+      "WebSearch"
     ]
   }
 }

@@ -8,6 +8,7 @@ import { SITE } from '@/lib/site'
 import { discountedFmt } from '@/lib/price'
 import { productJsonLd, breadcrumbJsonLd, faqJsonLd, JsonLd } from '@/lib/schema'
 import { varianceFor, PageVariance, SectionKey, ExtraBlockKey } from '@/lib/pageVariance'
+import { copyFor } from '@/lib/productCopy'
 import Rating from '@/components/Rating'
 import ProductCard from '@/components/ProductCard'
 import RelatedLinks from '@/components/RelatedLinks'
@@ -22,9 +23,8 @@ export function generateStaticParams() {
 export function generateMetadata({ params }: { params: { slug: string } }): Metadata {
   const p = getProduct(params.slug)
   if (!p) return {}
-  const c = contentFor(p.slug)
-  const baseDesc = c?.overview ? c.overview.slice(0, 140) : p.shortDescription
-  const description = `Buy ${p.name} research peptide — ${baseDesc}`.slice(0, 200)
+  const copy = copyFor(p)
+  const description = copy.metaDescription
   const title = `Buy ${p.name} — ${p.category} Research Peptide | ${SITE.name}`
   return {
     title,
@@ -45,6 +45,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   if (!p) notFound()
 
   const c = contentFor(p.slug)
+  const copy = copyFor(p)
   const faqs = c?.faqs ?? []
   const related = products
     .filter((x) => x.category === p.category && x.slug !== p.slug)
@@ -53,7 +54,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
   const v = varianceFor(p.slug, p.category)
 
   const hero = (
-    <Hero p={p} overview={c?.overview} variance={v} />
+    <Hero p={p} tagline={copy.tagline} overview={c?.overview} variance={v} />
   )
 
   const sidebar = (
@@ -94,7 +95,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
     </>
   ) : (
     <section className="mt-16 card p-6">
-      <p className="text-ink-700">{p.shortDescription}</p>
+      <p className="text-ink-700">{copy.shortDescription}</p>
       <p className="mt-3 text-sm text-ink-500">
         Full compound write-up coming soon. Request the supplier's spec sheet or COA from
         the product page at checkout.
@@ -130,7 +131,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         <div className="mt-16">{relatedBlock}</div>
       )}
 
-      <JsonLd data={productJsonLd(p)} />
+      <JsonLd data={productJsonLd(p, copy.shortDescription)} />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Home', url: SITE.baseUrl },
@@ -217,10 +218,12 @@ function InlineSidebarRow({ sidebar }: { sidebar: React.ReactNode }) {
 
 function Hero({
   p,
+  tagline,
   overview,
   variance: v,
 }: {
   p: ReturnType<typeof getProduct> & {}
+  tagline: string
   overview?: string
   variance: PageVariance
 }) {
@@ -242,7 +245,7 @@ function Hero({
       <div className="text-xs font-bold uppercase tracking-wider text-brand-600">{p.category}</div>
       <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 md:text-4xl">{p.name}</h1>
       <div className="mt-3"><Rating slug={p.slug} /></div>
-      <p className="mt-4 text-lg text-ink-800 font-medium">{p.tagline}</p>
+      <p className="mt-4 text-lg text-ink-800 font-medium">{tagline}</p>
       {overview && (
         <p className="mt-3 leading-relaxed text-ink-700">{overview}</p>
       )}

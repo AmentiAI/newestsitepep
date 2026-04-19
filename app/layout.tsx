@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import Script from 'next/script'
 import './globals.css'
 import { SITE } from '@/lib/site'
+import { JsonLd } from '@/lib/schema'
 import Nav from '@/components/Nav'
 import Footer from '@/components/Footer'
 
@@ -57,6 +58,29 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </Script>
       </head>
       <body className="bg-tide-gradient min-h-screen flex flex-col">
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'Organization',
+            name: SITE.name,
+            url: SITE.baseUrl,
+            logo: `${SITE.baseUrl}/icon-192.png`,
+            description: SITE.description,
+          }}
+        />
+        <JsonLd
+          data={{
+            '@context': 'https://schema.org',
+            '@type': 'WebSite',
+            name: SITE.name,
+            url: SITE.baseUrl,
+            potentialAction: {
+              '@type': 'SearchAction',
+              target: `${SITE.baseUrl}/products?q={search_term_string}`,
+              'query-input': 'required name=search_term_string',
+            },
+          }}
+        />
         <Nav />
         <main className="flex-1">{children}</main>
         <Footer />
