@@ -204,7 +204,7 @@ function Hero({
         </div>
 
         <Link
-          href={`/out/${primary.slug}`}
+          href={`/buy/${primary.slug}`}
           target="_blank"
           rel="noopener nofollow sponsored"
           className="btn-yellow mt-5 inline-flex items-center gap-2"
@@ -291,7 +291,7 @@ function PriceTable({ p }: { p: Parent }) {
                 </td>
                 <td className="py-2 pr-3">
                   <Link
-                    href={`/out/${v.slug}`}
+                    href={`/buy/${v.slug}`}
                     target="_blank"
                     rel="noopener nofollow sponsored"
                     className="font-semibold text-brand-700 hover:underline"
@@ -319,7 +319,7 @@ function SizePicker({ p }: { p: Parent }) {
         {p.variants.map((v) => (
           <Link
             key={v.slug}
-            href={`/out/${v.slug}`}
+            href={`/buy/${v.slug}`}
             target="_blank"
             rel="noopener nofollow sponsored"
             className="rounded-full border border-brand-400 bg-brand-50 px-3 py-1.5 text-sm font-semibold text-ink-800 hover:bg-brand-100"
@@ -481,7 +481,7 @@ function BlendComposition({ p }: { p: Parent }) {
             <span className="flex items-baseline gap-3">
               <span className="text-sm text-ink-700">{formatUsd(v.pricePaid)}</span>
               <Link
-                href={`/out/${v.slug}`}
+                href={`/buy/${v.slug}`}
                 target="_blank"
                 rel="noopener nofollow sponsored"
                 className="text-sm font-semibold text-brand-700 hover:underline"

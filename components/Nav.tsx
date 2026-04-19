@@ -47,7 +47,7 @@ export default function Nav() {
             </Link>
           ))}
           <Link
-            href="/go/shop"
+            href="/buy/shop"
             target="_blank"
             rel="noopener nofollow sponsored"
             className="rounded-md bg-brand-400 px-5 py-2.5 font-bold text-ink-900 hover:bg-brand-300"
@@ -108,7 +108,7 @@ export default function Nav() {
               </Link>
             ))}
             <Link
-              href="/go/shop"
+              href="/buy/shop"
               target="_blank"
               rel="noopener nofollow sponsored"
               onClick={() => setOpen(false)}

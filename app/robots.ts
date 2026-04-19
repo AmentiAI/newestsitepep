@@ -27,11 +27,11 @@ const AI_CRAWLERS = [
 export default function robots(): MetadataRoute.Robots {
   return {
     rules: [
-      { userAgent: '*', allow: '/', disallow: ['/api/', '/go/'] },
+      { userAgent: '*', allow: '/', disallow: ['/api/', '/go/', '/out/', '/buy/'] },
       ...AI_CRAWLERS.map((agent) => ({
         userAgent: agent,
         allow: '/',
-        disallow: ['/api/', '/go/'],
+        disallow: ['/api/', '/go/', '/out/', '/buy/'],
       })),
     ],
     sitemap: `${SITE.baseUrl}/sitemap.xml`,

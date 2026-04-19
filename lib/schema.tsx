@@ -36,7 +36,7 @@ export function productJsonLd(parent: Parent, description?: string) {
       ? 'https://schema.org/InStock'
       : 'https://schema.org/OutOfStock',
     itemCondition: 'https://schema.org/NewCondition',
-    url: `${SITE.baseUrl}/out/${v.slug}`,
+    url: `${SITE.baseUrl}/products/${parent.slug}`,
     sku: v.slug,
     seller: { '@type': 'Organization', name: SITE.name, url: SITE.baseUrl },
   }))

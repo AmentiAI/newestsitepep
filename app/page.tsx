@@ -52,7 +52,7 @@ export default function HomePage() {
                 Buy research peptides — {SITE.promoPercent}% off sitewide
               </Link>
               <Link
-                href="/go/shop"
+                href="/buy/shop"
                 target="_blank"
                 rel="noopener nofollow sponsored"
                 className="btn-outline"

@@ -14,7 +14,15 @@
       "Bash(echo \"EXIT=$?\")",
       "Bash(npx next *)",
       "WebSearch",
-      "Bash(echo \"---exit=$?\")"
+      "Bash(echo \"---exit=$?\")",
+      "Bash(pkill -f \"next start\")",
+      "Bash(nohup npx *)",
+      "Bash(echo \"pid=$!\")",
+      "Bash(disown)",
+      "Bash(curl -sI http://localhost:3458/out/tirzepatide-15mg)",
+      "Bash(curl -sI http://localhost:3458/out/bpc-157-10mg)",
+      "Bash(curl -sI http://localhost:3458/out/unknownslug)",
+      "Bash(netstat -lnt)"
     ]
   }
 }

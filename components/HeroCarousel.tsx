@@ -67,7 +67,7 @@ export default function HeroCarousel({ items }: { items: Parent[] }) {
                   </span>
                 </div>
                 <Link
-                  href={`/out/${primary.slug}`}
+                  href={`/buy/${primary.slug}`}
                   target="_blank"
                   rel="noopener nofollow sponsored"
                   className="mt-3 block w-full rounded-md bg-brand-400 px-4 py-2.5 text-center text-sm font-bold text-ink-900 hover:bg-brand-300"
