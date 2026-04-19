@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   description:
     'Single, dual, and triple agonists — how the new generation of incretin peptides compare, and what each adds over the last.',
   alternates: { canonical: `${SITE.baseUrl}/guides/semaglutide-vs-tirzepatide` },
+  openGraph: {
+    title: 'Semaglutide vs Tirzepatide vs Retatrutide',
+    description: 'Single, dual, and triple incretin agonists compared — receptor profile, half-life, and protocol fit.',
+    url: `${SITE.baseUrl}/guides/semaglutide-vs-tirzepatide`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Semaglutide vs Tirzepatide vs Retatrutide',
+    description: 'Incretin peptide comparison across three receptor profiles.',
+  },
 }
 
 export default function Page() {

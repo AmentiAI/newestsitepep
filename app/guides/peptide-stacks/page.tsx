@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   description:
     'Why compounds are combined, which stacks appear most in research, and how pre-blended vials simplify multi-peptide protocols.',
   alternates: { canonical: `${SITE.baseUrl}/guides/peptide-stacks` },
+  openGraph: {
+    title: 'Popular Peptide Stacks Explained',
+    description: 'Why compounds are combined and which stacks appear most in research-protocol work.',
+    url: `${SITE.baseUrl}/guides/peptide-stacks`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Popular Peptide Stacks Explained',
+    description: 'Why compounds are combined and which stacks research uses most.',
+  },
 }
 
 export default function Page() {

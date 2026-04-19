@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   description:
     'DSIP, selank, semax, pinealon, N-Acetyl Semax Amidate — the sleep and nootropic peptides that keep appearing in research.',
   alternates: { canonical: `${SITE.baseUrl}/guides/peptides-for-sleep` },
+  openGraph: {
+    title: 'Peptides for Sleep and Cognitive Support',
+    description: 'DSIP, selank, semax, pinealon, N-Acetyl Semax Amidate — sleep and nootropic peptides in research.',
+    url: `${SITE.baseUrl}/guides/peptides-for-sleep`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptides for Sleep and Cognitive Support',
+    description: 'Sleep and nootropic peptides that keep appearing in research.',
+  },
 }
 
 export default function Page() {

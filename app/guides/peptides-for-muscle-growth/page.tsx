@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   description:
     'The growth-axis peptide stack: ipamorelin, CJC-1295, tesamorelin, IGF-1 LR3. Plus BPC-157 and TB-500 for repair between training.',
   alternates: { canonical: `${SITE.baseUrl}/guides/peptides-for-muscle-growth` },
+  openGraph: {
+    title: 'Peptides for Muscle Growth and Recovery',
+    description: 'Growth-axis peptides: ipamorelin, CJC-1295, tesamorelin, IGF-1 LR3, plus BPC-157 and TB-500 for repair.',
+    url: `${SITE.baseUrl}/guides/peptides-for-muscle-growth`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptides for Muscle Growth and Recovery',
+    description: 'Growth-axis peptide stack and repair compounds explained.',
+  },
 }
 
 export default function Page() {

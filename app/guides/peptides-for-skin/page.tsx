@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   description:
     'GHK-Cu, epitalon, NA-Epitalon, GLOW and KLOW blends — the peptides that show up in cosmetic and anti-aging research.',
   alternates: { canonical: `${SITE.baseUrl}/guides/peptides-for-skin` },
+  openGraph: {
+    title: 'Peptides for Skin, Hair, and Anti-Aging',
+    description: 'GHK-Cu, epitalon, NA-Epitalon, GLOW and KLOW blends — the peptides in cosmetic and anti-aging research.',
+    url: `${SITE.baseUrl}/guides/peptides-for-skin`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptides for Skin, Hair, and Anti-Aging',
+    description: 'Peptides that show up in cosmetic and anti-aging research.',
+  },
 }
 
 export default function Page() {

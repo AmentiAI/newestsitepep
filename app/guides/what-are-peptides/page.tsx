@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   description:
     'Peptides are short chains of amino acids — the same building blocks as proteins, just shorter. Here\'s how they work, the main research families, and why they matter.',
   alternates: { canonical: `${SITE.baseUrl}/guides/what-are-peptides` },
+  openGraph: {
+    title: 'What Are Peptides? A Plain-English Beginner\'s Guide',
+    description: 'How peptides differ from proteins, why their size matters in pharmacology, and the main research families.',
+    url: `${SITE.baseUrl}/guides/what-are-peptides`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'What Are Peptides? A Beginner\'s Guide',
+    description: 'How peptides differ from proteins and the main research families.',
+  },
 }
 
 export default function Page() {

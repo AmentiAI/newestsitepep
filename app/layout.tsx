@@ -9,7 +9,7 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.baseUrl),
   title: {
-    default: `Buy Peptides Online — 139 Vials In Stock | ${SITE.name}`,
+    default: `${SITE.name} — Peptide Catalogue & Buyer's Index`,
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
@@ -19,14 +19,14 @@ export const metadata: Metadata = {
     type: 'website',
     url: SITE.baseUrl,
     siteName: SITE.name,
-    title: `Buy Peptides Online — 139 Vials In Stock | ${SITE.name}`,
+    title: `${SITE.name} — Peptide Catalogue & Buyer's Index`,
     description: SITE.description,
     locale: 'en_US',
     images: [{ url: '/og-image.png', width: 1200, height: 1200, alt: SITE.name }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `Buy Peptides Online — ${SITE.name}`,
+    title: `${SITE.name} — Peptide Catalogue`,
     description: SITE.description,
     images: ['/og-image.png'],
   },

@@ -35,8 +35,8 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const topList = Array.from(new Set(top)).slice(0, 3).join(', ')
   return {
     title: topList
-      ? `Buy ${c} Peptides Online | ${topList} | ${SITE.name}`
-      : `Buy ${c} Peptides Online | ${SITE.name}`,
+      ? `Buy ${c} Peptides Online — ${topList}`
+      : `Buy ${c} Peptides Online`,
     description,
     alternates: { canonical: `${SITE.baseUrl}/category/${params.slug}` },
     openGraph: {

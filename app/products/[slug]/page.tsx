@@ -49,19 +49,19 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 function titleFor(p: Parent, shape: PageShape): string {
   switch (shape) {
     case 'value-shop':
-      return `Buy ${p.name} Online — ${p.variants.length} Vial Sizes | ${SITE.name}`
+      return `Buy ${p.name} Online — ${p.variants.length} Vial Sizes`
     case 'recon-first':
-      return `Buy ${p.name} — Lyophilized Research Vial | ${SITE.name}`
+      return `${p.name} for Research — Lyophilized Vial with COA`
     case 'capsule':
-      return `Order ${p.name} — Capsule Format | ${SITE.name}`
+      return `Order ${p.name} Capsules — Oral Research Format`
     case 'liquid':
-      return `Buy ${p.name} — Pre-Dissolved Liquid | ${SITE.name}`
+      return `${p.name} Pre-Dissolved Liquid — Ready-to-Dose Bottle`
     case 'blend':
-      return `Order ${p.name} — Pre-Mixed Blend Vial | ${SITE.name}`
+      return `${p.name} Pre-Mixed Blend — Dual-Pathway Research Vial`
     case 'solvent':
-      return `Bacteriostatic Water — ${p.variants[0]?.sizeLabel ?? '30 mL'} | ${SITE.name}`
+      return `Bacteriostatic Water ${p.variants[0]?.sizeLabel ?? '30 mL'} — Peptide Reconstitution Solvent`
     case 'specialty':
-      return `Order ${p.name} — ${p.category} Compound | ${SITE.name}`
+      return `${p.name} — ${p.category} Research Compound`
   }
 }
 
@@ -256,7 +256,7 @@ function PriceTable({ p }: { p: Parent }) {
   return (
     <section className="card p-5">
       <div className="flex items-baseline justify-between gap-4 flex-wrap">
-        <SectionHeader title={`${p.name} — vial sizes and price per mg`} />
+        <SectionHeader title="Vial sizes and price per mg" />
         {savingsPct !== null && savingsPct > 0 && (
           <span className="rounded-md bg-emerald-600 px-2 py-1 text-xs font-black uppercase tracking-wider text-white">
             Up to {savingsPct}% cheaper per mg
@@ -340,7 +340,7 @@ function ReconMath({ p }: { p: Parent }) {
   return (
     <section className="card p-5">
       <SectionHeader
-        title={`${p.name} — reconstitution volumes`}
+        title="Reconstitution volumes"
         eyebrow="Bac-water math"
       />
       <p className="mt-2 text-sm text-ink-600">
@@ -395,7 +395,7 @@ function CapsuleBreakdown({ p }: { p: Parent }) {
   })
   return (
     <section className="card p-5">
-      <SectionHeader title={`${p.name} — capsule composition`} eyebrow="Oral format" />
+      <SectionHeader title="Capsule composition" eyebrow="Oral format" />
       <p className="mt-2 text-sm text-ink-600">
         Each bottle ships sealed with a lot-matched certificate of analysis covering
         per-capsule purity.
@@ -433,7 +433,7 @@ function BottleBreakdown({ p }: { p: Parent }) {
   })
   return (
     <section className="card p-5">
-      <SectionHeader title={`${p.name} — bottle breakdown`} eyebrow="Pre-dissolved liquid" />
+      <SectionHeader title="Bottle breakdown and $/mL" eyebrow="Pre-dissolved liquid" />
       <p className="mt-2 text-sm text-ink-600">
         Pre-mixed at the supplier's facility. Each bottle ships sealed, no
         reconstitution step required.
@@ -469,7 +469,7 @@ function BottleBreakdown({ p }: { p: Parent }) {
 function BlendComposition({ p }: { p: Parent }) {
   return (
     <section className="card p-5">
-      <SectionHeader title={`${p.name} — blend composition`} eyebrow="Pre-mixed vial" />
+      <SectionHeader title="Blend composition" eyebrow="Pre-mixed vial" />
       <p className="mt-2 text-sm text-ink-600">
         Each vial ships as a single lyophilized cake. The supplier measures each constituent
         before co-mixing so reconstitution yields the stated mg of each peptide per mL.

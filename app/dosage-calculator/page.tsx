@@ -7,10 +7,20 @@ import { SITE } from '@/lib/site'
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: `Peptide Dosage Calculator — Reconstitution & Syringe Units | ${SITE.name}`,
+  title: `Peptide Dosage Calculator — Reconstitution & Syringe Units`,
   description:
     'Interactive peptide dosage calculator. Enter vial mg, bac water volume, and research dose — get concentration, draw volume, and U-100 syringe units.',
   alternates: { canonical: `${SITE.baseUrl}/dosage-calculator` },
+  openGraph: {
+    title: 'Peptide Dosage Calculator',
+    description: 'Calculator for peptide reconstitution volume, draw units, and U-100 syringe marks.',
+    url: `${SITE.baseUrl}/dosage-calculator`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptide Dosage Calculator',
+    description: 'Reconstitution and syringe-unit calculator.',
+  },
 }
 
 export default function Page() {

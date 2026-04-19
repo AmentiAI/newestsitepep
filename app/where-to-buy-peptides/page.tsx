@@ -6,7 +6,7 @@ import { SITE } from '@/lib/site'
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: `Where to Buy Peptides Online (2026 Buyer's Guide) | ${SITE.name}`,
+  title: `Where to Buy Peptides Online — 2026 Buyer's Guide`,
   description:
     'How to buy peptides online safely — what to check on CoAs, red flags, shipping realities, and how the vetted partner on Tidemaxxing is selected.',
   alternates: { canonical: `${SITE.baseUrl}/where-to-buy-peptides` },

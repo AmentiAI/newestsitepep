@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   description:
     'Two of the most-studied repair peptides side by side. How they differ mechanistically, which research models each dominates, and why they\'re so often stacked.',
   alternates: { canonical: `${SITE.baseUrl}/guides/bpc-157-vs-tb-500` },
+  openGraph: {
+    title: 'BPC-157 vs TB-500: Repair Peptide Comparison',
+    description: 'Mechanism-level comparison of two widely-studied repair peptides and why they are so often paired.',
+    url: `${SITE.baseUrl}/guides/bpc-157-vs-tb-500`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'BPC-157 vs TB-500: Repair Peptide Comparison',
+    description: 'Angiogenic vs actin-migratory repair peptides compared.',
+  },
 }
 
 export default function Page() {

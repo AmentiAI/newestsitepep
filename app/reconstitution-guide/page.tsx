@@ -6,10 +6,20 @@ import { SITE } from '@/lib/site'
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: `How to Reconstitute Peptides — Step by Step Guide | ${SITE.name}`,
+  title: `How to Reconstitute Peptides — Step-by-Step Guide`,
   description:
     'Reconstitute lyophilized peptides correctly. Step-by-step guide with bac water volumes, storage, dose math, and common mistakes to avoid.',
   alternates: { canonical: `${SITE.baseUrl}/reconstitution-guide` },
+  openGraph: {
+    title: 'How to Reconstitute Peptides',
+    description: 'Step-by-step bac water reconstitution guide with storage and dose math.',
+    url: `${SITE.baseUrl}/reconstitution-guide`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'How to Reconstitute Peptides',
+    description: 'Step-by-step bac water reconstitution guide.',
+  },
 }
 
 const STEPS = [

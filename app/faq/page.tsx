@@ -37,9 +37,19 @@ const FAQS = [
 ]
 
 export const metadata: Metadata = {
-  title: 'FAQ',
+  title: 'Peptide Catalogue FAQ — Buying, CoAs, and Research Use',
   description: 'Common questions about the catalogue, the supplier, reconstitution, and research use.',
   alternates: { canonical: `${SITE.baseUrl}/faq` },
+  openGraph: {
+    title: 'Peptide Catalogue FAQ',
+    description: 'Common questions about the catalogue, the supplier, and research-compound handling.',
+    url: `${SITE.baseUrl}/faq`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptide Catalogue FAQ',
+    description: 'Questions about the catalogue and research-compound handling.',
+  },
 }
 
 export default function FAQ() {

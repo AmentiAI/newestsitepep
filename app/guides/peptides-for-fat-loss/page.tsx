@@ -9,6 +9,16 @@ export const metadata: Metadata = {
   description:
     'Semaglutide, tirzepatide, retatrutide, cagrilintide, 5-Amino-1MQ — the current lineup of metabolic peptides, how they compare, and where each fits.',
   alternates: { canonical: `${SITE.baseUrl}/guides/peptides-for-fat-loss` },
+  openGraph: {
+    title: 'Peptides for Fat Loss: GLP-1, GIP, and Beyond',
+    description: 'Semaglutide, tirzepatide, retatrutide, cagrilintide, 5-Amino-1MQ — the current metabolic peptide lineup.',
+    url: `${SITE.baseUrl}/guides/peptides-for-fat-loss`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptides for Fat Loss: GLP-1, GIP, and Beyond',
+    description: 'The current metabolic peptide lineup and how the compounds compare.',
+  },
 }
 
 export default function Page() {

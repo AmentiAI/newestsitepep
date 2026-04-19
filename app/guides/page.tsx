@@ -10,6 +10,16 @@ export const metadata: Metadata = {
   description:
     'Plain-English guides to the most-searched research peptides: BPC-157, TB-500, semaglutide vs tirzepatide, GHK-Cu, and more.',
   alternates: { canonical: `${SITE.baseUrl}/guides` },
+  openGraph: {
+    title: 'Peptide Guides — Compound Breakdowns',
+    description: 'Plain-English guides to the most-searched research peptides and comparisons.',
+    url: `${SITE.baseUrl}/guides`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptide Guides',
+    description: 'Plain-English research peptide breakdowns and comparisons.',
+  },
 }
 
 const GUIDES = [

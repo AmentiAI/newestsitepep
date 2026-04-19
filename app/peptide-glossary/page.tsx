@@ -6,10 +6,20 @@ import { SITE } from '@/lib/site'
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: `Peptide Glossary — Terms Explained A–Z | ${SITE.name}`,
+  title: `Peptide Glossary — Research Terminology A to Z`,
   description:
     'Plain-language glossary of research peptide terminology — COA, lyophilization, GHRH, GLP-1, amylin, bac water, subcutaneous, HPLC and more.',
   alternates: { canonical: `${SITE.baseUrl}/peptide-glossary` },
+  openGraph: {
+    title: 'Peptide Glossary — A to Z',
+    description: 'Plain-language glossary of research peptide terms, pathways, and acronyms.',
+    url: `${SITE.baseUrl}/peptide-glossary`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Peptide Glossary',
+    description: 'Plain-language glossary of research peptide terminology.',
+  },
 }
 
 type Entry = { term: string; body: string }
