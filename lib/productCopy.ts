@@ -6,7 +6,7 @@
 // sentence shape, different opener, different closer for each product.
 // Seeded by slug so builds stay stable.
 
-import type { Product } from './products'
+import type { Parent } from './catalog'
 
 function fnv1a(str: string): number {
   let h = 0x811c9dc5
@@ -437,7 +437,7 @@ export interface ProductCopy {
   metaDescription: string
 }
 
-export function copyFor(p: Product): ProductCopy {
+export function copyFor(p: Parent): ProductCopy {
   const seed = fnv1a(p.slug)
   const rand = mulberry32(seed)
   const key = keyFor(p.category)
@@ -484,7 +484,7 @@ export function copyFor(p: Product): ProductCopy {
     `Buy ${p.name} — ${primary}. ${closer}.`,
     `${p.name}: ${primary} in ${ctx} research. ${closer}.`,
     `Research-grade ${p.name} — ${primary}; ${closer}.`,
-    `${p.name} for ${ctx} work — ${closer}, ${p.price} per vial.`,
+    `${p.name} for ${ctx} work — ${closer}, from ${p.cheapest.price} per vial.`,
   ]
   const raw = pick(rand, metaShapes)
   const metaDescription = raw.length > 160 ? raw.slice(0, 157).trimEnd() + '…' : raw

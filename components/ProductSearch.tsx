@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
-import { products } from '@/lib/products'
+import { parents } from '@/lib/catalog'
 import { discountedFmt } from '@/lib/price'
 
 type Row = {
@@ -15,20 +15,29 @@ type Row = {
   nameLower: string
   tokens: string[]
   tags: string[]
+  variantCount: number
 }
 
-const INDEX: Row[] = products.map((p) => ({
-  slug: p.slug,
-  name: p.name,
-  category: p.category,
-  price: discountedFmt(p.priceNum),
-  image: p.image,
-  nameLower: p.name.toLowerCase(),
-  tokens: p.name.toLowerCase().split(/[\s\-\/(),]+/).filter(Boolean),
-  tags: (p.tags ?? []).map((t) => t.toLowerCase()),
-}))
+// Index at module scope — parents are stable across renders. Variant names
+// flow into `tokens` so a search for "15mg" still hits the parent Tirzepatide.
+const INDEX: Row[] = parents.map((p) => {
+  const variantTokens = p.variants.flatMap((v) =>
+    v.name.toLowerCase().split(/[\s\-\/(),]+/).filter(Boolean),
+  )
+  const nameTokens = p.name.toLowerCase().split(/[\s\-\/(),]+/).filter(Boolean)
+  return {
+    slug: p.slug,
+    name: p.name,
+    category: p.category,
+    price: discountedFmt(p.cheapest.priceNum),
+    image: p.image,
+    nameLower: p.name.toLowerCase(),
+    tokens: Array.from(new Set([...nameTokens, ...variantTokens])),
+    tags: (p.tags ?? []).map((t) => t.toLowerCase()),
+    variantCount: p.variants.length,
+  }
+})
 
-// Tiny Levenshtein for typo tolerance on short tokens.
 function lev(a: string, b: string, cap = 3) {
   if (Math.abs(a.length - b.length) > cap) return cap + 1
   const m = a.length
@@ -156,7 +165,7 @@ export default function ProductSearch({ className = '' }: { className?: string }
           }}
           onFocus={() => setOpen(true)}
           onKeyDown={onKey}
-          placeholder="Search 139 peptides…"
+          placeholder={`Search ${parents.length} peptides…`}
           aria-label="Search peptides"
           className="w-full rounded-md border-2 border-ink-200 bg-white pl-9 pr-3 py-2 text-sm font-medium text-ink-900 placeholder:text-ink-500 focus:border-brand-400 focus:outline-none"
         />
@@ -190,12 +199,21 @@ export default function ProductSearch({ className = '' }: { className?: string }
                       />
                     </span>
                     <span className="min-w-0 flex-1">
-                      <span className="block truncate font-semibold text-ink-900">{r.name}</span>
+                      <span className="block truncate font-semibold text-ink-900">
+                        {r.name}
+                        {r.variantCount > 1 && (
+                          <span className="ml-2 text-xs font-medium text-ink-500">
+                            · {r.variantCount} sizes
+                          </span>
+                        )}
+                      </span>
                       <span className="block text-xs font-bold uppercase tracking-wide text-brand-600">
                         {r.category}
                       </span>
                     </span>
-                    <span className="shrink-0 text-sm font-bold text-ink-900">{r.price}</span>
+                    <span className="shrink-0 text-sm font-bold text-ink-900">
+                      {r.variantCount > 1 ? `from ${r.price}` : r.price}
+                    </span>
                   </Link>
                 </li>
               ))}
@@ -206,7 +224,7 @@ export default function ProductSearch({ className = '' }: { className?: string }
             onClick={() => setOpen(false)}
             className="block border-t border-ink-200 bg-ink-50 px-4 py-2 text-center text-xs font-bold text-brand-600 hover:bg-ink-100"
           >
-            Browse all 139 compounds →
+            Browse all {parents.length} compounds →
           </Link>
         </div>
       )}

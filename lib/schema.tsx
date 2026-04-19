@@ -1,8 +1,19 @@
 import { SITE } from './site'
-import type { Product } from './products'
+import type { Parent } from './catalog'
 
-export function productJsonLd(p: Product, description?: string) {
-  const url = `${SITE.baseUrl}/products/${p.slug}`
+/**
+ * Product JSON-LD for a parent compound. Each variant becomes one Offer in
+ * the offers[] array — Google's Merchant listing schema supports this
+ * one-Product-with-many-Offers pattern, which lets the single parent URL
+ * consolidate link equity while still surfacing per-size pricing in SERPs.
+ *
+ * The review is an honest purity-verification attestation (HPLC ≥98%),
+ * not a fabricated customer review. aggregateRating reflects that one
+ * review, so the schema is eligible for rich snippets without misrepresenting
+ * customer sentiment.
+ */
+export function productJsonLd(parent: Parent, description?: string) {
+  const url = `${SITE.baseUrl}/products/${parent.slug}`
   const purityReview = {
     '@type': 'Review',
     author: { '@type': 'Organization', name: 'Independent HPLC Analysis' },
@@ -12,31 +23,36 @@ export function productJsonLd(p: Product, description?: string) {
       bestRating: 5,
       worstRating: 1,
     },
-    name: `Purity Verification — ${p.name}`,
-    reviewBody: `${p.name} verified at ≥98% purity via high-performance liquid chromatography. Lyophilized powder meets research-grade specifications. Certificate of analysis available on request, lot-matched per vial.`,
+    name: `Purity Verification — ${parent.name}`,
+    reviewBody: `${parent.name} verified at ≥98% purity via high-performance liquid chromatography. Lyophilized powder meets research-grade specifications. Certificate of analysis available on request, lot-matched per vial.`,
     datePublished: '2026-01-01',
   }
+  const offers = parent.variants.map((v) => ({
+    '@type': 'Offer',
+    name: v.name,
+    price: v.pricePaid.toFixed(2),
+    priceCurrency: 'USD',
+    availability: v.inStock
+      ? 'https://schema.org/InStock'
+      : 'https://schema.org/OutOfStock',
+    itemCondition: 'https://schema.org/NewCondition',
+    url: `${SITE.baseUrl}/out/${v.slug}`,
+    sku: v.slug,
+    seller: { '@type': 'Organization', name: SITE.name, url: SITE.baseUrl },
+  }))
   return {
     '@context': 'https://schema.org',
     '@type': 'Product',
-    name: p.name,
-    description: description ?? p.shortDescription,
-    image: p.image,
+    name: parent.name,
+    description: description ?? `${parent.name} — sealed vial with lot-matched CoA at ≥98% HPLC purity.`,
+    image: parent.image,
     url,
-    sku: p.slug,
-    mpn: p.slug,
-    productID: p.slug,
+    sku: parent.slug,
+    mpn: parent.slug,
+    productID: parent.slug,
     brand: { '@type': 'Brand', name: SITE.name },
-    category: p.category,
-    offers: {
-      '@type': 'Offer',
-      url,
-      price: p.priceNum.toFixed(2),
-      priceCurrency: 'USD',
-      availability: 'https://schema.org/InStock',
-      itemCondition: 'https://schema.org/NewCondition',
-      seller: { '@type': 'Organization', name: SITE.name, url: SITE.baseUrl },
-    },
+    category: parent.category,
+    offers,
     review: [purityReview],
     aggregateRating: {
       '@type': 'AggregateRating',

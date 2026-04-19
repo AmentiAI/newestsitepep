@@ -1,6 +1,5 @@
 import Link from 'next/link'
-import { products, categories } from '@/lib/products'
-import { familyForSlug } from '@/lib/content'
+import { parents, categories } from '@/lib/catalog'
 import ProductCard from '@/components/ProductCard'
 import HeroCarousel from '@/components/HeroCarousel'
 import RelatedLinks from '@/components/RelatedLinks'
@@ -18,19 +17,10 @@ const CATEGORY_COPY: Record<string, string> = {
   'Blends': 'Pre-mixed stacks for side-by-side comparison.',
 }
 
-// Pick one featured product per compound family so the carousel/grid
-// shows variety instead of e.g. three tirzepatide dose variants.
+// Parents are already one row per compound, so no family dedupe is needed.
+// Picking the first N gives one card per compound in sorted order.
 function pickFeatured(count: number) {
-  const seen = new Set<string>()
-  const picked = []
-  for (const p of products) {
-    const fam = familyForSlug(p.slug) ?? p.slug
-    if (seen.has(fam)) continue
-    seen.add(fam)
-    picked.push(p)
-    if (picked.length >= count) break
-  }
-  return picked
+  return parents.slice(0, count)
 }
 
 export default function HomePage() {
@@ -71,8 +61,8 @@ export default function HomePage() {
               </Link>
             </div>
             <div className="mt-8 grid grid-cols-2 gap-3 text-sm sm:mt-10 sm:grid-cols-4">
-              <Stat k="139" v="compounds indexed" />
-              <Stat k="6" v="categories" />
+              <Stat k={`${parents.length}`} v="compounds indexed" />
+              <Stat k={`${categories.length}`} v="categories" />
               <Stat k="COA" v="per-batch testing" />
               <Stat k="USP" v="bac water" />
             </div>
@@ -104,7 +94,7 @@ export default function HomePage() {
         <div className="flex items-end justify-between">
           <h2 className="text-3xl font-black text-ink-900">Featured compounds</h2>
           <Link href="/products" className="font-semibold text-brand-600 hover:text-brand-700">
-            See all {products.length} →
+            See all {parents.length} →
           </Link>
         </div>
         <div className="mt-6 grid grid-cols-2 gap-4 md:grid-cols-4">

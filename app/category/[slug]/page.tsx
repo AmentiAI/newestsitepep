@@ -1,13 +1,12 @@
 import type { Metadata } from 'next'
 import { notFound } from 'next/navigation'
 import Link from 'next/link'
-import { products, categories } from '@/lib/products'
+import { parents, categories, type Parent } from '@/lib/catalog'
 import ProductCard from '@/components/ProductCard'
 import RelatedLinks from '@/components/RelatedLinks'
 import { SITE } from '@/lib/site'
 import { breadcrumbJsonLd, JsonLd } from '@/lib/schema'
 import { categoryContentFor, CategoryContent } from '@/lib/categoryContent'
-import { discounted } from '@/lib/price'
 
 export const dynamic = 'force-static'
 export const revalidate = 86400
@@ -29,10 +28,10 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const description = content
     ? content.intro.slice(0, 155) + (content.intro.length > 155 ? '…' : '')
     : `Every ${c.toLowerCase()} research compound indexed on ${SITE.name} — lot-matched COAs, transparent pricing.`
-  const top = products
+  const top = parents
     .filter((p) => p.category === c)
     .slice(0, 3)
-    .map((p) => p.name.replace(/\s+\d+.*$/, ''))
+    .map((p) => p.name)
   const topList = Array.from(new Set(top)).slice(0, 3).join(', ')
   return {
     title: topList
@@ -52,7 +51,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
 export default function CategoryPage({ params }: { params: { slug: string } }) {
   const c = categoryFromSlug(params.slug)
   if (!c) notFound()
-  const list = products.filter((p) => p.category === c)
+  const list = parents.filter((p) => p.category === c)
   const content = categoryContentFor(params.slug)
 
   const grid = (
@@ -71,13 +70,13 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
         <p className="mt-4 text-lg text-ink-700 leading-relaxed">{content.intro}</p>
       ) : (
         <p className="mt-3 text-lg text-ink-700">
-          {list.length} {c.toLowerCase()} peptide vials in stock — every one sealed under
+          {list.length} {c.toLowerCase()} peptide compounds in stock — every one sealed under
           nitrogen at ≥98% HPLC purity with a lot-matched certificate of analysis. Tracked
           US shipping in 3–5 business days; free shipping over $200.
         </p>
       )}
       <div className="mt-3 text-sm text-ink-500">
-        {list.length} vials in this class · ≥98% HPLC purity · lot-matched CoA
+        {list.length} compounds in this class · ≥98% HPLC purity · lot-matched CoA
       </div>
     </header>
   )
@@ -201,11 +200,11 @@ function QuickAnswer({
   list,
   category,
 }: {
-  list: ReturnType<typeof products.filter>
+  list: Parent[]
   category: string
 }) {
   if (list.length === 0) return null
-  const prices = list.map((p) => discounted(p.priceNum))
+  const prices = list.map((p) => p.cheapest.pricePaid)
   const lowest = Math.min(...prices)
   const highest = Math.max(...prices)
   const top = list.slice(0, 3).map((p) => p.name)
@@ -221,7 +220,7 @@ function QuickAnswer({
         Quick answer
       </p>
       <p className="mt-2 text-base leading-relaxed text-ink-800">
-        {SITE.name} carries <strong>{list.length} {category.toLowerCase()} peptide vials</strong>{' '}
+        {SITE.name} carries <strong>{list.length} {category.toLowerCase()} peptide compounds</strong>{' '}
         priced from <strong>${lowest.toFixed(2)}</strong> to <strong>${highest.toFixed(2)}</strong>.
         The top products are {topList}. Every vial is sealed under nitrogen at ≥98% HPLC purity
         with its original lot CoA. Tracked US shipping in 3–5 business days; free shipping over $200.

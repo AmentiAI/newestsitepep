@@ -1,5 +1,5 @@
 import Link from 'next/link'
-import { products } from '@/lib/products'
+import { resolveSlug } from '@/lib/catalog'
 import ProductCard from './ProductCard'
 import RelatedLinks from './RelatedLinks'
 
@@ -18,9 +18,18 @@ export default function GuideLayout({
   related?: string[]
   crossLinks?: React.ComponentProps<typeof RelatedLinks>['keys']
 }) {
-  const relatedProducts = (related ?? [])
-    .map((s) => products.find((p) => p.slug === s))
-    .filter(Boolean) as typeof products
+  // Guides still reference legacy per-variant slugs; resolve them to parents
+  // and de-duplicate so a guide mentioning tirzepatide-15mg and tirzepatide-30mg
+  // surfaces one Tirzepatide card, not two.
+  const resolved = (related ?? [])
+    .map((s) => resolveSlug(s)?.parent)
+    .filter((p): p is NonNullable<typeof p> => !!p)
+  const seen = new Set<string>()
+  const relatedProducts = resolved.filter((p) => {
+    if (seen.has(p.slug)) return false
+    seen.add(p.slug)
+    return true
+  })
   return (
     <article className="mx-auto max-w-4xl px-6 py-12">
       <div className="text-xs font-bold uppercase tracking-widest text-brand-600">

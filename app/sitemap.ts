@@ -1,5 +1,5 @@
 import type { MetadataRoute } from 'next'
-import { products, categories } from '@/lib/products'
+import { parents, categories, hashSlug } from '@/lib/catalog'
 import { SITE } from '@/lib/site'
 
 const GUIDE_SLUGS = [
@@ -17,16 +17,10 @@ const GUIDE_SLUGS = [
 // bump this only when the content of a section actually changes.
 const CONTENT_LASTMOD = new Date('2026-04-15T00:00:00Z')
 
-// Per-product lastmod seeded by slug, so the sitemap reports a stable,
+// Per-parent lastmod seeded by slug, so the sitemap reports a stable,
 // differentiated lastmod rather than `now` for every URL.
 function stableLastModFor(slug: string): Date {
-  let h = 0x811c9dc5
-  for (let i = 0; i < slug.length; i++) {
-    h ^= slug.charCodeAt(i)
-    h = (h + ((h << 1) + (h << 4) + (h << 7) + (h << 8) + (h << 24))) >>> 0
-  }
-  // Spread product lastmods across a 90-day window ending at CONTENT_LASTMOD
-  // so Google doesn't see them all bouncing in lockstep either.
+  const h = hashSlug(slug)
   const offsetDays = h % 90
   const d = new Date(CONTENT_LASTMOD)
   d.setUTCDate(d.getUTCDate() - offsetDays)
@@ -55,7 +49,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
       lastModified: CONTENT_LASTMOD,
       priority: 0.7,
     })),
-    ...products.map((p) => ({
+    ...parents.map((p) => ({
       url: `${base}/products/${p.slug}`,
       lastModified: stableLastModFor(p.slug),
       priority: 0.8,
