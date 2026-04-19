@@ -9,21 +9,24 @@ import Footer from '@/components/Footer'
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.baseUrl),
   title: {
-    default: `${SITE.name} — Buy Research Peptides Online | One-Stop Shop`,
+    default: `Buy Peptides Online — 139 Vials In Stock | ${SITE.name}`,
     template: `%s | ${SITE.name}`,
   },
   description: SITE.description,
+  applicationName: SITE.name,
+  alternates: { canonical: SITE.baseUrl },
   openGraph: {
     type: 'website',
     url: SITE.baseUrl,
     siteName: SITE.name,
-    title: `${SITE.name} — Buy Research Peptides Online`,
+    title: `Buy Peptides Online — 139 Vials In Stock | ${SITE.name}`,
     description: SITE.description,
+    locale: 'en_US',
     images: [{ url: '/og-image.png', width: 1200, height: 1200, alt: SITE.name }],
   },
   twitter: {
     card: 'summary_large_image',
-    title: `${SITE.name} — Buy Research Peptides Online`,
+    title: `Buy Peptides Online — ${SITE.name}`,
     description: SITE.description,
     images: ['/og-image.png'],
   },
@@ -63,9 +66,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             '@context': 'https://schema.org',
             '@type': 'Organization',
             name: SITE.name,
+            alternateName: SITE.domain,
             url: SITE.baseUrl,
             logo: `${SITE.baseUrl}/icon-192.png`,
             description: SITE.description,
+            sameAs: [SITE.baseUrl],
           }}
         />
         <JsonLd

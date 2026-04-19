@@ -6,10 +6,20 @@ import { SITE } from '@/lib/site'
 export const dynamic = 'force-static'
 
 export const metadata: Metadata = {
-  title: `Where to Buy Research Peptides Online (2026 Guide) | ${SITE.name}`,
+  title: `Where to Buy Peptides Online (2026 Buyer's Guide) | ${SITE.name}`,
   description:
-    'How to buy research peptides online safely — what to check on COAs, red flags, shipping realities, and how the vetted vendor on Tidemaxxing is selected.',
+    'How to buy peptides online safely — what to check on CoAs, red flags, shipping realities, and how the vetted partner on Tidemaxxing is selected.',
   alternates: { canonical: `${SITE.baseUrl}/where-to-buy-peptides` },
+  openGraph: {
+    title: 'Where to Buy Peptides Online (2026 Buyer\'s Guide)',
+    description: 'How to buy peptides online safely — CoA checks, red flags, shipping realities.',
+    url: `${SITE.baseUrl}/where-to-buy-peptides`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Where to Buy Peptides Online',
+    description: 'How to buy peptides online safely — CoA checks, red flags, shipping realities.',
+  },
 }
 
 export default function Page() {
@@ -19,13 +29,13 @@ export default function Page() {
         Buying Guide
       </div>
       <h1 className="mt-3 text-3xl font-black tracking-tight text-ink-900 sm:text-4xl md:text-5xl">
-        Where to Buy Research Peptides
+        Where to Buy Peptides Online
       </h1>
       <p className="mt-4 text-lg text-ink-700 leading-relaxed">
-        Buying research peptides online is a crowded market with wildly different
-        quality. This guide covers what to check before you buy, the red flags that
-        separate real labs from resellers, and why {SITE.name} only ranks a single
-        vendor across the catalogue.
+        Buying peptides online is a crowded market with wildly different quality.
+        This guide covers what to check before you buy, the red flags that separate
+        real labs from resellers, and why {SITE.name} only ranks a single partner
+        across the catalogue.
       </p>
 
       <div className="mt-10 space-y-8 prose-body">

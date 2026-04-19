@@ -7,18 +7,29 @@ export const dynamic = 'force-static'
 export const revalidate = 86400
 
 export const metadata: Metadata = {
-  title: `Buy Research Peptides — Full Catalogue | ${SITE.name}`,
-  description: `Buy research peptides indexed on ${SITE.name} — ${products.length} compounds across ${categories.length} pathways, lot-matched COAs, USP bac water pairings.`,
+  title: `Buy Peptides Online — Shop All ${products.length} Vials In Stock`,
+  description: `${products.length} peptide vials in stock across ${categories.length} classes. ≥98% HPLC purity, lot-matched CoA, tracked US shipping 3–5 business days. Free shipping over $200.`,
   alternates: { canonical: `${SITE.baseUrl}/products` },
+  openGraph: {
+    title: `Buy Peptides Online — Shop All ${products.length} Vials`,
+    description: `${products.length} peptide vials in stock. ≥98% HPLC purity, lot-matched CoA.`,
+    url: `${SITE.baseUrl}/products`,
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: `Buy Peptides Online — ${products.length} Vials In Stock`,
+    description: `${products.length} peptide vials in stock. ≥98% HPLC purity, lot-matched CoA.`,
+  },
 }
 
 export default function ProductsIndex() {
   return (
     <div className="mx-auto max-w-6xl px-4 py-10 sm:px-6 sm:py-12">
       <header className="mb-8">
-        <h1 className="text-3xl font-black text-ink-900 md:text-4xl">Buy research peptides</h1>
+        <h1 className="text-3xl font-black text-ink-900 md:text-4xl">Shop all peptide vials</h1>
         <p className="mt-2 text-ink-600">
-          {products.length} compounds indexed across {categories.length} pathways. Every link routes to a lot-matched, COA-backed vial.
+          {products.length} vials in stock across {categories.length} classes. ≥98% HPLC purity,
+          lot-matched CoA, tracked US shipping in 3–5 business days.
         </p>
       </header>
       {categories.map((c) => {

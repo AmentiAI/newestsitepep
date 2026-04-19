@@ -31,7 +31,7 @@ export interface CategoryContent {
 
 const BY_SLUG: Record<string, CategoryContent> = {
   'fat-loss': {
-    heading: 'Fat-loss and metabolic research peptides',
+    heading: 'Shop Fat Loss Peptides — GLP-1, GIP & Triple-Agonist Vials',
     intro:
       'Fat-loss research peptides sit at the intersection of incretin biology and energy-balance physiology. Most of the compounds in this class are studied for their interaction with the GLP-1 or GIP receptor — two of the best-characterised incretin pathways in the published pharmacology literature. Researchers working in this space typically compare analogs on potency, half-life, receptor selectivity, and published pharmacokinetic data. The catalogue here lists each compound at multiple dose strengths to support dose-response work, with lot-matched certificates of analysis from an independent lab. Nothing on this page is medical advice — these vials are sold strictly for in-vitro and laboratory research.',
     comparisonFramework: [
@@ -88,7 +88,7 @@ const BY_SLUG: Record<string, CategoryContent> = {
   },
 
   recovery: {
-    heading: 'Recovery and soft-tissue-repair research peptides',
+    heading: 'Shop Recovery & Repair Peptides — BPC-157, TB-500 & Pairs',
     intro:
       'Research in the recovery class centres on compounds studied in pre-clinical models of tendon, ligament, gut, and vascular repair. Two of the longest-studied peptides in this space are BPC-157 and TB-500, which appear frequently as a paired protocol because they are thought to act on complementary arms of the repair response — angiogenic signalling on one side, actin sequestration and cellular migration on the other. The literature record spans rodent, porcine, and in-vitro wound-healing assays, and most protocols measure mechanism-level endpoints (vessel density, collagen remodelling, re-epithelialisation) rather than human outcomes.',
     comparisonFramework: [
@@ -140,7 +140,7 @@ const BY_SLUG: Record<string, CategoryContent> = {
   },
 
   longevity: {
-    heading: 'Longevity and cellular-senescence research peptides',
+    heading: 'Shop Longevity Peptides — Senescence, NAD+ & Mitochondrial Vials',
     intro:
       'Longevity-class research peptides are studied across the core pathways of biological ageing — cellular senescence, mitochondrial quality control, NAD+ salvage and sirtuin activation, epigenetic-clock readouts, and autophagy regulation. Most of the published work is pre-clinical and pathway-focused: compounds are evaluated for their effect on biomarker panels and mechanism-level endpoints rather than lifespan directly. This makes the category heavier on mechanism primers than on dose-response data. Each vial in this catalogue is lot-matched to an independent certificate of analysis.',
     comparisonFramework: [
@@ -192,7 +192,7 @@ const BY_SLUG: Record<string, CategoryContent> = {
   },
 
   growth: {
-    heading: 'Growth-axis and hypertrophy research peptides',
+    heading: 'Shop Growth Peptides — GH Secretagogues & IGF-1 Pathway Vials',
     intro:
       'Growth-axis peptides in this catalogue are studied for their interaction with the GH–IGF-1 system. Secretagogues like CJC-1295 and ipamorelin act upstream at the pituitary, while receptor-binding compounds work on the GHRH-receptor directly. Published comparisons tend to measure pulsatile GH release, downstream IGF-1 phosphorylation, and in some designs muscle-protein-synthesis endpoints. This class is heavy on comparative potency mapping — most research questions reduce to which compound produces the cleanest pulse with the most predictable downstream signalling.',
     comparisonFramework: [
@@ -244,7 +244,7 @@ const BY_SLUG: Record<string, CategoryContent> = {
   },
 
   cognitive: {
-    heading: 'Cognitive and nootropic research peptides',
+    heading: 'Shop Cognitive Peptides — Nootropic & Neuroplasticity Vials',
     intro:
       'Cognitive research peptides sit at the intersection of cholinergic pharmacology, neuroplasticity, and cerebrovascular research. Compounds in this category are studied in cell-line electrophysiology (LTP, LTD), rodent behavioural models (Morris water maze, novel-object recognition), and molecular assays of BDNF / NGF expression. The catalogue here includes both long-studied nootropics like semax and selank and more recent research compounds that appear in comparative behavioural work.',
     comparisonFramework: [
@@ -296,7 +296,7 @@ const BY_SLUG: Record<string, CategoryContent> = {
   },
 
   blends: {
-    heading: 'Pre-mixed research peptide blends',
+    heading: 'Shop Pre-Mixed Peptide Blends — Complementary Pathway Vials',
     intro:
       'Pre-mixed blends are research peptides supplied in a single vial at a documented ratio. The main use-case is comparative protocol work where multiple pathways are studied in parallel — rather than reconstituting and dosing two or three vials separately, researchers use a single blend to reduce variable count across arms. Every blend here lists its constituents with per-compound purity verification in the lot-matched certificate of analysis.',
     comparisonFramework: [

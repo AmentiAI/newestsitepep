@@ -6,10 +6,10 @@ import { products, getProduct } from '@/lib/products'
 import { contentFor, CompoundContent } from '@/lib/content'
 import { SITE } from '@/lib/site'
 import { discountedFmt } from '@/lib/price'
-import { productJsonLd, breadcrumbJsonLd, faqJsonLd, JsonLd } from '@/lib/schema'
+import { productJsonLd, breadcrumbJsonLd, JsonLd } from '@/lib/schema'
 import { varianceFor, PageVariance, SectionKey, ExtraBlockKey } from '@/lib/pageVariance'
 import { copyFor } from '@/lib/productCopy'
-import Rating from '@/components/Rating'
+import { analyzeFamily, savingsPct, reconTableFor, pairPicksFor, parseDose, type VariantRow } from '@/lib/variants'
 import ProductCard from '@/components/ProductCard'
 import RelatedLinks from '@/components/RelatedLinks'
 
@@ -25,7 +25,7 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   if (!p) return {}
   const copy = copyFor(p)
   const description = copy.metaDescription
-  const title = `Buy ${p.name} — ${p.category} Research Peptide | ${SITE.name}`
+  const title = `Buy ${p.name} Online — ${p.category} Peptide | ${SITE.name}`
   return {
     title,
     description,
@@ -53,8 +53,28 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
   const v = varianceFor(p.slug, p.category)
 
+  const family = analyzeFamily(p)
+  const familySavings = savingsPct(family)
+  const reconRows = reconTableFor(p)
+  const pairPicks = pairPicksFor(p, 3)
+  const { mg: currentMg } = parseDose(p.name)
+
   const hero = (
     <Hero p={p} tagline={copy.tagline} overview={c?.overview} variance={v} />
+  )
+
+  const computedBlocks = (
+    <div className="mt-10 space-y-6">
+      {family.length > 1 && (
+        <VariantTable rows={family} savings={familySavings} productBase={parseDose(p.name).baseName} />
+      )}
+      {reconRows.length > 0 && currentMg && (
+        <ReconBlock productName={p.name} mg={currentMg} rows={reconRows} />
+      )}
+      {pairPicks.length > 0 && (
+        <PairPicks productName={p.name} picks={pairPicks} />
+      )}
+    </div>
   )
 
   const sidebar = (
@@ -115,6 +135,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
       {hero}
 
+      {computedBlocks}
+
       {v.related === 'before-content' && relatedBlock && (
         <div className="mt-16">{relatedBlock}</div>
       )}
@@ -139,7 +161,6 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           { name: p.name, url: `${SITE.baseUrl}/products/${p.slug}` },
         ])}
       />
-      {faqs.length > 0 && <JsonLd data={faqJsonLd(faqs)} />}
     </div>
   )
 }
@@ -244,7 +265,9 @@ function Hero({
     <div>
       <div className="text-xs font-bold uppercase tracking-wider text-brand-600">{p.category}</div>
       <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 md:text-4xl">{p.name}</h1>
-      <div className="mt-3"><Rating slug={p.slug} /></div>
+      <div className="mt-3 text-xs font-semibold uppercase tracking-wider text-emerald-700">
+        ≥98% HPLC purity · lot-matched CoA · sealed under nitrogen
+      </div>
       <p className="mt-4 text-lg text-ink-800 font-medium">{tagline}</p>
       {overview && (
         <p className="mt-3 leading-relaxed text-ink-700">{overview}</p>
@@ -424,13 +447,12 @@ function ExtraBlock({
       return (
         <section className="mt-12 card p-5">
           <div className="text-xs font-bold uppercase tracking-wider text-brand-600">
-            {p.category} research
+            {p.category} class
           </div>
           <p className="mt-2 text-ink-700 leading-relaxed">
-            {p.name} sits within the {p.category.toLowerCase()} class of research peptides
-            offered on {SITE.name}. Researchers comparing compounds in this category often
-            evaluate potency, half-life, and receptor selectivity side by side before
-            selecting a protocol.
+            {p.name} sits in the {p.category.toLowerCase()} shelf at {SITE.name}. Buyers
+            comparing compounds in this class typically weigh potency, half-life, and
+            receptor selectivity before choosing a vial.
           </p>
         </section>
       )
@@ -450,12 +472,11 @@ function ExtraBlock({
     case 'literature-callout':
       return (
         <section className="mt-12 card bg-ink-50 p-5">
-          <div className="text-sm font-bold text-ink-900">From the literature</div>
+          <div className="text-sm font-bold text-ink-900">Sourcing and QC</div>
           <p className="mt-2 text-sm text-ink-700 leading-relaxed">
-            Where possible, published references in the {p.category.toLowerCase()} space
-            should be consulted directly rather than relying on product-page summaries.
-            This page frames research context only — it is not a substitute for primary
-            literature.
+            Every {p.name} vial ships sealed under nitrogen with a lot-matched
+            certificate of analysis. Purity is HPLC-verified at ≥98% and a mass-spec
+            identity check is on file per lot.
           </p>
         </section>
       )
@@ -464,7 +485,7 @@ function ExtraBlock({
       return (
         <section className="mt-12">
           <div className="text-xs font-bold uppercase tracking-wider text-ink-500">
-            Research tags
+            Compound tags
           </div>
           <div className="mt-2 flex flex-wrap gap-2">
             {p.tags.map((t) => (
@@ -529,5 +550,149 @@ function Row({ k, v }: { k: string; v: string }) {
       <dt className="text-ink-500">{k}</dt>
       <dd className="font-medium text-ink-900 text-right">{v}</dd>
     </div>
+  )
+}
+
+function VariantTable({
+  rows,
+  savings,
+  productBase,
+}: {
+  rows: VariantRow[]
+  savings: number | null
+  productBase: string
+}) {
+  return (
+    <section className="card p-5" aria-labelledby="variant-heading">
+      <div className="flex items-baseline justify-between gap-4 flex-wrap">
+        <h2 id="variant-heading" className="text-xl font-bold text-ink-900">
+          {productBase} vial sizes — price per mg
+        </h2>
+        {savings !== null && savings > 0 && (
+          <span className="rounded-md bg-emerald-600 px-2 py-1 text-xs font-black uppercase tracking-wider text-white">
+            Up to {savings}% cheaper per mg
+          </span>
+        )}
+      </div>
+      <div className="mt-4 overflow-x-auto">
+        <table className="w-full text-sm">
+          <thead>
+            <tr className="border-b border-ink-200 text-left text-ink-500">
+              <th className="py-2 pr-3 font-semibold">Size</th>
+              <th className="py-2 pr-3 font-semibold">Price</th>
+              <th className="py-2 pr-3 font-semibold">$ / mg</th>
+              <th className="py-2 pr-3 font-semibold">Best value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {rows.map((r) => (
+              <tr
+                key={r.product.slug}
+                className={`border-b border-ink-100 last:border-0 ${
+                  r.isCurrent ? 'bg-brand-50' : ''
+                }`}
+              >
+                <td className="py-2 pr-3 font-medium text-ink-900">
+                  {r.isCurrent ? (
+                    <span>{r.mg ? `${r.mg} mg` : r.product.name} <span className="text-xs text-brand-600">· this page</span></span>
+                  ) : (
+                    <Link href={`/products/${r.product.slug}`} className="text-brand-700 hover:underline">
+                      Buy {r.product.name}
+                    </Link>
+                  )}
+                </td>
+                <td className="py-2 pr-3 text-ink-800">{discountedFmt(r.pricePaid)}</td>
+                <td className="py-2 pr-3 text-ink-800">
+                  {r.pricePerMg !== null ? `$${r.pricePerMg.toFixed(2)}` : '—'}
+                </td>
+                <td className="py-2 pr-3">
+                  {r.isBestValue && (
+                    <span className="rounded bg-emerald-600 px-2 py-0.5 text-xs font-bold text-white">
+                      Best
+                    </span>
+                  )}
+                  {r.isWorstValue && !r.isBestValue && (
+                    <span className="text-xs text-ink-500">—</span>
+                  )}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
+}
+
+function ReconBlock({
+  productName,
+  mg,
+  rows,
+}: {
+  productName: string
+  mg: number
+  rows: { targetMgPerMl: number; ml: string }[]
+}) {
+  return (
+    <section className="card p-5" aria-labelledby="recon-heading">
+      <h2 id="recon-heading" className="text-xl font-bold text-ink-900">
+        {productName} reconstitution volumes
+      </h2>
+      <p className="mt-2 text-sm text-ink-600">
+        A {mg} mg vial reconstituted with bacteriostatic water yields:
+      </p>
+      <div className="mt-3 grid grid-cols-3 gap-3">
+        {rows.map((r) => (
+          <div key={r.targetMgPerMl} className="rounded-md border border-ink-200 p-3">
+            <div className="text-xs font-semibold uppercase tracking-wider text-ink-500">
+              at {r.targetMgPerMl} mg/mL
+            </div>
+            <div className="mt-1 text-lg font-bold text-ink-900">{r.ml}</div>
+            <div className="text-xs text-ink-500">BAC water</div>
+          </div>
+        ))}
+      </div>
+      <p className="mt-3 text-xs text-ink-500">
+        Calculated from vial mass. Verify against the supplier's instructions for your protocol.
+      </p>
+    </section>
+  )
+}
+
+function PairPicks({
+  productName,
+  picks,
+}: {
+  productName: string
+  picks: ReturnType<typeof pairPicksFor>
+}) {
+  const names = picks.map((x) => x.name)
+  const list =
+    names.length === 1
+      ? names[0]
+      : names.length === 2
+        ? `${names[0]} and ${names[1]}`
+        : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`
+  return (
+    <section className="card p-5">
+      <div className="text-xs font-bold uppercase tracking-wider text-brand-600">
+        Often paired with
+      </div>
+      <p className="mt-2 text-ink-800 leading-relaxed">
+        Buyers viewing <strong>{productName}</strong> typically also consider {list} from the same
+        shelf. Each is in stock, sealed under nitrogen with a lot-matched CoA.
+      </p>
+      <div className="mt-3 flex flex-wrap gap-2">
+        {picks.map((x) => (
+          <Link
+            key={x.slug}
+            href={`/products/${x.slug}`}
+            className="rounded-full border border-brand-400 bg-brand-50 px-3 py-1 text-sm font-semibold text-ink-800 hover:bg-brand-100"
+          >
+            Buy {x.name} — {discountedFmt(x.priceNum)}
+          </Link>
+        ))}
+      </div>
+    </section>
   )
 }

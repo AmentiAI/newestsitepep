@@ -78,25 +78,25 @@ const HEADINGS: Record<SectionKey, readonly string[]> = {
     'What the studies describe',
   ],
   highlights: [
-    'Research highlights',
-    'Key points from the literature',
-    'Notable findings',
-    'What the studies show',
+    'Key facts',
+    'What stands out',
     'At a glance',
+    'Notable points',
+    'Compound highlights',
   ],
   protocolNotes: [
-    'Research protocol notes',
-    'Reconstitution and working-concentration notes',
-    'Lab protocol guidance',
-    'Handling in research settings',
+    'Reconstitution notes',
+    'Working-concentration notes',
+    'Lab handling guidance',
+    'Handling in the lab',
     'Protocol considerations',
   ],
   stackingNotes: [
-    'Stacking and comparative studies',
-    'Combination research',
-    'Paired-compound studies',
-    'Comparative literature',
-    'How it is studied alongside others',
+    'Pairs and stacks',
+    'Combination notes',
+    'Paired-compound work',
+    'Comparative notes',
+    'How it is paired',
   ],
   storage: [
     'Handling and storage',
@@ -108,18 +108,18 @@ const HEADINGS: Record<SectionKey, readonly string[]> = {
   faqs: [
     'Frequently asked',
     'Common questions',
-    'Questions from researchers',
-    'Researcher FAQ',
+    'Questions we get',
+    'Customer FAQ',
     'Asked often',
   ],
 }
 
 const RELATED_HEADINGS = [
   'Related in {cat}',
-  'Also studied in {cat}',
-  'More {cat} research compounds',
+  'Also in {cat}',
+  'More {cat} compounds',
   'Other {cat} entries',
-  'Nearby in the {cat} literature',
+  'Nearby in {cat}',
   'Compare with other {cat} compounds',
 ]
 
