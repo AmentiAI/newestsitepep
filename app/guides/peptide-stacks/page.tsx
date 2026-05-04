@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuideLayout, { H2, H3, P, UL } from '@/components/GuideLayout'
+import GuideLayout, { Cite, H2, H3, P, UL } from '@/components/GuideLayout'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -27,6 +27,9 @@ export default function Page() {
       eyebrow="Stacks Guide"
       title="Popular Peptide Stacks Explained"
       lead="Most research-peptide work pairs compounds that hit different arms of the same system. Here's a breakdown of the combinations that keep appearing in the literature and why they make sense."
+      path="/guides/peptide-stacks"
+      datePublished="2026-04-15"
+      dateModified="2026-04-19"
       crossLinks={['bpc', 'sema', 'muscle', 'fatloss', 'calc', 'recon']}
       related={[
         'bpc-157-tb-500-blend-bpc-157-10mg-tb-500-10mg',
@@ -48,8 +51,20 @@ export default function Page() {
       <H2>Repair stack: BPC-157 + TB-500</H2>
       <P>
         The canonical soft-tissue repair combination. BPC-157 drives angiogenesis via
-        VEGFR2. TB-500 drives cellular migration via actin sequestration. Different
-        arms of the same process. Available pre-blended at 10 mg and 20 mg total mass.
+        VEGFR2 and the Src–caveolin-1–eNOS pathway (
+        <Cite
+          pmid="33051481"
+          label="Hsieh et al., Sci Rep 2020"
+          title="Modulatory effects of BPC 157 on vasomotor tone and the Src–Caveolin-1–eNOS pathway"
+        />
+        ). TB-500 drives cellular migration via actin sequestration (
+        <Cite
+          pmid="22074294"
+          label="Goldstein et al., 2011 review"
+          title="Thymosin β4: a multi-functional regenerative peptide"
+        />
+        ). Different arms of the same process. Available pre-blended at 10 mg and 20 mg
+        total mass.
       </P>
       <UL>
         <li>BPC-157 + TB-500 10 mg (5 mg + 5 mg)</li>
@@ -58,11 +73,22 @@ export default function Page() {
 
       <H2>Growth-axis stack: Ipamorelin + CJC-1295</H2>
       <P>
-        Ipamorelin activates the ghrelin receptor. CJC-1295 activates the GHRH receptor.
-        Both drive growth-hormone release from the pituitary, but through different
-        signaling cascades. Activating both at once produces a larger GH pulse than
-        either alone. This is the most-published growth-axis stack in the research
-        literature.
+        Ipamorelin activates the ghrelin receptor with selectivity for GH release that
+        does not raise ACTH or cortisol at doses up to 200-fold over the GH-release ED50 (
+        <Cite
+          pmid="9849822"
+          label="Raun et al., Eur J Endocrinol 1998"
+          title="Ipamorelin, the first selective growth hormone secretagogue"
+        />
+        ). CJC-1295 activates the GHRH receptor; the long-acting analog produced sustained
+        GH and IGF-1 elevations across 28- and 49-day dosing in healthy adults (
+        <Cite
+          pmid="16352683"
+          label="Teichman et al., JCEM 2006"
+          title="Prolonged stimulation of GH and IGF-1 secretion by CJC-1295"
+        />
+        ). Activating both receptors at once produces a larger GH pulse than either alone
+        — the most-published growth-axis stack in the research literature.
       </P>
       <P>
         Pre-blended versions use the <strong>No DAC</strong> variant of CJC-1295 so both
@@ -73,8 +99,15 @@ export default function Page() {
       <H2>Alternative growth-axis: Ipamorelin + Tesamorelin</H2>
       <P>
         Same principle, different GHRH analog. Tesamorelin is closer to native GHRH
-        structurally than CJC-1295. Researchers who prefer a more "natural" GHRH-analog
-        profile use this stack instead. Available in two pre-blended ratios:
+        structurally than CJC-1295 — its registrational HIV-lipodystrophy work
+        demonstrated selective visceral-fat reduction over 26 weeks (
+        <Cite
+          pmid="18057338"
+          label="Falutz et al., NEJM 2007"
+          title="Metabolic Effects of a Growth Hormone–Releasing Factor in Patients with HIV"
+        />
+        ). Researchers who prefer a more "natural" GHRH-analog profile use this stack
+        instead. Available in two pre-blended ratios:
       </P>
       <UL>
         <li>IPA 3 mg + TESA 10 mg</li>
@@ -85,8 +118,20 @@ export default function Page() {
       <P>
         Cagrilintide + semaglutide. Amylin pathway + GLP-1 pathway. Cagrilintide is a
         long-acting amylin analog that engages satiety and gastric-emptying circuits
-        distinct from GLP-1. Combining the two produces additive metabolic endpoints —
-        and the pre-blend eliminates the need to reconstitute two separate vials.
+        distinct from GLP-1 (
+        <Cite
+          pmid="34798060"
+          label="Lau et al., Lancet 2021"
+          title="Once-weekly cagrilintide for weight management — phase 2 dose-finding trial"
+        />
+        ). Combining the two produces additive metabolic endpoints — the phase 1b
+        co-administration data is the basis for the pre-blend (
+        <Cite
+          pmid="33894838"
+          label="Enebo et al., Lancet 2021"
+          title="Concomitant administration of cagrilintide with semaglutide 2·4 mg — phase 1b"
+        />
+        ).
       </P>
 
       <H2>Advanced metabolic stack: Cagri-Reta</H2>

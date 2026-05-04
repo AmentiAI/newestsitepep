@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuideLayout, { H2, H3, P } from '@/components/GuideLayout'
+import GuideLayout, { Cite, H2, H3, P } from '@/components/GuideLayout'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -27,6 +27,9 @@ export default function Page() {
       eyebrow="Sleep & Cognition Guide"
       title="Peptides for Sleep and Cognitive Support"
       lead="The sleep and nootropic peptide space is narrower than the fat-loss or growth-axis categories — but it's dominated by compounds with decades of research behind them, most of it from Russian neuropharmacology groups."
+      path="/guides/peptides-for-sleep"
+      datePublished="2026-04-15"
+      dateModified="2026-04-19"
       related={['selank-10mg', 'n-acetyl-semax-amidate-30mg', 'dsip-delta-sleep-inducing-peptide-10mg', 'pinealon-20mg']}
       crossLinks={['basics', 'glossary', 'calc', 'recon', 'stacks', 'products']}
     >
@@ -48,7 +51,15 @@ export default function Page() {
         Selank is a synthetic heptapeptide analog of tuftsin, developed at the Institute
         of Molecular Genetics of the Russian Academy of Sciences. It is studied primarily
         for its anxiolytic and immunomodulatory effects, with documented activity on
-        GABAergic and serotonergic systems.
+        GABAergic and serotonergic systems. A 62-patient comparative trial in generalised
+        anxiety disorder and neurasthenia reported anxiolytic effects comparable to
+        medazepam, with additional antiasthenic and psychostimulant activity (
+        <Cite
+          pmid="18454096"
+          label="Zozulia et al., 2008"
+          title="Efficacy and possible mechanisms of action of selank in the therapy of generalised anxiety disorders and neurasthenia"
+        />
+        ).
       </P>
       <P>
         The <strong>NA-Selank Amidate</strong> version is N-terminally acetylated —
@@ -59,9 +70,21 @@ export default function Page() {
       <H2>Semax: the nootropic heptapeptide</H2>
       <P>
         Semax is derived from ACTH(4-10) — the non-corticotropic fragment of
-        adrenocorticotropic hormone. Research reports strong BDNF and NGF upregulation,
-        plus modulation of dopaminergic and serotonergic signaling. It has been studied
-        across learning, memory, and post-ischemic-recovery research models.
+        adrenocorticotropic hormone. Activation of dopaminergic and serotonergic systems
+        is documented in rodent work (
+        <Cite
+          pmid="16362768"
+          label="Eremin et al., 2005"
+          title="Semax, an ACTH(4-10) analogue with nootropic properties, activates dopaminergic and serotoninergic brain systems in rodents"
+        />
+        ), with separate work showing BDNF/trkB upregulation in the rat hippocampus (
+        <Cite
+          pmid="16996037"
+          label="Dolotov et al., 2006"
+          title="Semax, an analog of ACTH(4-10) with cognitive effects, regulates BDNF and trkB expression in the rat hippocampus"
+        />
+        ). It has been studied across learning, memory, and post-ischemic-recovery
+        research models.
       </P>
       <P>
         <strong>N-Acetyl Semax Amidate</strong> is the stabilized form — N-terminally
@@ -82,8 +105,16 @@ export default function Page() {
       <P>
         Pinealon (Glu-Asp-Arg) is a tripeptide in the Khavinson bioregulator class — a
         family of short peptides developed by Prof. Vladimir Khavinson for tissue-specific
-        research. Pinealon targets pineal-gland and neuronal endpoints. Short pulsed
-        courses (10–20 days) are the standard research protocol.
+        research, with the most-cited human dataset being a 6-year mortality cohort using
+        the related epithalamin/thymalin pair (
+        <Cite
+          pmid="14523363"
+          label="Khavinson et al., 2003"
+          title="Peptides of pineal gland and thymus prolong human life"
+        />
+        ). The published evidence base is heavily concentrated in the Khavinson group;
+        independent replication outside that lab is sparse. Short pulsed courses (10–20
+        days) are the standard research protocol.
       </P>
 
       <H2>Epitalon (for circadian research)</H2>

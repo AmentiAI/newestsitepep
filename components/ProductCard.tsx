@@ -38,8 +38,14 @@ export default function ProductCard({ p }: { p: Parent }) {
         </div>
         <div className="mt-auto flex items-center justify-between pt-2">
           <span className="flex items-baseline gap-1.5">
-            {multi && <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-500">from</span>}
+            {multi && (
+              <>
+                <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-500">from</span>
+                {' '}
+              </>
+            )}
             <span className="font-bold text-ink-900">{discountedFmt(primary.priceNum)}</span>
+            {' '}
             <span className="text-xs font-medium text-ink-400 line-through">{primary.price}</span>
           </span>
           <span className="text-xs font-bold text-brand-600">Buy {p.name} →</span>

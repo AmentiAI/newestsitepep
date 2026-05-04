@@ -27,7 +27,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/tirzepatide-15mg.png",
+    "image": "/images/products/tirzepatide-15mg.png",
     "affiliateUrl": "https://phiogen.is/products/tirzepatide-15mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -44,7 +44,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$249.99",
     "priceNum": 249.99,
-    "image": "https://phiogen.is/images/products/tirzepatide-30mg.png",
+    "image": "/images/products/tirzepatide-30mg.png",
     "affiliateUrl": "https://phiogen.is/products/tirzepatide-30mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -61,7 +61,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$399.99",
     "priceNum": 399.99,
-    "image": "https://phiogen.is/images/products/tirzepatide-60mg.png",
+    "image": "/images/products/tirzepatide-60mg.png",
     "affiliateUrl": "https://phiogen.is/products/tirzepatide-60mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -78,7 +78,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$49.99",
     "priceNum": 49.99,
-    "image": "https://phiogen.is/images/products/semaglutide-3mg.png",
+    "image": "/images/products/semaglutide-3mg.png",
     "affiliateUrl": "https://phiogen.is/products/semaglutide-3mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -95,7 +95,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/semaglutide-6mg.png",
+    "image": "/images/products/semaglutide-6mg.png",
     "affiliateUrl": "https://phiogen.is/products/semaglutide-6mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -112,7 +112,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$129.99",
     "priceNum": 129.99,
-    "image": "https://phiogen.is/images/products/semaglutide-12mg.png",
+    "image": "/images/products/semaglutide-12mg.png",
     "affiliateUrl": "https://phiogen.is/products/semaglutide-12mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -129,7 +129,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$189.99",
     "priceNum": 189.99,
-    "image": "https://phiogen.is/images/products/semaglutide-20mg.png",
+    "image": "/images/products/semaglutide-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/semaglutide-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -146,7 +146,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$249.99",
     "priceNum": 249.99,
-    "image": "https://phiogen.is/images/products/semaglutide-30mg.png",
+    "image": "/images/products/semaglutide-30mg.png",
     "affiliateUrl": "https://phiogen.is/products/semaglutide-30mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -163,7 +163,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/retatrutide-10mg.png",
+    "image": "/images/products/retatrutide-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/retatrutide-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -180,7 +180,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$199.99",
     "priceNum": 199.99,
-    "image": "https://phiogen.is/images/products/retatrutide-15mg.png",
+    "image": "/images/products/retatrutide-15mg.png",
     "affiliateUrl": "https://phiogen.is/products/retatrutide-15mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -197,7 +197,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$249.99",
     "priceNum": 249.99,
-    "image": "https://phiogen.is/images/products/retatrutide-20mg.png",
+    "image": "/images/products/retatrutide-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/retatrutide-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -214,7 +214,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$329.99",
     "priceNum": 329.99,
-    "image": "https://phiogen.is/images/products/retatrutide-30mg.png",
+    "image": "/images/products/retatrutide-30mg.png",
     "affiliateUrl": "https://phiogen.is/products/retatrutide-30mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -231,7 +231,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$159.99",
     "priceNum": 159.99,
-    "image": "https://phiogen.is/images/products/survodutide-10mg.png",
+    "image": "/images/products/survodutide-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/survodutide-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -248,7 +248,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$129.99",
     "priceNum": 129.99,
-    "image": "https://phiogen.is/images/products/mazdutide-6mg.png",
+    "image": "/images/products/mazdutide-6mg.png",
     "affiliateUrl": "https://phiogen.is/products/mazdutide-6mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -265,7 +265,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/cagrilintide-5mg.png",
+    "image": "/images/products/cagrilintide-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/cagrilintide-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -282,7 +282,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$169.99",
     "priceNum": 169.99,
-    "image": "https://phiogen.is/images/products/cagrilintide-10mg.png",
+    "image": "/images/products/cagrilintide-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/cagrilintide-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -299,7 +299,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$19.99",
     "priceNum": 19.99,
-    "image": "https://phiogen.is/images/products/5-amino-1mq-5mg.png",
+    "image": "/images/products/5-amino-1mq-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/5-amino-1mq-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -316,7 +316,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/5-amino-1mq-50mg.png",
+    "image": "/images/products/5-amino-1mq-50mg.png",
     "affiliateUrl": "https://phiogen.is/products/5-amino-1mq-50mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -333,7 +333,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/5-amino-1mq-capsules-50mg-x-60-capsules.png",
+    "image": "/images/products/5-amino-1mq-capsules-50mg-x-60-capsules.png",
     "affiliateUrl": "https://phiogen.is/products/5-amino-1mq-capsules-50mg-x-60-capsules?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -350,7 +350,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/aicar-50mg.png",
+    "image": "/images/products/aicar-50mg.png",
     "affiliateUrl": "https://phiogen.is/products/aicar-50mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -367,7 +367,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$39.99",
     "priceNum": 39.99,
-    "image": "https://phiogen.is/images/products/aod9604-2mg.png",
+    "image": "/images/products/aod9604-2mg.png",
     "affiliateUrl": "https://phiogen.is/products/aod9604-2mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -384,7 +384,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/aod9604-5mg.png",
+    "image": "/images/products/aod9604-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/aod9604-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -401,7 +401,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/aod9604-10mg.png",
+    "image": "/images/products/aod9604-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/aod9604-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -418,7 +418,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/adipotide-fttp-5mg.png",
+    "image": "/images/products/adipotide-fttp-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/adipotide-fttp-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -435,7 +435,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/adipotide-fttp-10mg.png",
+    "image": "/images/products/adipotide-fttp-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/adipotide-fttp-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -452,7 +452,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/bam-15-30mg-ml-30ml.png",
+    "image": "/images/products/bam-15-30mg-ml-30ml.png",
     "affiliateUrl": "https://phiogen.is/products/bam-15-30mg-ml-30ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -469,7 +469,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$129.99",
     "priceNum": 129.99,
-    "image": "https://phiogen.is/images/products/bam-15-50mg-ml-30ml.png",
+    "image": "/images/products/bam-15-50mg-ml-30ml.png",
     "affiliateUrl": "https://phiogen.is/products/bam-15-50mg-ml-30ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -486,7 +486,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$39.99",
     "priceNum": 39.99,
-    "image": "https://phiogen.is/images/products/l-carnitine-400mg-ml.png",
+    "image": "/images/products/l-carnitine-400mg-ml.png",
     "affiliateUrl": "https://phiogen.is/products/l-carnitine-400mg-ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -503,7 +503,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$49.99",
     "priceNum": 49.99,
-    "image": "https://phiogen.is/images/products/l-carnitine-600mg-ml.png",
+    "image": "/images/products/l-carnitine-600mg-ml.png",
     "affiliateUrl": "https://phiogen.is/products/l-carnitine-600mg-ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -520,7 +520,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/l-carnitine-5-pack-600mg.png",
+    "image": "/images/products/l-carnitine-5-pack-600mg.png",
     "affiliateUrl": "https://phiogen.is/products/l-carnitine-5-pack-600mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -537,7 +537,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/o-304-atx-304-100mg-x-60-capsules.png",
+    "image": "/images/products/o-304-atx-304-100mg-x-60-capsules.png",
     "affiliateUrl": "https://phiogen.is/products/o-304-atx-304-100mg-x-60-capsules?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -554,7 +554,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$39.99",
     "priceNum": 39.99,
-    "image": "https://phiogen.is/images/products/slu-pp-332-1mg-x-30-capsules.png",
+    "image": "/images/products/slu-pp-332-1mg-x-30-capsules.png",
     "affiliateUrl": "https://phiogen.is/products/slu-pp-332-1mg-x-30-capsules?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -571,7 +571,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/slu-pp-332-100mg-x-30-capsules.png",
+    "image": "/images/products/slu-pp-332-100mg-x-30-capsules.png",
     "affiliateUrl": "https://phiogen.is/products/slu-pp-332-100mg-x-30-capsules?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -588,7 +588,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$159.99",
     "priceNum": 159.99,
-    "image": "https://phiogen.is/images/products/slu-pp-332-100mg-x-120-capsules.png",
+    "image": "/images/products/slu-pp-332-100mg-x-120-capsules.png",
     "affiliateUrl": "https://phiogen.is/products/slu-pp-332-100mg-x-120-capsules?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -605,7 +605,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/slu-pp-332-1mg-ml-30ml.png",
+    "image": "/images/products/slu-pp-332-1mg-ml-30ml.png",
     "affiliateUrl": "https://phiogen.is/products/slu-pp-332-1mg-ml-30ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -622,7 +622,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/slu-pp-332-5mg-ml-30ml.png",
+    "image": "/images/products/slu-pp-332-5mg-ml-30ml.png",
     "affiliateUrl": "https://phiogen.is/products/slu-pp-332-5mg-ml-30ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -639,7 +639,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/tesofensine-500mcg-x-30-capsules.png",
+    "image": "/images/products/tesofensine-500mcg-x-30-capsules.png",
     "affiliateUrl": "https://phiogen.is/products/tesofensine-500mcg-x-30-capsules?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -656,7 +656,7 @@ export const products: Product[] = [
     "category": "Fat Loss",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/tesofensine-500mcg-x-30-tablets.png",
+    "image": "/images/products/tesofensine-500mcg-x-30-tablets.png",
     "affiliateUrl": "https://phiogen.is/products/tesofensine-500mcg-x-30-tablets?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -673,7 +673,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/igf-1-lr3-1mg.png",
+    "image": "/images/products/igf-1-lr3-1mg.png",
     "affiliateUrl": "https://phiogen.is/products/igf-1-lr3-1mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -690,7 +690,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/ipamorelin-10mg.png",
+    "image": "/images/products/ipamorelin-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/ipamorelin-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -707,7 +707,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$49.99",
     "priceNum": 49.99,
-    "image": "https://phiogen.is/images/products/cjc-1295-no-dac-5mg.png",
+    "image": "/images/products/cjc-1295-no-dac-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/cjc-1295-no-dac-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -724,7 +724,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/cjc-1295-no-dac-10mg.png",
+    "image": "/images/products/cjc-1295-no-dac-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/cjc-1295-no-dac-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -741,7 +741,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/cjc-1295-with-dac-10mg.png",
+    "image": "/images/products/cjc-1295-with-dac-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/cjc-1295-with-dac-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -758,7 +758,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$49.99",
     "priceNum": 49.99,
-    "image": "https://phiogen.is/images/products/ghrp-2-10mg.png",
+    "image": "/images/products/ghrp-2-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/ghrp-2-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -775,7 +775,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$49.99",
     "priceNum": 49.99,
-    "image": "https://phiogen.is/images/products/ghrp-6-10mg.png",
+    "image": "/images/products/ghrp-6-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/ghrp-6-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -792,7 +792,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$49.99",
     "priceNum": 49.99,
-    "image": "https://phiogen.is/images/products/gonadorelin-acetate.png",
+    "image": "/images/products/gonadorelin-acetate.png",
     "affiliateUrl": "https://phiogen.is/products/gonadorelin-acetate?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -809,7 +809,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/hexarelin-5mg.png",
+    "image": "/images/products/hexarelin-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/hexarelin-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -826,7 +826,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/kisspeptin-10-5mg.png",
+    "image": "/images/products/kisspeptin-10-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/kisspeptin-10-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -843,7 +843,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/kisspeptin-10-10mg.png",
+    "image": "/images/products/kisspeptin-10-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/kisspeptin-10-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -860,7 +860,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/peg-mgf-2mg.png",
+    "image": "/images/products/peg-mgf-2mg.png",
     "affiliateUrl": "https://phiogen.is/products/peg-mgf-2mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -877,7 +877,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$39.99",
     "priceNum": 39.99,
-    "image": "https://phiogen.is/images/products/sermorelin-2mg.png",
+    "image": "/images/products/sermorelin-2mg.png",
     "affiliateUrl": "https://phiogen.is/products/sermorelin-2mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -894,7 +894,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/sermorelin-5mg.png",
+    "image": "/images/products/sermorelin-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/sermorelin-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -911,7 +911,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/sermorelin-10mg.png",
+    "image": "/images/products/sermorelin-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/sermorelin-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -928,7 +928,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/tesamorelin-10mg.png",
+    "image": "/images/products/tesamorelin-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/tesamorelin-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -945,7 +945,7 @@ export const products: Product[] = [
     "category": "Growth",
     "price": "$199.99",
     "priceNum": 199.99,
-    "image": "https://phiogen.is/images/products/tesamorelin-20mg.png",
+    "image": "/images/products/tesamorelin-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/tesamorelin-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -962,7 +962,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/bpc-157-10mg.png",
+    "image": "/images/products/bpc-157-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/bpc-157-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -979,7 +979,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/tb-500-thymosin-beta-4-10mg.png",
+    "image": "/images/products/tb-500-thymosin-beta-4-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/tb-500-thymosin-beta-4-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -996,7 +996,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/ara-290-10mg.png",
+    "image": "/images/products/ara-290-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/ara-290-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1013,7 +1013,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/bpc-157-capsules-500mcg-x-60-capsules.png",
+    "image": "/images/products/bpc-157-capsules-500mcg-x-60-capsules.png",
     "affiliateUrl": "https://phiogen.is/products/bpc-157-capsules-500mcg-x-60-capsules?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1030,7 +1030,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$12.99",
     "priceNum": 12.99,
-    "image": "https://phiogen.is/images/products/bacteriostatic-water-30ml.png",
+    "image": "/images/products/bacteriostatic-water-30ml.png",
     "affiliateUrl": "https://phiogen.is/products/bacteriostatic-water-30ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1047,7 +1047,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$14.99",
     "priceNum": 14.99,
-    "image": "https://phiogen.is/images/products/usp-bacteriostatic-water-30ml.png",
+    "image": "/images/products/usp-bacteriostatic-water-30ml.png",
     "affiliateUrl": "https://phiogen.is/products/usp-bacteriostatic-water-30ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1064,7 +1064,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/bronchogen-20mg.png",
+    "image": "/images/products/bronchogen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/bronchogen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1081,7 +1081,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/cardiogen-20mg.png",
+    "image": "/images/products/cardiogen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/cardiogen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1098,7 +1098,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/cartalax-20mg.png",
+    "image": "/images/products/cartalax-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/cartalax-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1115,7 +1115,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/chonluten-20mg.png",
+    "image": "/images/products/chonluten-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/chonluten-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1132,7 +1132,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/cortagen-20mg.png",
+    "image": "/images/products/cortagen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/cortagen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1149,7 +1149,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/crystagen-20mg.png",
+    "image": "/images/products/crystagen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/crystagen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1166,7 +1166,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/kpv-5mg.png",
+    "image": "/images/products/kpv-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/kpv-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1183,7 +1183,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/kpv-10mg.png",
+    "image": "/images/products/kpv-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/kpv-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1200,7 +1200,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/ll-37-10mg.png",
+    "image": "/images/products/ll-37-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/ll-37-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1217,7 +1217,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/livagen-20mg.png",
+    "image": "/images/products/livagen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/livagen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1234,7 +1234,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$129.99",
     "priceNum": 129.99,
-    "image": "https://phiogen.is/images/products/mots-c-10mg.png",
+    "image": "/images/products/mots-c-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/mots-c-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1251,7 +1251,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$219.99",
     "priceNum": 219.99,
-    "image": "https://phiogen.is/images/products/mots-c-20mg.png",
+    "image": "/images/products/mots-c-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/mots-c-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1268,7 +1268,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$379.99",
     "priceNum": 379.99,
-    "image": "https://phiogen.is/images/products/mots-c-40mg.png",
+    "image": "/images/products/mots-c-40mg.png",
     "affiliateUrl": "https://phiogen.is/products/mots-c-40mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1285,7 +1285,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/ovagen-20mg.png",
+    "image": "/images/products/ovagen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/ovagen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1302,7 +1302,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/oxytocin-8mg.png",
+    "image": "/images/products/oxytocin-8mg.png",
     "affiliateUrl": "https://phiogen.is/products/oxytocin-8mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1319,7 +1319,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/oxytocin-10mg.png",
+    "image": "/images/products/oxytocin-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/oxytocin-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1336,7 +1336,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/pancragen-20mg.png",
+    "image": "/images/products/pancragen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/pancragen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1353,7 +1353,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/prostamax-20mg.png",
+    "image": "/images/products/prostamax-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/prostamax-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1370,7 +1370,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/ss-31-10mg.png",
+    "image": "/images/products/ss-31-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/ss-31-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1387,7 +1387,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$189.99",
     "priceNum": 189.99,
-    "image": "https://phiogen.is/images/products/ss-31-25mg.png",
+    "image": "/images/products/ss-31-25mg.png",
     "affiliateUrl": "https://phiogen.is/products/ss-31-25mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1404,7 +1404,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$329.99",
     "priceNum": 329.99,
-    "image": "https://phiogen.is/images/products/ss-31-50mg.png",
+    "image": "/images/products/ss-31-50mg.png",
     "affiliateUrl": "https://phiogen.is/products/ss-31-50mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1421,7 +1421,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/testagen-20mg.png",
+    "image": "/images/products/testagen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/testagen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1438,7 +1438,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/thymogen-20mg.png",
+    "image": "/images/products/thymogen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/thymogen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1455,7 +1455,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/thymosin-alpha-1-5mg.png",
+    "image": "/images/products/thymosin-alpha-1-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/thymosin-alpha-1-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1472,7 +1472,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/thymosin-alpha-1-10mg.png",
+    "image": "/images/products/thymosin-alpha-1-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/thymosin-alpha-1-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1489,7 +1489,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/thymulin-10mg.png",
+    "image": "/images/products/thymulin-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/thymulin-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1506,7 +1506,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/vip-5mg.png",
+    "image": "/images/products/vip-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/vip-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1523,7 +1523,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$139.99",
     "priceNum": 139.99,
-    "image": "https://phiogen.is/images/products/vip-10mg.png",
+    "image": "/images/products/vip-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/vip-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1540,7 +1540,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/vesilute-20mg.png",
+    "image": "/images/products/vesilute-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/vesilute-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1557,7 +1557,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/vesugen-20mg.png",
+    "image": "/images/products/vesugen-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/vesugen-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1574,7 +1574,7 @@ export const products: Product[] = [
     "category": "Recovery",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/vilon-20mg.png",
+    "image": "/images/products/vilon-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/vilon-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1591,7 +1591,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/epitalon-10mg.png",
+    "image": "/images/products/epitalon-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/epitalon-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1608,7 +1608,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$139.99",
     "priceNum": 139.99,
-    "image": "https://phiogen.is/images/products/epitalon-50mg.png",
+    "image": "/images/products/epitalon-50mg.png",
     "affiliateUrl": "https://phiogen.is/products/epitalon-50mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1625,7 +1625,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$50.00",
     "priceNum": 50,
-    "image": "https://phiogen.is/images/products/ghk-cu-50mg.png",
+    "image": "/images/products/ghk-cu-50mg.png",
     "affiliateUrl": "https://phiogen.is/products/ghk-cu-50mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1642,7 +1642,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/ghk-cu-100mg.png",
+    "image": "/images/products/ghk-cu-100mg.png",
     "affiliateUrl": "https://phiogen.is/products/ghk-cu-100mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1659,7 +1659,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/nad-500mg.png",
+    "image": "/images/products/nad-500mg.png",
     "affiliateUrl": "https://phiogen.is/products/nad-500mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1676,7 +1676,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$139.99",
     "priceNum": 139.99,
-    "image": "https://phiogen.is/images/products/nad-1000mg.png",
+    "image": "/images/products/nad-1000mg.png",
     "affiliateUrl": "https://phiogen.is/products/nad-1000mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1693,7 +1693,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$199.99",
     "priceNum": 199.99,
-    "image": "https://phiogen.is/images/products/ace-031-1mg.png",
+    "image": "/images/products/ace-031-1mg.png",
     "affiliateUrl": "https://phiogen.is/products/ace-031-1mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1710,7 +1710,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/abaloparatide-3mg.png",
+    "image": "/images/products/abaloparatide-3mg.png",
     "affiliateUrl": "https://phiogen.is/products/abaloparatide-3mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1727,7 +1727,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/fox04-dri-10mg.png",
+    "image": "/images/products/fox04-dri-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/fox04-dri-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1744,7 +1744,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$49.99",
     "priceNum": 49.99,
-    "image": "https://phiogen.is/images/products/glutathione-200mg.png",
+    "image": "/images/products/glutathione-200mg.png",
     "affiliateUrl": "https://phiogen.is/products/glutathione-200mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1761,7 +1761,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/glutathione-600mg.png",
+    "image": "/images/products/glutathione-600mg.png",
     "affiliateUrl": "https://phiogen.is/products/glutathione-600mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1778,7 +1778,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$179.99",
     "priceNum": 179.99,
-    "image": "https://phiogen.is/images/products/glutathione-1500mg.png",
+    "image": "/images/products/glutathione-1500mg.png",
     "affiliateUrl": "https://phiogen.is/products/glutathione-1500mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1795,7 +1795,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/melanotan-1-10mg.png",
+    "image": "/images/products/melanotan-1-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/melanotan-1-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1812,7 +1812,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/melanotan-2-10mg.png",
+    "image": "/images/products/melanotan-2-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/melanotan-2-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1829,7 +1829,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/methylene-blue-10mg-ml-50ml.png",
+    "image": "/images/products/methylene-blue-10mg-ml-50ml.png",
     "affiliateUrl": "https://phiogen.is/products/methylene-blue-10mg-ml-50ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1846,7 +1846,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/na-epitalon-10mg.png",
+    "image": "/images/products/na-epitalon-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/na-epitalon-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1863,7 +1863,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/p21-10mg.png",
+    "image": "/images/products/p21-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/p21-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1880,7 +1880,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/pnc-27-30mg.png",
+    "image": "/images/products/pnc-27-30mg.png",
     "affiliateUrl": "https://phiogen.is/products/pnc-27-30mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1897,7 +1897,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/pt-141-10mg.png",
+    "image": "/images/products/pt-141-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/pt-141-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1914,7 +1914,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/ru-58841-50mg-x-30ml.png",
+    "image": "/images/products/ru-58841-50mg-x-30ml.png",
     "affiliateUrl": "https://phiogen.is/products/ru-58841-50mg-x-30ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1931,7 +1931,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$129.99",
     "priceNum": 129.99,
-    "image": "https://phiogen.is/images/products/ru-58841-50mg-x-60ml.png",
+    "image": "/images/products/ru-58841-50mg-x-60ml.png",
     "affiliateUrl": "https://phiogen.is/products/ru-58841-50mg-x-60ml?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1948,7 +1948,7 @@ export const products: Product[] = [
     "category": "Longevity",
     "price": "$45.00",
     "priceNum": 45,
-    "image": "https://phiogen.is/images/products/snap-8-10mg.png",
+    "image": "/images/products/snap-8-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/snap-8-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1965,7 +1965,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/adamax-10mg.png",
+    "image": "/images/products/adamax-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/adamax-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1982,7 +1982,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$49.99",
     "priceNum": 49.99,
-    "image": "https://phiogen.is/images/products/dsip-delta-sleep-inducing-peptide-5mg.png",
+    "image": "/images/products/dsip-delta-sleep-inducing-peptide-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/dsip-delta-sleep-inducing-peptide-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -1999,7 +1999,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/dsip-delta-sleep-inducing-peptide-10mg.png",
+    "image": "/images/products/dsip-delta-sleep-inducing-peptide-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/dsip-delta-sleep-inducing-peptide-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2016,7 +2016,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/dsip-delta-sleep-inducing-peptide-15mg.png",
+    "image": "/images/products/dsip-delta-sleep-inducing-peptide-15mg.png",
     "affiliateUrl": "https://phiogen.is/products/dsip-delta-sleep-inducing-peptide-15mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2033,7 +2033,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/n-acetyl-semax-amidate-30mg.png",
+    "image": "/images/products/n-acetyl-semax-amidate-30mg.png",
     "affiliateUrl": "https://phiogen.is/products/n-acetyl-semax-amidate-30mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2050,7 +2050,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/na-selank-amidate-10mg.png",
+    "image": "/images/products/na-selank-amidate-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/na-selank-amidate-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2067,7 +2067,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$179.99",
     "priceNum": 179.99,
-    "image": "https://phiogen.is/images/products/na-selank-amidate-30mg.png",
+    "image": "/images/products/na-selank-amidate-30mg.png",
     "affiliateUrl": "https://phiogen.is/products/na-selank-amidate-30mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2084,7 +2084,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$79.99",
     "priceNum": 79.99,
-    "image": "https://phiogen.is/images/products/pe-22-28-10mg.png",
+    "image": "/images/products/pe-22-28-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/pe-22-28-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2101,7 +2101,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/pinealon-10mg.png",
+    "image": "/images/products/pinealon-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/pinealon-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2118,7 +2118,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/pinealon-20mg.png",
+    "image": "/images/products/pinealon-20mg.png",
     "affiliateUrl": "https://phiogen.is/products/pinealon-20mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2135,7 +2135,7 @@ export const products: Product[] = [
     "category": "Cognitive",
     "price": "$69.99",
     "priceNum": 69.99,
-    "image": "https://phiogen.is/images/products/selank-10mg.png",
+    "image": "/images/products/selank-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/selank-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2152,7 +2152,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$99.99",
     "priceNum": 99.99,
-    "image": "https://phiogen.is/images/products/bpc-157-tb-500-blend-bpc-157-10mg-tb-500-10mg.png",
+    "image": "/images/products/bpc-157-tb-500-blend-bpc-157-10mg-tb-500-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/bpc-157-tb-500-blend-bpc-157-10mg-tb-500-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2169,7 +2169,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$59.99",
     "priceNum": 59.99,
-    "image": "https://phiogen.is/images/products/bpc-157-tb-500-blend-bpc-157-5mg-tb-500-5mg.png",
+    "image": "/images/products/bpc-157-tb-500-blend-bpc-157-5mg-tb-500-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/bpc-157-tb-500-blend-bpc-157-5mg-tb-500-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2186,7 +2186,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/ipamorelin-cjc-1295-blend-cjc-1295-5mg-ipa-5mg.png",
+    "image": "/images/products/ipamorelin-cjc-1295-blend-cjc-1295-5mg-ipa-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/ipamorelin-cjc-1295-blend-cjc-1295-5mg-ipa-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2203,7 +2203,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/ipamorelin-cjc-1295-blend-cjc-1295-5mg-ipamorelin-5mg.png",
+    "image": "/images/products/ipamorelin-cjc-1295-blend-cjc-1295-5mg-ipamorelin-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/ipamorelin-cjc-1295-blend-cjc-1295-5mg-ipamorelin-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2220,7 +2220,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$129.99",
     "priceNum": 129.99,
-    "image": "https://phiogen.is/images/products/ipamorelin-tesamorelin-blend-ipa-3mg-tesa-10mg.png",
+    "image": "/images/products/ipamorelin-tesamorelin-blend-ipa-3mg-tesa-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/ipamorelin-tesamorelin-blend-ipa-3mg-tesa-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2237,7 +2237,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/ipamorelin-tesamorelin-blend-ipa-5mg-tesa-10mg.png",
+    "image": "/images/products/ipamorelin-tesamorelin-blend-ipa-5mg-tesa-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/ipamorelin-tesamorelin-blend-ipa-5mg-tesa-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2254,7 +2254,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/ipa-tesa-blend-ipa-5mg-tesa-10mg-15mg.png",
+    "image": "/images/products/ipa-tesa-blend-ipa-5mg-tesa-10mg-15mg.png",
     "affiliateUrl": "https://phiogen.is/products/ipa-tesa-blend-ipa-5mg-tesa-10mg-15mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2271,7 +2271,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$129.99",
     "priceNum": 129.99,
-    "image": "https://phiogen.is/images/products/cagri-reta-5mg.png",
+    "image": "/images/products/cagri-reta-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/cagri-reta-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2288,7 +2288,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$189.99",
     "priceNum": 189.99,
-    "image": "https://phiogen.is/images/products/cagri-reta-10mg.png",
+    "image": "/images/products/cagri-reta-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/cagri-reta-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2305,7 +2305,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$179.99",
     "priceNum": 179.99,
-    "image": "https://phiogen.is/images/products/cagri-sema-blend-5mg-cagrilintide-5mg-sema-10mg.png",
+    "image": "/images/products/cagri-sema-blend-5mg-cagrilintide-5mg-sema-10mg.png",
     "affiliateUrl": "https://phiogen.is/products/cagri-sema-blend-5mg-cagrilintide-5mg-sema-10mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2322,7 +2322,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$149.99",
     "priceNum": 149.99,
-    "image": "https://phiogen.is/images/products/reta-cagri-5mg-5mg.png",
+    "image": "/images/products/reta-cagri-5mg-5mg.png",
     "affiliateUrl": "https://phiogen.is/products/reta-cagri-5mg-5mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2339,7 +2339,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$89.99",
     "priceNum": 89.99,
-    "image": "https://phiogen.is/images/products/glow-blend-50mg.png",
+    "image": "/images/products/glow-blend-50mg.png",
     "affiliateUrl": "https://phiogen.is/products/glow-blend-50mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2356,7 +2356,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$109.99",
     "priceNum": 109.99,
-    "image": "https://phiogen.is/images/products/glow-blend-70mg.png",
+    "image": "/images/products/glow-blend-70mg.png",
     "affiliateUrl": "https://phiogen.is/products/glow-blend-70mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [
@@ -2373,7 +2373,7 @@ export const products: Product[] = [
     "category": "Blends",
     "price": "$119.99",
     "priceNum": 119.99,
-    "image": "https://phiogen.is/images/products/klow-blend-80mg.png",
+    "image": "/images/products/klow-blend-80mg.png",
     "affiliateUrl": "https://phiogen.is/products/klow-blend-80mg?ref=PEPS",
     "protocol": "For research use only. Reconstitute with bacteriostatic water per your research protocol.",
     "tags": [

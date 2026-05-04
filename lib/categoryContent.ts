@@ -10,6 +10,15 @@ export interface CategoryQAndA {
   a: string
 }
 
+export interface CategorySectionHeadings {
+  framework?: string
+  mechanism?: string
+  useCases?: string
+  faqs?: string
+  relatedReading?: string
+  grid?: string
+}
+
 export interface CategoryContent {
   /** Plain-text H1 override. Varies shape per category. */
   heading: string
@@ -25,8 +34,17 @@ export interface CategoryContent {
   faqs: CategoryQAndA[]
   /** Where to read more on-site. */
   relatedReading: { label: string; href: string }[]
-  /** Structural layout variant — what order the sections render in. */
-  layout: 'framework-first' | 'mechanism-first' | 'usecase-first' | 'faq-inline'
+  /** Structural layout variant — one unique layout per category. */
+  layout:
+    | 'framework-first'    // framework → grid → mechanism → usecases → faqs → related
+    | 'mechanism-first'    // mechanism → usecases → grid → framework → faqs → related
+    | 'usecase-first'      // usecases → framework → grid → mechanism → faqs → related
+    | 'faq-inline'         // framework → mechanism → grid → faqs → usecases → related
+    | 'primer-first'       // mechanism → framework → useCases → grid → faqs → related
+    | 'comparison-pivot'   // framework → grid → usecases → mechanism → faqs → related (different framework placement)
+  /** Per-category H2 overrides — each category gets distinct H2 text so
+   *  the section headings aren't shared across category pages. */
+  h2s?: CategorySectionHeadings
 }
 
 const BY_SLUG: Record<string, CategoryContent> = {
@@ -85,6 +103,14 @@ const BY_SLUG: Record<string, CategoryContent> = {
       { label: 'Dosage calculator', href: '/dosage-calculator' },
     ],
     layout: 'framework-first',
+    h2s: {
+      framework: 'How to compare GLP-1 and incretin analogs',
+      mechanism: 'Incretin pathway primer',
+      useCases: 'Typical fat-loss research designs',
+      faqs: 'Questions we get on this class',
+      relatedReading: 'Further reading on incretins',
+      grid: 'Fat-loss compounds in stock',
+    },
   },
 
   recovery: {
@@ -137,6 +163,14 @@ const BY_SLUG: Record<string, CategoryContent> = {
       { label: 'Peptide stacks', href: '/guides/peptide-stacks' },
     ],
     layout: 'mechanism-first',
+    h2s: {
+      framework: 'Axes that separate repair peptides in the literature',
+      mechanism: 'The repair cascade — where each peptide acts',
+      useCases: 'Common repair-class research designs',
+      faqs: 'What researchers ask about this shelf',
+      relatedReading: 'More on repair-pathway work',
+      grid: 'Repair-class compounds on the shelf',
+    },
   },
 
   longevity: {
@@ -189,6 +223,14 @@ const BY_SLUG: Record<string, CategoryContent> = {
       { label: 'Reconstitution guide', href: '/reconstitution-guide' },
     ],
     layout: 'usecase-first',
+    h2s: {
+      framework: 'Where longevity compounds differ from each other',
+      mechanism: 'Core ageing-pathway hubs',
+      useCases: 'Research questions this shelf supports',
+      faqs: 'Recurring longevity-class questions',
+      relatedReading: 'Deeper reading',
+      grid: 'Longevity-class vials in stock',
+    },
   },
 
   growth: {
@@ -241,6 +283,14 @@ const BY_SLUG: Record<string, CategoryContent> = {
       { label: 'Dosage calculator', href: '/dosage-calculator' },
     ],
     layout: 'faq-inline',
+    h2s: {
+      framework: 'What to weigh between secretagogues and agonists',
+      mechanism: 'The GH–IGF-1 axis in brief',
+      useCases: 'Typical growth-axis research protocols',
+      faqs: 'Growth-axis research questions',
+      relatedReading: 'More on growth-axis work',
+      grid: 'Growth-axis vials on the shelf',
+    },
   },
 
   cognitive: {
@@ -292,7 +342,15 @@ const BY_SLUG: Record<string, CategoryContent> = {
       { label: 'Looksmaxxing peptides', href: '/looksmaxxing' },
       { label: 'Guides', href: '/guides' },
     ],
-    layout: 'framework-first',
+    layout: 'primer-first',
+    h2s: {
+      framework: 'Where to draw lines between nootropic compounds',
+      mechanism: 'Neuroplasticity and cholinergic signalling',
+      useCases: 'Nootropic research designs in practice',
+      faqs: 'Common nootropic-research questions',
+      relatedReading: 'Extra reading',
+      grid: 'Nootropic vials in stock',
+    },
   },
 
   blends: {
@@ -344,7 +402,15 @@ const BY_SLUG: Record<string, CategoryContent> = {
       { label: 'Peptide stacks', href: '/guides/peptide-stacks' },
       { label: 'Reconstitution guide', href: '/reconstitution-guide' },
     ],
-    layout: 'mechanism-first',
+    layout: 'comparison-pivot',
+    h2s: {
+      framework: 'How blends differ from reconstituting two separate vials',
+      mechanism: 'Why researchers reach for pre-mixed vials',
+      useCases: 'Where blend vials show up in research designs',
+      faqs: 'Blend-specific questions',
+      relatedReading: 'More on multi-compound protocols',
+      grid: 'Blend vials on the shelf',
+    },
   },
 }
 

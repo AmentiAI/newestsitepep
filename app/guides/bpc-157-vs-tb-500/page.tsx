@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuideLayout, { H2, H3, P, UL } from '@/components/GuideLayout'
+import GuideLayout, { Cite, H2, H3, P, UL } from '@/components/GuideLayout'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -27,6 +27,9 @@ export default function Page() {
       eyebrow="Compound Comparison"
       title="BPC-157 vs TB-500: Repair Peptide Comparison"
       lead="Ask any peptide-research community about soft-tissue repair and you'll hear the same two names. BPC-157 and TB-500 aren't competitors — they hit different arms of the repair response. Here's what each one actually does."
+      path="/guides/bpc-157-vs-tb-500"
+      datePublished="2026-04-15"
+      dateModified="2026-04-19"
       related={[
         'bpc-157-10mg',
         'tb-500-thymosin-beta-4-10mg',
@@ -47,14 +50,41 @@ export default function Page() {
         BPC-157 is a 15-amino-acid synthetic peptide derived from a protective protein
         found in gastric juice. The name stands for Body Protection Compound-157. It has
         one of the largest peptide-research literatures of any repair compound, largely
-        coming out of the Seiwerth and Sikiric laboratories in Zagreb.
+        coming out of the Seiwerth and Sikiric laboratories in Zagreb (
+        <Cite
+          pmid="21548867"
+          label="Sikiric et al., Curr Pharm Des 2011"
+          title="Stable gastric pentadecapeptide BPC 157: novel therapy in gastrointestinal tract"
+        />
+        ). A 2025 narrative review across 36 studies notes that the human evidence base
+        remains limited despite the breadth of preclinical data (
+        <Cite
+          pmid="40789979"
+          label="Vasireddi et al., 2025 review"
+          title="Regeneration or Risk? A Narrative Review of BPC-157 for Musculoskeletal Healing"
+        />
+        ).
       </P>
       <H3>Proposed mechanism</H3>
       <P>
         Research describes BPC-157 acting on the VEGFR2 pathway — promoting angiogenesis
-        at the site of injury. It also modulates the nitric oxide (NO) system and has been
-        shown to upregulate growth-hormone receptor expression in injured tissue. The
-        angiogenic effect is the central mechanism most of the repair literature points to.
+        at the site of injury. The Hsieh group showed BPC 157 enhances phosphorylation of
+        Src, caveolin-1, and endothelial nitric oxide synthase, producing endothelium-
+        dependent vasodilation in isolated rat aorta (
+        <Cite
+          pmid="33051481"
+          label="Hsieh et al., Sci Rep 2020"
+          title="Modulatory effects of BPC 157 on vasomotor tone and the Src–Caveolin-1–eNOS pathway"
+        />
+        ). It also modulates the nitric oxide (NO) system more broadly (
+        <Cite
+          pmid="23755725"
+          label="Sikiric et al., 2014"
+          title="Stable gastric pentadecapeptide BPC 157-NO-system relation"
+        />
+        ) and has been shown to upregulate growth-hormone receptor expression in injured
+        tissue. The angiogenic effect is the central mechanism most of the repair
+        literature points to.
       </P>
       <H3>What models has it been studied in?</H3>
       <P>
@@ -73,19 +103,46 @@ export default function Page() {
       <P>
         TB-500 is a synthetic fragment of Thymosin Beta-4, a 43-amino-acid protein found
         at high concentrations in platelets and wound fluid. The fragment contains the
-        actin-binding sequence that drives Tβ4's biological activity.
+        actin-binding sequence that drives Tβ4's biological activity (
+        <Cite
+          pmid="22074294"
+          label="Goldstein et al., 2011 review"
+          title="Thymosin β4: a multi-functional regenerative peptide. Basic properties and clinical applications"
+        />
+        ).
       </P>
       <H3>Proposed mechanism</H3>
       <P>
         TB-500 binds and sequesters G-actin monomers, regulating the dynamic actin pool
         available for cytoskeletal remodeling. This is the proposed basis for its effects
-        on cell migration, wound closure, and progenitor-cell recruitment to injury sites.
+        on cell migration, wound closure, and progenitor-cell recruitment to injury sites
+        — the original Malinda paper showed accelerated dermal wound healing in rats and
+        mice (
+        <Cite
+          pmid="10469335"
+          label="Malinda et al., FASEB J 1999"
+          title="Thymosin beta4 accelerates wound healing"
+        />
+        ). Two phase 2 trials in stasis and pressure ulcers reported acceleration of
+        healing by roughly a month in patients who did heal (
+        <Cite
+          pmid="23050815"
+          label="Treadwell et al., Ann NY Acad Sci 2012"
+          title="The regenerative peptide thymosin β4 accelerates the rate of dermal healing in preclinical animal models and in patients"
+        />
+        ).
       </P>
       <H3>What models has it been studied in?</H3>
       <P>
         Dermal wound healing, cardiac remodeling after ischemia, corneal repair, and
-        neurological recovery. Cardiac research is particularly notable — Tβ4 is one of
-        the few peptides with published cardiac-tissue repair data.
+        neurological recovery (
+        <Cite
+          pmid="15037013"
+          label="Philp et al., 2004"
+          title="Thymosin beta4 promotes angiogenesis, wound healing, and hair follicle development"
+        />
+        ). Cardiac research is particularly notable — Tβ4 is one of the few peptides with
+        published cardiac-tissue repair data.
       </P>
       <H3>Format</H3>
       <P>

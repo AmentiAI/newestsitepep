@@ -1,263 +1,238 @@
 # GEO Audit Report: Tidemaxxing
 
-**Audit Date:** 2026-04-18
+**Audit Date:** 2026-04-25
 **URL:** https://tidemaxxing.shop
-**Business Type:** E-commerce (research-peptide affiliate catalogue, YMYL-adjacent)
-**Pages Analyzed:** 9 sampled (homepage, product, category, guides, FAQ, glossary) across a 180-URL sitemap
+**Business Type:** E-commerce + Publisher hybrid (research peptides catalogue + 8 long-form guides; YMYL-adjacent health content)
+**Pages Analyzed:** 14 sampled URLs across homepage, products, guides, categories, reviewer route, FAQ, llms.txt, robots.txt, sitemap.xml (115 URLs in sitemap; 95 products / 8 guides / 6 categories / utility pages)
 
 ---
 
 ## Executive Summary
 
-**Overall GEO Score: 47/100 (Poor)**
+**Overall GEO Score: 45/100 (Poor)**
 
-Tidemaxxing has a solid technical foundation (SSR via Next.js, permissive crawler access, valid product-level JSON-LD, aggregateRating signal) but scores near the floor on the dimensions AI models actually weight for citation: brand entity recognition, named expertise, primary-source linking, and llms.txt / Organization markup. The single biggest risk is entity collision — "tidemaxxing" is also an active Instagram slang term, so AI models asked "what is tidemaxxing" retrieve the wrong entity. The deployed product pages also share byte-identical body copy across dose variants, which Google is likely to consolidate or drop from the index.
+The site has genuinely strong content (citability 74) and a mostly-solid technical foundation (58) that is being neutralised by **one critical infrastructure defect** (apex/www canonical loop) and a **gutted YMYL E-E-A-T posture** (anonymous operator, missing safety disclosures, reviewer infrastructure built but undeployed, 6 of 8 guides unsourced). Brand authority is near-zero outside the domain (8/100) — AI models do not recognise "Tidemaxxing" as an entity. The good news: a meaningful share of the deficit is sitting in the working tree as uncommitted code (Article schema, reviewer profile route, byline component, inline PMID citations on 2 guides) and can ship in a single deploy.
 
 ### Score Breakdown
 
 | Category | Score | Weight | Weighted Score |
 |---|---|---|---|
-| AI Citability | 72/100 | 25% | 18.0 |
-| Brand Authority | 10/100 | 20% | 2.0 |
-| Content E-E-A-T | 38/100 | 20% | 7.6 |
-| Technical GEO | 74/100 | 15% | 11.1 |
-| Schema & Structured Data | 42/100 | 10% | 4.2 |
-| Platform Optimization | 38/100 | 10% | 3.8 |
-| **Overall GEO Score** | | | **46.7 → 47/100** |
+| AI Citability | 74/100 | 25% | 18.5 |
+| Brand Authority | 8/100 | 20% | 1.6 |
+| Content E-E-A-T | 28/100 | 20% | 5.6 |
+| Technical GEO | 58/100 | 15% | 8.7 |
+| Schema & Structured Data | 62/100 | 10% | 6.2 |
+| Platform Optimization | 41/100 | 10% | 4.1 |
+| **Overall GEO Score** | | | **44.7 → 45/100** |
 
 ---
 
 ## Critical Issues (Fix Immediately)
 
-1. **Zero third-party brand signal + cultural-term entity collision.** Tidemaxxing has no Wikipedia article, no Wikidata entity, no LinkedIn company page, no Reddit/YouTube/forum footprint, no Trustpilot/G2 reviews. Worse, "tidemaxxing" is an active Instagram slang term (Sehan du Toit reels), so AI models resolving the query pull the wrong entity. This is the single highest-impact GEO gap.
+### C1. Apex/www canonical loop — likely the single biggest cause of mass de-indexing
+- `https://tidemaxxing.shop/` returns **HTTP 308** to `https://www.tidemaxxing.shop/` for every path
+- Every page on the live www host emits `<link rel="canonical" href="https://tidemaxxing.shop/...">` (apex, no-www)
+- Every `<meta property="og:url">` points at apex
+- Every `<loc>` in `/sitemap.xml` is the apex (115 URLs, all 308 on first hit)
+- robots.txt declares `Host: https://tidemaxxing.shop` — reinforcing apex as canonical, while the apex itself redirects away
+- Result: Google fetches a sitemap URL → 308 to www → renders www page → reads canonical pointing back to apex → revisits apex → 308 again. Documented Google behaviour: ignore the conflicting canonical and treat the page as a soft duplicate. AI crawlers are stricter and frequently drop pages outright.
+- **Fix:** Pick one host. Most-likely-correct path: keep apex as canonical, flip Vercel domain config so www→apex (instead of the current apex→www). Alternatively, update `lib/site.ts` `baseUrl` to `https://www.tidemaxxing.shop` and let the sitemap and canonicals regenerate on www. Whichever direction: redirect, canonical, og:url, sitemap entries, and robots.txt `Host:` must all agree.
 
-2. **No Organization schema anywhere on the site.** The brand has zero structured identity, no `sameAs` links, no logo schema, no publisher declaration. AI models have nothing to attach claims to. Site-wide Organization + WebSite JSON-LD is required to even begin entity-graph formation.
+### C2. YMYL dosing without risk disclosure on product pages
+- Sample: `/products/bpc-157` publishes µg/kg dosing ranges with **zero contraindications, zero adverse-event profile, zero drug-interaction warnings, zero research-limitations block**.
+- Pattern is sitewide across all 95 product pages.
+- Google's March 2026 core update specifically targets YMYL health content lacking expert-grounded risk disclosure — this is the highest-severity pattern under current ranking signals.
+- **Fix:** add a "Safety & research limitations" section to every product page covering: known preclinical adverse signals, single-lab/single-species evidence caveats, absence-of-human-trials disclosure (where applicable), and an explicit "this is not a clinical dosing recommendation" framing tied to the existing research-only footer. Mirror as `MedicalWebPage` schema with `lastReviewed` and `reviewedBy`.
 
-3. **Canonical host mismatch.** The site serves from `www.tidemaxxing.shop` (apex 307-redirects to www) but every canonical tag points to `https://tidemaxxing.shop/...` (apex). Mixed signals for Google canonicalization and AI crawlers that don't aggressively follow 307s. One-line fix in Next.js `metadataBase`.
+### C3. Reviewer / Article-schema / citation infrastructure is built but undeployed
+- `components/ReviewerByline.tsx`, `lib/reviewers.ts`, `app/reviewers/`, the new `articleJsonLd` helper in `lib/schema.tsx`, and inline PMID citations on 2 guides are all in the working tree but not pushed to production.
+- `https://tidemaxxing.shop/reviewers/david-levison` returns **404**.
+- No reviewer byline visible on any live guide.
+- No `Article` JSON-LD on any guide — only the layout-level Organization/WebSite/SearchAction.
+- Prof David A. Levison (U Dundee, ex-President Pathological Society of GB&I, senior editor Muir's Pathology 14e) is a strong genuine asset that currently provides zero ranking value because nothing ships.
+- **Fix:** ship the working-tree changes. Verify after deploy: `/reviewers/david-levison` returns 200, byline renders on all 8 guides, Article+Person JSON-LD is present in raw HTML, `dateModified` exposed.
 
-4. **Primary-literature citations absent site-wide.** Zero PubMed links, zero DOIs, zero journal URLs across product pages, guides, and the glossary. For a YMYL-adjacent research catalogue, this is a first-order E-E-A-T failure — named labs are dropped ("Seiwerth/Sikiric labs in Zagreb") with no link anchors.
-
-5. **Site operator is fully anonymous.** No company registration, no physical address, no named individual, no About page, no editorial contact. Combined with affiliate-only revenue and a single undisclosed supplier (phiogen.is), the trust profile sits below general e-commerce baseline in a vertical that demands the opposite.
-
-6. **No `/llms.txt` file.** Returns 404. Highest-ROI fix on the audit — a 40-line file moves the subscore from 0 → 70 and gives AI crawlers a compact entity definition that bypasses the cultural-term ambiguity.
+### C4. Misleading aggregateRating across 95 product pages
+- Every Product schema declares `aggregateRating: { ratingValue: 5, ratingCount: 1, reviewCount: 1 }` mapping to a single `Review` whose author is "Independent HPLC Analysis" — a lab purity assay, not a customer review.
+- Two violations of Google's review snippet guidelines: (a) self-serving / first-party rating, (b) author-type mismatch (a COA is not a `Review`).
+- 95 identical 5/5-from-one-review patterns is a sitewide signal that Google's spam systems detect easily. Risk: manual action for "spammy structured markup" or silent rich-result suppression.
+- **Fix:** remove `aggregateRating` and `review` from `productJsonLd` in `lib/schema.tsx:15-66`. Express purity as `additionalProperty: [{ "@type": "PropertyValue", name: "Purity", value: "≥98% HPLC" }, { "@type": "PropertyValue", name: "CoA", value: "Lot-matched, available on request" }]` instead.
 
 ---
 
 ## High Priority Issues
 
-1. **Dose-variant duplication on the deployed site.** `tirzepatide-15mg`, `tirzepatide-30mg`, and `tirzepatide-60mg` return byte-identical 93991-byte pages — only H1 and price differ. The 15mg page's protocol text reads "a 30 mg vial in 3 mL BAC water yields 10 mg/mL working stock" — the template was hard-coded to 30mg and never reparameterized. *(Note: a per-slug structural-variance refactor has been implemented locally in this session — `lib/pageVariance.ts` + `app/products/[slug]/page.tsx` — but not yet deployed.)*
+### H1. Six of eight guides have zero inline citations (YMYL content unsourced)
+Guides `peptides-for-muscle-growth`, `peptide-stacks`, `what-are-peptides`, `peptides-for-skin`, `peptides-for-sleep`, `semaglutide-vs-tirzepatide` make mechanistic claims (VEGFR2, ghrelin, GLP-1 receptor binding, etc.) with no PubMed/DOI links. Two guides (`peptides-for-fat-loss`, `bpc-157-vs-tb-500`) have inline citations in the working tree but those are also undeployed. **Fix:** finish the citation rollout to all 8 guides — target 6–10 inline citations per guide (real PMIDs only), add a numbered references list at the foot.
 
-2. **Seven guides ship with no Article/BlogPosting schema.** 1,200–1,400-word editorial pages (`/guides/bpc-157-vs-tb-500`, `/guides/semaglutide-vs-tirzepatide`, etc.) emit zero JSON-LD. No `author`, no `datePublished`, no `dateModified`, no `publisher`, no `mainEntityOfPage`.
+### H2. Brand authority near zero
+"Tidemaxxing" returns 0 results on Wikipedia, Reddit, YouTube, Twitter/X, LinkedIn. One incidental Instagram reel is the entire external footprint. AI entity-recognition pipelines will not surface the brand unsolicited. **Fix:** seed Reddit (r/Peptides, r/MoreplatesMoredates) with sourced mentions, file a Wikidata stub (lower bar than Wikipedia), register LinkedIn company page, link these from `Organization.sameAs`.
 
-3. **Product schema `aggregateRating` (4.5 from 235 reviews) risks unverified-review flagging.** No `Review` objects are nested and no visible reviews appear on the page. Leaving it creates a Search Console manual-action risk.
+### H3. Sitemap broadcasts apex URLs that all 308 (crawl budget waste)
+Independent of C1: every sitemap entry is the apex, every fetch redirects. Wastes crawler budget on every visit. **Fix:** rewrite sitemap to whichever host C1 picks, resubmit in Search Console.
 
-4. **Title tag template bug: `| Tidemaxxing | Tidemaxxing` duplicated brand.** Product titles render as `Buy Tirzepatide 15mg — Fat Loss Research Peptide | Tidemaxxing | Tidemaxxing`. Template layering issue.
+### H4. Featured-compounds blocks render as concatenated wordsalad
+Strings like `"5 sizes-10%Fat LossSemaglutide≥98% HPLC · lot CoAfrom$44.99$49.99Buy Semaglutide →"` appear in raw HTML with no whitespace between badge/price/CTA. AI extractors see one nonsense token instead of structured product info. Lowers citability of every page with a featured-compounds section. **Fix:** add whitespace separators between fragments or wrap each in semantic elements with visually-hidden separators.
 
-5. **Thin FAQ and glossary for a 139-product catalogue.** 7 FAQ entries and 33 glossary terms is well below the breadth expected of a reference catalogue. Missing letters E, F, J, K, O, Q, W, X, Y, Z.
+### H5. Missing security headers
+HSTS is the only security header set. Missing: CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy. Doesn't block crawling but is a trust-signal demerit. **Fix:** `next.config.js` `async headers()` block — five lines.
 
-6. **No named authors or reviewer credentials anywhere.** All 139 product pages, all 8 guides, the glossary, and the FAQ are unattributed. Google's QRG and AI citation behavior reward identifiable expert authorship in YMYL verticals.
-
-7. **Missing safety/adverse-events scaffolding on product pages.** BPC-157 page has zero safety discussion — even inside a "research use only" frame, omitting known contraindications and the explicit absence of human RCT data is an accuracy gap.
-
-8. **No content-freshness signals.** No visible `datePublished` or `dateModified` on any page. Perplexity and Gemini both deprioritize undated content, especially in YMYL verticals.
-
-9. **Perplexity readiness is critical (30/100).** Perplexity cites r/Peptides, r/PeptideScience, PubMed, Examine.com, and Mayo Clinic in this vertical. The site has zero footprint on any of them.
+### H6. Same H2 sequence across product pages within a class (templating)
+Sample (live): `semaglutide` / `tirzepatide` / `retatrutide` all emit identical 10-H2 sequences in identical order — "Vial sizes and price per mg" / "Reconstitution volumes" / "Mechanism in the literature" / "Research use-cases" / "Often paired with" / "Handling in the lab" / "Stacking and paired-compound work" / "Frequently asked" / "More Fat Loss compounds" / "Related reading". `ipamorelin` / `ghk-cu` emit a different but identically-shared sequence. The user-introduced `lib/pageLayoutPlan.ts` varies *between* classes but does not vary *within* a class. Google's de-duplication detects same-skeleton-different-variable patterns (the "dynamic laziness" failure mode). **Fix:** push variation deeper — vary section *bodies* per compound, not just heading order, and re-shuffle section order within a class so the first three H2s of one fat-loss product don't match the next.
 
 ---
 
 ## Medium Priority Issues
 
-1. **Product `offers` missing merchant-listing fields:** `priceValidUntil`, `hasMerchantReturnPolicy`, `shippingDetails`. Prevents merchant-listing rich results across 139 products.
-
-2. **Six category pages have no `CollectionPage` or `ItemList` schema.** AI models infer category membership from HTML instead of ingesting it directly.
-
-3. **Missing security headers:** CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy. HSTS is present (good). Add via `next.config.js` `headers()`.
-
-4. **No Wikidata entry** for the brand. Wikidata feeds Gemini, ChatGPT, and Perplexity entity layers directly.
-
-5. **robots.txt lacks explicit AI-crawler directives.** Inheriting `*` works functionally, but an explicit block naming GPTBot, OAI-SearchBot, ChatGPT-User, ClaudeBot, PerplexityBot, Google-Extended, Applebot-Extended is a stronger intent signal.
-
-6. **No Bing Webmaster Tools verification or IndexNow key file.** Bing Copilot is this site's most-ready platform (55/100); claiming the domain and enabling IndexNow would push it toward 70+.
-
-7. **No YouTube or LinkedIn presence.** Gemini weights YouTube heavily; LinkedIn is the fastest Microsoft-ecosystem signal.
-
-8. **No regulatory framing by jurisdiction.** No FDA/MHRA/EMA context on a YMYL-adjacent catalogue — unusual and notable.
-
----
+- **M1.** llms.txt missing a `## Guides` section — the 8 long-form guides are the most citable content and aren't enumerated.
+- **M2.** llms.txt product count mismatch (says 92, sitemap has 95, footer/CTAs say 139). Pick one number.
+- **M3.** No `/llms-full.txt` for full guide text — high-leverage for a publisher hybrid.
+- **M4.** `datePublished` / `dateModified` not exposed in deployed HTML on guides — Perplexity and Gemini both demote stale-looking content. (Local Article schema fixes this once shipped via C3.)
+- **M5.** No FAQPage schema on product pages despite each having a "Frequently asked" section.
+- **M6.** Single-reviewer scope — diversifying with a second reviewer (e.g. an MD or pharmacologist) would strengthen E-E-A-T further.
+- **M7.** Robots.txt `Host:` directive declares apex as canonical host — reinforces the canonical loop. (Resolved by C1.)
+- **M8.** Anonymous operator with no About page identifying entity, contact, postal address, or editorial policy.
 
 ## Low Priority Issues
 
-1. **Broken marketed slug `/products/bpc-157-5mg` returns 404.** The canonical page is `bpc-157-10mg`. Either redirect or publish the 5mg variant.
-2. **Product images have no explicit `width`/`height` attributes.** `next/image` srcset handles sizing but adding explicit dimensions eliminates CLS risk on slower connections.
-3. **Twitter Card meta tags not detected on all sampled pages.** Confirm template coverage.
-4. **`x-vercel-cache: PRERENDER` on some paths** — normal but worth monitoring.
-5. **No explicit author page (`/about/editorial`) or contact email in-body** (only in footer copyright).
+- **L1.** No IndexNow integration for Bing Copilot freshness signals.
+- **L2.** No `msvalidate.01` for Bing Webmaster Tools.
+- **L3.** Some product pages have minor `mt-1` vs ` ` className inconsistencies on `<h2>` tags (cosmetic).
+- **L4.** `Organization.sameAs` is self-referential — no external entity links.
+- **L5.** Open Graph tag completeness on category pages — verify `og:image` dimensions are explicit.
 
 ---
 
 ## Category Deep Dives
 
-### AI Citability (72/100)
+### AI Citability (74/100)
 
-**Strongest pages (deterministic spot-sample):**
-- `/guides/bpc-157-vs-tb-500` — 82/100. Clean "30-second version" lede, mechanism-clear prose, decision-friendly. Best-in-class on the site.
-- `/guides/semaglutide-vs-tirzepatide` — 80/100. Clear receptor hierarchy; needs a proper 3-column comparison table.
-- `/products/bpc-157-10mg` — 78/100. Strong mechanism sentence, clean spec table, concrete stability data.
+Page-level extractability scores from sampled blocks:
 
-**Weakest:** Homepage (62) — H1 is a marketing tagline, not a self-contained definition; no "What is Tidemaxxing" answer-block.
-
-**Top rewrite moves:**
-1. Add a 2-sentence "What is Tidemaxxing" definition directly under the H1 that AI models will lift verbatim.
-2. Convert each guide's core comparison into a proper `<table>` with explicit rows (mechanism, half-life, dose range, typical endpoints).
-3. Tighten every product page's opening sentence into a one-line entity definition ("BPC-157 is a synthetic 15-amino-acid pentadecapeptide derived from gastric-juice protein BPC...").
-
-### Brand Authority (10/100)
-
-Seven independent probes (Wikipedia API, LinkedIn, Reddit, YouTube, Trustpilot, G2, peptide forums) returned zero hits. The domain indexes in DuckDuckGo — that's the full extent of external signal.
-
-Entity-disambiguation liability: "tidemaxxing" is an active Instagram slang term. AI models asked for the brand currently retrieve the cultural meaning.
-
-**Priority moves:** (a) create a LinkedIn company page; (b) seed 2–3 genuine helpful posts to r/Peptides, r/PeptidesHub citing the dosage calculator and reconstitution guide as tools; (c) request a Wikidata entity; (d) submit to 5–10 research-peptide directory sites; (e) create an X/Twitter account and use it as a `sameAs` anchor.
-
-### Content E-E-A-T (38/100)
-
-| Dimension | Score | Evidence |
+| Page | Best block | Score |
 |---|---|---|
-| Experience | 20 | No firsthand lab data, no COA screenshots, no lot artifacts — despite "COA-backed" being a core claim |
-| Expertise | 25 | Accurate vocabulary and mechanism framing; zero primary-literature citations; no named authors |
-| Authoritativeness | 30 | Anonymous operator; affiliate-only; single undisclosed supplier; 139-compound breadth is the one authority positive |
-| Trustworthiness | 45 | HTTPS + HSTS, research-use disclaimers, affiliate disclosure — but no contact, privacy, terms, editorial policy |
-| Depth & readability | 70 | Consistent ~1,100–1,400 word pages, good H1/H2 hierarchy, clean paragraph sizing |
-| Topical authority | 55 | Catalogue breadth is strong; per-compound depth is templated rather than distinctive |
-| AI-content detection | 45 | Moderate-to-high LLM fingerprinting — template uniformity and hedging cadence are tells; no "delve into" spam phrases |
-| Content freshness | 0 | No visible dates anywhere |
+| `/guides/peptides-for-fat-loss` | "Semaglutide is a long-acting GLP-1 receptor agonist… extends its half-life to about a week" | 88 |
+| `/guides/peptides-for-fat-loss` | "How to think about which one fits" decision-tree bullets | 84 |
+| `/guides/bpc-157-vs-tb-500` | "The 30-second version" 3-bullet TL;DR | 92 |
+| `/guides/bpc-157-vs-tb-500` | BPC-157 definitional opener | 86 |
+| `/products/bpc-157` | Reconstitution table (mg / mL / mg/mL) | 80 |
+| `/products/bpc-157` | FAQ block | 82 |
 
-**Why YMYL context matters:** research-peptide content is read by people who cross the "research use only" line predictably. A responsible site in this vertical should exceed general e-commerce trust scaffolding; Tidemaxxing currently sits below it.
+Strengths: textbook-extract style, definitional opening sentences, named mechanisms, specific numerics, head-to-head comparison sections. The TL;DR bullets and FAQ format are exactly what ChatGPT/Perplexity tend to quote. Weakness: featured-compounds whitespace bug (H4) drags every page's effective citability down by mixing structured data into wordsalad strings.
 
-### Technical GEO (74/100)
+### Brand Authority (8/100)
 
-Strongest dimension. Next.js App Router on Vercel, fully SSR/SSG, `force-static` with 24h ISR. All content (H1, H2s, paragraphs, JSON-LD, meta tags) delivered in raw HTML before JS executes — GPTBot, ClaudeBot, PerplexityBot all see full content on a raw fetch.
+| Platform | Status | Evidence |
+|---|---|---|
+| Wikipedia | Absent | API search 0 results; direct URL 404 |
+| Reddit | Absent | No indexed mentions |
+| YouTube | Absent | No matches |
+| Twitter/X | Absent | No matches |
+| LinkedIn | Absent | No company page |
+| Instagram | Minimal | One incidental reel |
+
+The brand is effectively invisible to entity-recognition pipelines. AI models will not surface "Tidemaxxing" unsolicited.
+
+### Content E-E-A-T (28/100)
+
+| Dimension | Score | Notes |
+|---|---|---|
+| Experience | 4/25 | No first-person lab content, no original assays, no operator-run experiments |
+| Expertise | 8/25 | Strong reviewer recruited but undeployed; 6 of 8 guides unsourced; reviewer profile 404s |
+| Authoritativeness | 5/25 | Anonymous operator, no About page, no contact, no postal address, self-referential Organization |
+| Trustworthiness | 10/25 | Research-use disclaimer present (good); but YMYL dosing on product pages without contraindications is critical |
+
+The Levison reviewer is a real, verifiable, credentialed asset. The deficit is entirely deployment-side — the asset isn't reaching the live site.
+
+### Technical GEO (58/100)
 
 | Dimension | Score |
 |---|---|
-| Server-side rendering | 95 |
-| Meta tags & indexability (canonical bug) | 55 |
-| Crawlability | 80 |
-| Security headers (HSTS only) | 55 |
-| Core Web Vitals heuristics | 75 |
-| Mobile optimization | 90 |
-| URL structure | 85 |
-| Response & status (host-redirect friction) | 70 |
+| Server-side rendering | 95/100 — full content in raw HTML, no JS dependency for crawlers |
+| Mobile / Core Web Vitals | 80–90/100 — viewport set, Next/Image with srcset, edge-cached static |
+| Security headers | 40/100 — only HSTS |
+| Canonical / host | **0/100 — critical defect (see C1)** |
+| robots.txt / llms.txt | 90/100 — well-structured, AI crawlers allowed |
+| Sitemap | 50/100 — exists, but every URL 308s |
 
-### Schema & Structured Data (42/100)
+A foundation that would be 80+ on its own, dragged down by the canonical loop.
 
-| Page | JSON-LD blocks | Types |
+### Schema & Structured Data (62/100)
+
+What works: Product/Offer/Brand/BreadcrumbList on product pages structurally valid, FAQPage on `/faq`, CollectionPage+ItemList on category pages, Organization+WebSite+SearchAction sitewide.
+
+What hurts:
+1. **aggregateRating-from-purity-Review pattern across 95 pages — policy violation, see C4.**
+2. No Article/BlogPosting schema on any guide (local code pending deploy).
+3. Reviewer Person schema exists in code but `/reviewers/david-levison` returns 404.
+4. No `MedicalEntity`/`Substance`/`Drug` schema on product pages — would let AI bind compounds to pharmacology graphs.
+5. `Organization.sameAs` empty/self-referential.
+
+### Platform Optimization (41/100)
+
+| Platform | Score | Status |
 |---|---|---|
-| Homepage | 0 | none |
-| Product pages | 3 | Product, BreadcrumbList, FAQPage |
-| Guide pages | 0 | none |
-| FAQ page | 1 | FAQPage |
-| Category pages | 0 | none |
-
-**Product JSON-LD is valid and well-formed** — a genuine strength. Includes `aggregateRating` (4.5, 235 reviews) which is rare for an affiliate catalogue. Missing: `gtin`/`mpn`, `priceValidUntil`, `hasMerchantReturnPolicy`, `shippingDetails`, and nested `Review` objects to back the rating. Homepage, guides, and categories emit nothing at all.
-
-**Required adds:**
-- Organization + WebSite site-wide
-- Article (with author Person, datePublished, dateModified, speakable) on all 7 guides
-- CollectionPage/ItemList on 6 category pages
-- Merchant-listing fields on Product offers
-
-### Platform Optimization (38/100)
-
-| Platform | Score | Root Cause |
-|---|---|---|
-| Google AI Overviews | 32 | YMYL affiliate vertical with no expert authorship, no NIH/Mayo cross-references |
-| ChatGPT Web Search | 38 | No entity recognition (no Wikipedia, no sameAs, no Organization schema) |
-| Perplexity AI | 30 | No Reddit/forum footprint; no original data; affiliate aggregator, not primary source |
-| Google Gemini | 34 | No YouTube, no Wikidata, no Knowledge Graph entity |
-| Bing Copilot | 55 | Most-ready platform — Product JSON-LD aligns with Bing's parser, weakest YMYL filtering |
-
-Most-ready: **Bing Copilot.** Two quick wins (Bing Webmaster Tools verification + IndexNow key file) could push this toward 70+.
-Least-ready: **Perplexity** — closing this gap is structural, not markup: on-domain COAs, Reddit seeding, original content.
+| Google AI Overviews | 28 | Critical — canonical loop + YMYL E-E-A-T gap make AIO inclusion near-impossible |
+| ChatGPT web search | 52 | Best of the five — content is direct, factual, ChatGPT weighs canonical hygiene less |
+| Perplexity AI | 44 | Demoted by missing dates + sparse citations |
+| Google Gemini | 34 | No Knowledge Graph entity, no ecosystem footprint |
+| Bing Copilot | 47 | No IndexNow, no msvalidate, canonical loop hurts here too |
 
 ---
 
 ## Quick Wins (Implement This Week)
 
-1. **Add Organization + WebSite JSON-LD site-wide** (one edit in `app/layout.tsx`). Include `sameAs` pointing to any brand profile you own — even a fresh X/Twitter + LinkedIn counts. Affects 4 of 5 platforms immediately.
-2. **Publish `/llms.txt`** at the site root. 40 lines. Moves llms.txt subscore from 0 → 70.
-3. **Fix the canonical host mismatch.** Either change the Vercel redirect to send www → apex, or update `SITE.baseUrl` and `metadataBase` to `https://www.tidemaxxing.shop`. One line.
-4. **Fix the `| Tidemaxxing | Tidemaxxing` title bug.** Strip the duplicated brand from the product page metadata template.
-5. **Deploy the per-slug variance refactor** (already implemented locally this session: `lib/pageVariance.ts` + `app/products/[slug]/page.tsx`). Breaks the dose-variant duplicate problem at the structural level — section order, H2 wording, hero layout, sidebar position all vary deterministically per slug.
-6. **Add visible `Last reviewed: <date>` bylines** to all 7 guides and the FAQ.
-7. **Remove or back `aggregateRating` with real `Review` objects.** Current 235-review claim with no visible reviews is a manual-action risk.
-
----
+1. **Fix the canonical/host loop in one commit.** Update `lib/site.ts` `baseUrl` to whichever host you pick (recommend: keep `https://tidemaxxing.shop` apex, then flip Vercel domain config to redirect www→apex). All canonicals/og:urls/sitemap entries already use `SITE.baseUrl`, so the codebase change is minimal once the redirect direction is reversed. **Highest single-fix impact on indexation.**
+2. **Ship the working-tree changes.** Article JSON-LD, reviewer profile route, byline component, inline PMID citations on 2 guides — all already coded. Verify post-deploy: `/reviewers/david-levison` returns 200, byline renders on guides, Article schema appears in raw HTML, `datePublished`/`dateModified` exposed.
+3. **Remove fake aggregateRating from `lib/schema.tsx:57-64`.** Replace with `additionalProperty` PropertyValue entries for purity. Eliminates 95 instances of misleading review markup in one diff.
+4. **Add a Safety & Limitations section to top 20 product pages.** Boilerplate template + per-compound specifics. Tie to existing research-only disclaimer.
+5. **llms.txt cleanup:** add `## Guides` section listing all 8, fix the 92-vs-95-vs-139 product count, ship `/llms-full.txt` with concatenated guide text.
 
 ## 30-Day Action Plan
 
-### Week 1: Technical Foundations & Entity Identity
-- [ ] Fix canonical host mismatch in `metadataBase`
-- [ ] Fix title template duplicate-brand bug
-- [ ] Ship the per-slug variance refactor to production
-- [ ] Publish `/llms.txt`
-- [ ] Add Organization + WebSite JSON-LD to root layout with `sameAs`
-- [ ] Create LinkedIn company page (populate with real info)
-- [ ] Create X/Twitter account (use as `sameAs` anchor)
-- [ ] Add explicit AI-crawler `User-agent:` blocks to robots.txt
-- [ ] Verify domain in Bing Webmaster Tools; submit sitemap; add IndexNow key file
-- [ ] Investigate `/products/bpc-157-5mg` 404 — redirect or publish
+### Week 1: Unblock indexing
+- [ ] **C1** Pick one host, align canonical + redirect + sitemap + og:url + robots.txt `Host:` directive.
+- [ ] **C3** Commit and push the local-only reviewer/Article/citation work.
+- [ ] **C4** Remove aggregateRating/review block from Product schema; replace with PropertyValue purity entries.
+- [ ] Verify in Google Search Console: submit fresh sitemap, request re-indexing of homepage and 5 representative pages.
 
-### Week 2: Trust Scaffolding & E-E-A-T Infrastructure
-- [ ] Publish `/about` page with operator entity, jurisdiction, contact email, editorial policy, supplier-vetting methodology, affiliate disclosure
-- [ ] Publish `/privacy` and `/terms`
-- [ ] Create named "Research Editor" persona (even a single named individual) + author page with Person schema
-- [ ] Add visible author bylines + `Last reviewed:` dates to all 7 guides
-- [ ] Add `datePublished` / `dateModified` to product and guide metadata
-- [ ] Add `Article` JSON-LD (with author Person, publisher, dateModified, speakable) to all 7 guides
-- [ ] Add "Known limitations and unknowns" safety block to top 20 product pages
+### Week 2: Close the YMYL safety gap
+- [ ] **C2** Add Safety & Limitations block to all 95 product pages (template + per-compound notes).
+- [ ] **H1** Backfill inline PubMed citations on remaining 6 guides (peptide-stacks, muscle-growth, skin, sleep, sema-vs-tirz, what-are-peptides). Target 6–10 PMIDs per guide.
+- [ ] Add `MedicalWebPage` `lastReviewed`/`reviewedBy` schema to product pages.
 
-### Week 3: Schema Coverage & Content Depth
-- [ ] Add `CollectionPage` + `ItemList` JSON-LD to all 6 category pages
-- [ ] Add merchant-listing fields to Product schema (`priceValidUntil`, `hasMerchantReturnPolicy`, `shippingDetails`)
-- [ ] Remove `aggregateRating` from Product schema until real `Review` objects exist
-- [ ] Expand FAQ from 7 to 20+ questions with FAQPage schema
-- [ ] Expand glossary from 33 to 60+ terms with `DefinedTerm` schema and per-term anchors
-- [ ] Add 3–7 inline PubMed/DOI citations to each of top 20 product pages + all 7 guides
-- [ ] Add security headers via `next.config.js` (CSP, X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy)
+### Week 3: Brand authority and entity signals
+- [ ] **H2** File Wikidata stub for "Tidemaxxing".
+- [ ] Create LinkedIn company page; backlink from `Organization.sameAs`.
+- [ ] Seed 2–3 sourced Reddit comments in r/Peptides linking specific guide pages (citation-style, not promo).
+- [ ] **M6** Recruit a second reviewer (MD or pharmacologist) for dosing/safety scope.
+- [ ] **M8** Add an `/about` page identifying the operating entity, contact, editorial policy.
 
-### Week 4: Distribution & Entity Signals
-- [ ] Create Wikidata item for "Tidemaxxing" with properties `instance of: website`, `main subject: research peptide`
-- [ ] Seed 2–3 helpful (non-promotional) posts to r/Peptides and r/PeptideScience linking the dosage calculator + reconstitution guide
-- [ ] Launch YouTube channel with first explainer (reconstitution walkthrough or BPC-157 vs TB-500 summary)
-- [ ] Host COAs directly on-domain at `/coa/[lot-id]` as indexed pages (converts the site from affiliate aggregator → primary source of lot-matched data)
-- [ ] Publish 2 new long-form guides (e.g., "How to evaluate a research-peptide COA", "Legal status of research peptides by jurisdiction")
-- [ ] Submit brand to 5–10 research-peptide directory / review sites
+### Week 4: Templating, headers, and freshness
+- [ ] **H6** Push `pageLayoutPlan.ts` variation deeper — vary section bodies per compound, not just heading order. Specifically target the GLP-1 trio (semaglutide/tirzepatide/retatrutide) which currently share identical 10-H2 sequences.
+- [ ] **H4** Fix the featured-compounds whitespace bug — semantic separators between badge/price/CTA.
+- [ ] **H5** Add CSP, X-Content-Type-Options, X-Frame-Options, Referrer-Policy, Permissions-Policy in `next.config.js`.
+- [ ] **L1/L2** IndexNow integration + Bing Webmaster Tools verification.
+- [ ] Re-run this audit. Target: 65+ composite (Good band).
 
 ---
 
 ## Appendix: Pages Analyzed
 
-| URL | Title | GEO Issues |
+| URL | Title | Notable findings |
 |---|---|---|
-| `/` | Homepage | No meta description surfaced, no Organization schema, H1 is a tagline not a definition |
-| `/products/bpc-157-10mg` | BPC-157 10mg product | Strong citability, no primary citations, no safety block, unverified aggregateRating risk |
-| `/products/tirzepatide-15mg` / `-30mg` / `-60mg` | Tirzepatide variants | Byte-identical body across dose variants, self-canonicalizing, title-tag duplicate-brand bug |
-| `/guides/bpc-157-vs-tb-500` | BPC-157 vs TB-500 | Best citability on the site; no Article schema, no author, no dates, no citations |
-| `/guides/semaglutide-vs-tirzepatide` | Sema vs Tirz | Strong structure; same schema/author/date gaps |
-| `/guides/what-are-peptides` | What are peptides | Same schema/author/date gaps |
-| `/faq` | FAQ | FAQPage schema present and valid; only 7 questions for a 139-product catalogue |
-| `/peptide-glossary` | Glossary | 33 terms, inconsistent definition length, missing letters E/F/J/K/O/Q/W/X/Y/Z |
-| `/category/fat-loss` | Fat Loss category | No CollectionPage/ItemList schema |
-| `/products/bpc-157-5mg` | (advertised) | **404 — broken URL** |
-
----
-
-## Audit Methodology
-
-- 5 specialist subagents ran in parallel: AI visibility, platform readiness, technical, content E-E-A-T, schema
-- Score aggregation: weighted average per the GEO-audit skill (Citability 25% / Brand 20% / E-E-A-T 20% / Technical 15% / Schema 10% / Platform 10%)
-- Page sample drawn across all primary template types
-- robots.txt + sitemap.xml fetched and parsed
-- `/llms.txt` checked (returns 404)
-- Brand-mention probes: Wikipedia API, LinkedIn company URL, DuckDuckGo HTML site-scoped searches, Reddit, YouTube, Trustpilot, G2, peptide forums
+| https://tidemaxxing.shop/ | Tidemaxxing — Peptide Catalogue & Buyer's Index | Org/WebSite/SearchAction; canonical→apex (loop) |
+| https://tidemaxxing.shop/products/bpc-157 | Buy BPC-157 — 10 mg Lyophilized Vial | Product+Offer+Review (policy risk); no safety section |
+| https://tidemaxxing.shop/products/semaglutide | Semaglutide product page | Same 10-H2 sequence as tirzepatide and retatrutide |
+| https://tidemaxxing.shop/products/tirzepatide | Tirzepatide product page | Identical structure to semaglutide |
+| https://tidemaxxing.shop/products/retatrutide | Retatrutide product page | Identical structure to semaglutide and tirzepatide |
+| https://tidemaxxing.shop/products/ipamorelin | Ipamorelin product page | Different shared structure (Growth class) |
+| https://tidemaxxing.shop/products/ghk-cu | GHK-Cu product page | Same shared structure as ipamorelin |
+| https://tidemaxxing.shop/category/fat-loss | Fat Loss category | CollectionPage+ItemList valid; canonical→apex |
+| https://tidemaxxing.shop/guides/peptides-for-fat-loss | Peptides for Fat Loss guide | No Article schema deployed; no byline; ~2,330 words |
+| https://tidemaxxing.shop/guides/bpc-157-vs-tb-500 | BPC-157 vs TB-500 guide | Same as above |
+| https://tidemaxxing.shop/reviewers/david-levison | (Reviewer profile) | **404 — undeployed** |
+| https://tidemaxxing.shop/llms.txt | llms.txt | 200, well-formed, missing Guides section |
+| https://tidemaxxing.shop/robots.txt | robots.txt | All AI crawlers allowed; appropriate disallows |
+| https://tidemaxxing.shop/sitemap.xml | Sitemap | 115 URLs, all apex (308 chain) |
+| https://tidemaxxing.shop/faq | FAQ | FAQPage schema, valid 7 Q/A |

@@ -4,9 +4,11 @@ import Link from 'next/link'
 import { parents, categories, type Parent } from '@/lib/catalog'
 import ProductCard from '@/components/ProductCard'
 import RelatedLinks from '@/components/RelatedLinks'
+import ReviewerByline from '@/components/ReviewerByline'
 import { SITE } from '@/lib/site'
 import { breadcrumbJsonLd, JsonLd } from '@/lib/schema'
 import { categoryContentFor, CategoryContent } from '@/lib/categoryContent'
+import { reviewerForScope } from '@/lib/reviewers'
 
 export const dynamic = 'force-static'
 export const revalidate = 86400
@@ -53,6 +55,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
   if (!c) notFound()
   const list = parents.filter((p) => p.category === c)
   const content = categoryContentFor(params.slug)
+  const reviewer = reviewerForScope('categories')
 
   const grid = (
     <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
@@ -92,6 +95,8 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
       </nav>
 
       {header}
+
+      {reviewer && <ReviewerByline reviewer={reviewer} />}
 
       <QuickAnswer list={list} category={c} />
 
@@ -147,13 +152,14 @@ function VariedBody({
   const usecases = <UseCases content={content} />
   const faqs = <Faqs content={content} />
   const related = <RelatedReading content={content} />
+  const gridBlock = <GridBlock grid={grid} content={content} category={category} />
 
   switch (content.layout) {
     case 'framework-first':
       return (
         <>
           {framework}
-          <GridBlock grid={grid} category={category} />
+          {gridBlock}
           {mechanism}
           {usecases}
           {faqs}
@@ -165,7 +171,7 @@ function VariedBody({
         <>
           {mechanism}
           {usecases}
-          <GridBlock grid={grid} category={category} />
+          {gridBlock}
           {framework}
           {faqs}
           {related}
@@ -176,7 +182,7 @@ function VariedBody({
         <>
           {usecases}
           {framework}
-          <GridBlock grid={grid} category={category} />
+          {gridBlock}
           {mechanism}
           {faqs}
           {related}
@@ -187,9 +193,31 @@ function VariedBody({
         <>
           {framework}
           {mechanism}
-          <GridBlock grid={grid} category={category} />
+          {gridBlock}
           {faqs}
           {usecases}
+          {related}
+        </>
+      )
+    case 'primer-first':
+      return (
+        <>
+          {mechanism}
+          {framework}
+          {usecases}
+          {gridBlock}
+          {faqs}
+          {related}
+        </>
+      )
+    case 'comparison-pivot':
+      return (
+        <>
+          {framework}
+          {gridBlock}
+          {usecases}
+          {mechanism}
+          {faqs}
           {related}
         </>
       )
@@ -229,19 +257,29 @@ function QuickAnswer({
   )
 }
 
-function GridBlock({ grid, category }: { grid: React.ReactNode; category: string }) {
+function GridBlock({
+  grid,
+  content,
+  category,
+}: {
+  grid: React.ReactNode
+  content: CategoryContent
+  category: string
+}) {
+  const heading = content.h2s?.grid ?? `${category} catalogue`
   return (
     <section className="my-12">
-      <h2 className="text-2xl font-bold text-ink-900">{category} catalogue</h2>
+      <h2 className="text-2xl font-bold text-ink-900">{heading}</h2>
       <div className="mt-4">{grid}</div>
     </section>
   )
 }
 
 function ComparisonFramework({ content }: { content: CategoryContent }) {
+  const heading = content.h2s?.framework ?? 'How to compare compounds in this class'
   return (
     <section className="my-12">
-      <h2 className="text-2xl font-bold text-ink-900">How to compare compounds in this class</h2>
+      <h2 className="text-2xl font-bold text-ink-900">{heading}</h2>
       <div className="mt-4 grid gap-4 md:grid-cols-2">
         {content.comparisonFramework.map((f) => (
           <div key={f.label} className="card p-5">
@@ -255,18 +293,20 @@ function ComparisonFramework({ content }: { content: CategoryContent }) {
 }
 
 function MechanismPrimer({ content }: { content: CategoryContent }) {
+  const heading = content.h2s?.mechanism ?? 'Mechanism primer'
   return (
     <section className="my-12 card bg-ink-50 p-6">
-      <div className="text-xs font-bold uppercase tracking-wider text-brand-600">Mechanism primer</div>
-      <p className="mt-2 text-ink-800 leading-relaxed">{content.mechanismPrimer}</p>
+      <h2 className="text-2xl font-bold text-ink-900">{heading}</h2>
+      <p className="mt-3 text-ink-800 leading-relaxed">{content.mechanismPrimer}</p>
     </section>
   )
 }
 
 function UseCases({ content }: { content: CategoryContent }) {
+  const heading = content.h2s?.useCases ?? 'Typical use-cases'
   return (
     <section className="my-12">
-      <h2 className="text-2xl font-bold text-ink-900">Typical use-cases</h2>
+      <h2 className="text-2xl font-bold text-ink-900">{heading}</h2>
       <ul className="mt-4 space-y-2">
         {content.useCases.map((u, i) => (
           <li key={i} className="flex gap-3">
@@ -281,9 +321,10 @@ function UseCases({ content }: { content: CategoryContent }) {
 
 function Faqs({ content }: { content: CategoryContent }) {
   if (!content.faqs.length) return null
+  const heading = content.h2s?.faqs ?? 'Frequently asked'
   return (
     <section className="my-12">
-      <h2 className="text-2xl font-bold text-ink-900">Frequently asked</h2>
+      <h2 className="text-2xl font-bold text-ink-900">{heading}</h2>
       <div className="mt-4 divide-y divide-ink-200 card">
         {content.faqs.map((f, i) => (
           <details key={i} className="group p-5">
@@ -298,9 +339,10 @@ function Faqs({ content }: { content: CategoryContent }) {
 
 function RelatedReading({ content }: { content: CategoryContent }) {
   if (!content.relatedReading.length) return null
+  const heading = content.h2s?.relatedReading ?? 'Related reading'
   return (
     <section className="my-12">
-      <h2 className="text-2xl font-bold text-ink-900">Related reading</h2>
+      <h2 className="text-2xl font-bold text-ink-900">{heading}</h2>
       <div className="mt-4 flex flex-wrap gap-3">
         {content.relatedReading.map((r) => (
           <Link

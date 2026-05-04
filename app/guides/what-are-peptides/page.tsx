@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuideLayout, { H2, H3, P, UL } from '@/components/GuideLayout'
+import GuideLayout, { Cite, H2, H3, P, UL } from '@/components/GuideLayout'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -27,6 +27,9 @@ export default function Page() {
       eyebrow="Guide"
       title="What Are Peptides? A Beginner's Guide"
       lead="Peptides are short chains of amino acids — the same building blocks proteins are made of, just smaller. That size difference turns out to matter a lot for biology, pharmacology, and the way peptides have come to dominate the research-compound space."
+      path="/guides/what-are-peptides"
+      datePublished="2026-04-15"
+      dateModified="2026-04-19"
       related={['bpc-157-10mg', 'semaglutide-6mg', 'ghk-cu-50mg', 'ipamorelin-10mg']}
       crossLinks={['glossary', 'recon', 'calc', 'wheretobuy', 'stacks', 'products']}
     >
@@ -37,7 +40,16 @@ export default function Page() {
         hormone. The functional difference is that shorter chains fold less, are often
         more stable, and can be chemically synthesized at scale. That last point matters:
         peptides can be manufactured by solid-phase synthesis rather than through living
-        cell lines, which keeps research-grade material affordable.
+        cell lines, which keeps research-grade material affordable. Therapeutic peptides
+        are now a major drug-development category, with over 100 approved peptide drugs
+        worldwide and a development pipeline weighted heavily toward extracellular targets
+        — GPCRs, GnRH, and the GLP-1 receptor (
+        <Cite
+          pmid="28720325"
+          label="Lau & Dunn, Bioorg Med Chem 2018"
+          title="Therapeutic peptides: Historical perspectives, current development trends, and future directions"
+        />
+        ).
       </P>
 
       <H2>How peptides signal</H2>

@@ -22,7 +22,16 @@
       "Bash(curl -sI http://localhost:3458/out/tirzepatide-15mg)",
       "Bash(curl -sI http://localhost:3458/out/bpc-157-10mg)",
       "Bash(curl -sI http://localhost:3458/out/unknownslug)",
-      "Bash(netstat -lnt)"
+      "Bash(netstat -lnt)",
+      "Bash(npx --yes tsx -e ' *)",
+      "WebFetch(domain:arnoldpublishers-com.vercel.app)",
+      "WebFetch(domain:www.arnoldpublishers.com)",
+      "Bash(awk '/^  ORDERINGS: Record<PageShape, SectionKey\\\\[\\\\]\\\\[\\\\]> = \\\\{/,/^  \\\\}/' lib/pageLayoutPlan.ts)",
+      "Bash(python3 *)",
+      "WebFetch(domain:pubmed.ncbi.nlm.nih.gov)",
+      "Bash(cp '/mnt/c/Users/Wilso/Downloads/Unconfirmed 624384.crdownload' /tmp/prod-images.zip)",
+      "Read(//tmp/**)",
+      "Bash(unzip -l prod-images.zip)"
     ]
   }
 }

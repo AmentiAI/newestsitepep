@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuideLayout, { H2, H3, P, UL } from '@/components/GuideLayout'
+import GuideLayout, { Cite, H2, H3, P, UL } from '@/components/GuideLayout'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -27,6 +27,9 @@ export default function Page() {
       eyebrow="Muscle Growth Guide"
       title="Peptides for Muscle Growth and Recovery"
       lead="The muscle-growth peptide conversation splits cleanly in two: compounds that amplify the growth-hormone axis, and compounds that accelerate soft-tissue recovery between training. The best-documented stacks combine one from each lane."
+      path="/guides/peptides-for-muscle-growth"
+      datePublished="2026-04-15"
+      dateModified="2026-04-19"
       related={['ipamorelin-10mg', 'cjc-1295-no-dac-10mg', 'igf-1-lr3-1mg', 'bpc-157-10mg']}
       crossLinks={['stacks', 'bpc', 'calc', 'recon', 'glossary', 'products']}
     >
@@ -42,9 +45,16 @@ export default function Page() {
       <H2>The GHRP side: ipamorelin, GHRP-2, GHRP-6, hexarelin</H2>
       <H3>Ipamorelin</H3>
       <P>
-        The most selective of the group. Research reports strong GH release with minimal
-        cortisol or prolactin impact — this is the "clean" reputation ipamorelin carries
-        in comparative studies. Short half-life (~2 hours) supports pulsed dosing.
+        The most selective of the group. Selectivity for GH release was demonstrated up
+        to 200-fold over the GH-release ED50 without significant ACTH or cortisol elevation
+        in the original characterisation work (
+        <Cite
+          pmid="9849822"
+          label="Raun et al., Eur J Endocrinol 1998"
+          title="Ipamorelin, the first selective growth hormone secretagogue"
+        />
+        ) — the "clean" reputation ipamorelin carries in comparative studies. Short
+        half-life (~2 hours) supports pulsed dosing.
       </P>
       <H3>GHRP-2</H3>
       <P>
@@ -68,12 +78,26 @@ export default function Page() {
       <P>
         GHRH (1-29) analog. The "No DAC" version has a half-life in hours — suited to
         multi-daily pulsed protocols. The "with DAC" version includes an albumin-binding
-        modification that extends half-life to days, for sustained-level research.
+        modification that extends half-life to days. Sustained GH and IGF-1 elevation
+        was demonstrated across 28- and 49-day human dosing in the registrational work (
+        <Cite
+          pmid="16352683"
+          label="Teichman et al., JCEM 2006"
+          title="Prolonged stimulation of GH and IGF-1 secretion by CJC-1295, a long-acting GHRH analog"
+        />
+        ).
       </P>
       <H3>Tesamorelin</H3>
       <P>
         Stabilized GHRH (1-44) analog — closer to native GHRH than CJC-1295. Daily-dose
-        research profile, well documented in visceral-adiposity models.
+        profile, with the most-cited human dataset coming from the HIV-lipodystrophy
+        registrational work showing selective visceral-fat reduction at 26 weeks (
+        <Cite
+          pmid="18057338"
+          label="Falutz et al., NEJM 2007"
+          title="Metabolic Effects of a Growth Hormone–Releasing Factor in Patients with HIV"
+        />
+        ).
       </P>
       <H3>Sermorelin</H3>
       <P>
@@ -107,14 +131,34 @@ export default function Page() {
       </P>
       <H3>BPC-157</H3>
       <P>
-        Drives angiogenesis at injury sites via the VEGFR2 pathway. Enormous rodent-model
-        literature covering tendon, ligament, muscle, and gut tissue. Unusual among peptides
-        for being orally stable.
+        Drives angiogenesis at injury sites via the VEGFR2 pathway and the Src–caveolin-1
+        –eNOS axis (
+        <Cite
+          pmid="33051481"
+          label="Hsieh et al., Sci Rep 2020"
+          title="Modulatory effects of BPC 157 on vasomotor tone and the Src–Caveolin-1–eNOS pathway"
+        />
+        ). Enormous rodent-model literature covering tendon, ligament, muscle, and gut
+        tissue, but a 2025 narrative review across 36 studies notes the human evidence
+        base remains limited (
+        <Cite
+          pmid="40789979"
+          label="Vasireddi et al., 2025 review"
+          title="Regeneration or Risk? A Narrative Review of BPC-157 for Musculoskeletal Healing"
+        />
+        ). Unusual among peptides for being orally stable.
       </P>
       <H3>TB-500</H3>
       <P>
-        Fragment of Thymosin Beta-4. Promotes cellular migration via actin sequestration.
-        Reported half-life is unusually long for a research peptide (days, not hours).
+        Fragment of Thymosin Beta-4. Promotes cellular migration via actin sequestration —
+        the original Malinda paper showed accelerated dermal wound healing in rodent
+        models (
+        <Cite
+          pmid="10469335"
+          label="Malinda et al., FASEB J 1999"
+          title="Thymosin beta4 accelerates wound healing"
+        />
+        ). Reported half-life is unusually long for a research peptide (days, not hours).
       </P>
       <H3>The combined repair blend</H3>
       <P>

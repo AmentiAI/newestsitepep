@@ -5,17 +5,15 @@ import Link from 'next/link'
 import { parents, getParent, type Parent } from '@/lib/catalog'
 import { contentFor, type CompoundContent } from '@/lib/content'
 import { SITE } from '@/lib/site'
-import { productJsonLd, breadcrumbJsonLd, JsonLd } from '@/lib/schema'
-import {
-  pageShapeFor,
-  layoutFor,
-  type SectionKey,
-  type PageShape,
-} from '@/lib/pageShape'
+import { productJsonLd, breadcrumbJsonLd, faqJsonLd, JsonLd } from '@/lib/schema'
+import { type SectionKey } from '@/lib/pageShape'
+import { planFor, type PagePlan, type PlannedSection, type HeroVariant } from '@/lib/pageLayoutPlan'
 import { copyFor } from '@/lib/productCopy'
 import { pickPairs, pickRelated, pickCompatibleCompounds } from '@/lib/relatedPicks'
+import { reviewerForScope } from '@/lib/reviewers'
 import ProductCard from '@/components/ProductCard'
 import RelatedLinks from '@/components/RelatedLinks'
+import ReviewerByline from '@/components/ReviewerByline'
 
 export const dynamic = 'force-static'
 export const revalidate = 86400
@@ -28,40 +26,18 @@ export function generateMetadata({ params }: { params: { slug: string } }): Meta
   const p = getParent(params.slug)
   if (!p) return {}
   const copy = copyFor(p)
-  const shape = pageShapeFor(p)
-  const title = titleFor(p, shape)
+  const plan = planFor(p)
   return {
-    title,
+    title: plan.title,
     description: copy.metaDescription,
     alternates: { canonical: `${SITE.baseUrl}/products/${p.slug}` },
     openGraph: {
-      title,
+      title: plan.title,
       description: copy.metaDescription,
       url: `${SITE.baseUrl}/products/${p.slug}`,
       images: [{ url: p.image }],
     },
-    twitter: { card: 'summary_large_image', title, description: copy.metaDescription },
-  }
-}
-
-// Shape-specific <title> formulae. Different suffix per shape so title-tag
-// templating doesn't read as duplicate either.
-function titleFor(p: Parent, shape: PageShape): string {
-  switch (shape) {
-    case 'value-shop':
-      return `Buy ${p.name} Online — ${p.variants.length} Vial Sizes`
-    case 'recon-first':
-      return `${p.name} for Research — Lyophilized Vial with COA`
-    case 'capsule':
-      return `Order ${p.name} Capsules — Oral Research Format`
-    case 'liquid':
-      return `${p.name} Pre-Dissolved Liquid — Ready-to-Dose Bottle`
-    case 'blend':
-      return `${p.name} Pre-Mixed Blend — Dual-Pathway Research Vial`
-    case 'solvent':
-      return `Bacteriostatic Water ${p.variants[0]?.sizeLabel ?? '30 mL'} — Peptide Reconstitution Solvent`
-    case 'specialty':
-      return `${p.name} — ${p.category} Research Compound`
+    twitter: { card: 'summary_large_image', title: plan.title, description: copy.metaDescription },
   }
 }
 
@@ -71,9 +47,8 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
 
   const c = contentFor(p.slug)
   const copy = copyFor(p)
-  const layout = layoutFor(p)
-  const shape = pageShapeFor(p)
-  const h1 = layout.h1Formula(p)
+  const plan = planFor(p)
+  const reviewer = reviewerForScope('products')
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-10">
@@ -85,18 +60,45 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         <span className="font-medium text-ink-900">{p.name}</span>
       </nav>
 
-      <Hero p={p} h1={h1} shape={shape} tagline={copy.tagline} overview={c?.overview} />
+      {reviewer && <ReviewerByline reviewer={reviewer} />}
+
+      <Hero
+        p={p}
+        plan={plan}
+        tagline={copy.tagline}
+        overview={c?.overview}
+      />
 
       <div className="mt-12 space-y-12">
-        {layout.sections.map((k) => {
-          const node = renderSection(k, p, c)
-          return node ? <div key={k}>{node}</div> : null
+        {plan.sections.map((s) => {
+          const body = renderSection(s.key, p, c, plan)
+          if (!body) return null
+          return (
+            <section key={s.key}>
+              <SectionHeader title={s.title} eyebrow={s.eyebrow} />
+              <div className="mt-4">{body}</div>
+            </section>
+          )
         })}
       </div>
 
       <RelatedLinks keys={['calc', 'recon', 'glossary', 'wheretobuy', 'stacks', 'guides']} />
 
-      <JsonLd data={productJsonLd(p, copy.shortDescription)} />
+      <JsonLd
+        data={{
+          ...productJsonLd(p, copy.shortDescription),
+          ...(reviewer
+            ? {
+                reviewedBy: {
+                  '@type': 'Person',
+                  '@id': `${SITE.baseUrl}/reviewers/${reviewer.slug}`,
+                  name: reviewer.name,
+                  jobTitle: reviewer.role,
+                },
+              }
+            : {}),
+        }}
+      />
       <JsonLd
         data={breadcrumbJsonLd([
           { name: 'Home', url: SITE.baseUrl },
@@ -104,6 +106,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
           { name: p.name, url: `${SITE.baseUrl}/products/${p.slug}` },
         ])}
       />
+      {c?.faqs.length ? <JsonLd data={faqJsonLd(c.faqs)} /> : null}
     </div>
   )
 }
@@ -112,6 +115,7 @@ function renderSection(
   k: SectionKey,
   p: Parent,
   c: CompoundContent | null,
+  plan: PagePlan,
 ): React.ReactNode {
   switch (k) {
     case 'priceTable':
@@ -131,15 +135,15 @@ function renderSection(
     case 'shelfLife':
       return <ShelfLife />
     case 'mechanismPrimer':
-      return c?.mechanism ? <MechanismPrimer mechanism={c.mechanism} /> : null
+      return c?.mechanism ? <Prose text={c.mechanism} /> : null
     case 'useCases':
       return <UseCases p={p} content={c} />
     case 'protocolNotes':
-      return c?.protocolNotes ? <ProtocolNotes text={c.protocolNotes} /> : null
+      return c?.protocolNotes ? <Prose text={c.protocolNotes} /> : null
     case 'stackingNotes':
-      return c?.stackingNotes ? <StackingNotes text={c.stackingNotes} /> : null
+      return c?.stackingNotes ? <Prose text={c.stackingNotes} /> : null
     case 'storage':
-      return c?.storage ? <Storage text={c.storage} /> : null
+      return c?.storage ? <StorageBody text={c.storage} /> : null
     case 'highlights':
       return c && c.highlights.length ? <Highlights items={c.highlights} /> : null
     case 'pairWith':
@@ -148,19 +152,25 @@ function renderSection(
       return c && c.faqs.length ? <Faqs items={c.faqs} /> : null
     case 'related':
       return <Related p={p} />
+    case 'analyticalNotes':
+      return <AnalyticalNotes p={p} plan={plan} />
+    case 'researchFraming':
+      return <ResearchFraming p={p} />
+    case 'safety':
+      return <Safety p={p} plan={plan} />
   }
 }
 
+// --- Hero variants --------------------------------------------------------
+
 function Hero({
   p,
-  h1,
-  shape,
+  plan,
   tagline,
   overview,
 }: {
   p: Parent
-  h1: string
-  shape: PageShape
+  plan: PagePlan
   tagline: string
   overview?: string
 }) {
@@ -169,6 +179,64 @@ function Hero({
   const priceLabel = multi
     ? `from ${formatUsd(primary.pricePaid)}`
     : formatUsd(primary.pricePaid)
+
+  const purityLine =
+    plan.shape === 'solvent'
+      ? 'USP-grade · 0.9% benzyl alcohol · sealed multi-dose vial'
+      : '≥98% HPLC purity · lot-matched CoA · sealed under nitrogen'
+
+  const priceBlock = (
+    <>
+      <div className="flex flex-wrap items-baseline gap-3">
+        <span className="text-3xl font-black text-ink-900">{priceLabel}</span>
+        <span className="text-xl font-medium text-ink-400 line-through">{primary.price}</span>
+        <span className="rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white">
+          SAVE {SITE.promoPercent}%
+        </span>
+      </div>
+      <div className="mt-1 text-sm text-ink-500">
+        USD · {plan.shape === 'solvent' ? 'ships sealed · ready to use' : 'ships lyophilized · discount auto-applied'}
+      </div>
+      <Link
+        href={`/buy/${primary.slug}`}
+        target="_blank"
+        rel="noopener nofollow sponsored"
+        className="btn-yellow mt-5 inline-flex items-center gap-2"
+      >
+        {multi ? `Buy ${primary.sizeLabel} →` : `Buy ${p.name} now →`}
+      </Link>
+    </>
+  )
+
+  const tagBar = (
+    <div className="mt-4 flex flex-wrap gap-2">
+      {p.tags.map((t) => (
+        <span
+          key={t}
+          className="rounded-full border border-brand-400 bg-brand-50 px-2.5 py-0.5 text-xs font-semibold text-ink-800"
+        >
+          {t}
+        </span>
+      ))}
+    </div>
+  )
+
+  const category = (
+    <div className="text-xs font-bold uppercase tracking-wider text-brand-600">{p.category}</div>
+  )
+
+  const h1 = (
+    <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 md:text-4xl">{plan.h1}</h1>
+  )
+
+  const purity = (
+    <div className="mt-3 text-xs font-semibold uppercase tracking-wider text-emerald-700">
+      {purityLine}
+    </div>
+  )
+
+  const body = renderHeroBody(plan.heroVariant, p, tagline, overview)
+
   return (
     <div className="grid gap-8 md:grid-cols-2">
       <div className="card relative aspect-square overflow-hidden">
@@ -182,50 +250,64 @@ function Hero({
         />
       </div>
       <div>
-        <div className="text-xs font-bold uppercase tracking-wider text-brand-600">{p.category}</div>
-        <h1 className="mt-2 text-3xl font-bold tracking-tight text-ink-900 md:text-4xl">{h1}</h1>
-        <div className="mt-3 text-xs font-semibold uppercase tracking-wider text-emerald-700">
-          {shape === 'solvent'
-            ? 'USP-grade · 0.9% benzyl alcohol · sealed multi-dose vial'
-            : '≥98% HPLC purity · lot-matched CoA · sealed under nitrogen'}
-        </div>
-        <p className="mt-4 text-lg text-ink-800 font-medium">{tagline}</p>
-        {overview && <p className="mt-3 leading-relaxed text-ink-700">{overview}</p>}
-
-        <div className="mt-6 flex flex-wrap items-baseline gap-3">
-          <span className="text-3xl font-black text-ink-900">{priceLabel}</span>
-          <span className="text-xl font-medium text-ink-400 line-through">{primary.price}</span>
-          <span className="rounded-md bg-red-600 px-2 py-1 text-xs font-black text-white">
-            SAVE {SITE.promoPercent}%
-          </span>
-        </div>
-        <div className="mt-1 text-sm text-ink-500">
-          USD · {shape === 'solvent' ? 'ships sealed · ready to use' : 'ships lyophilized · discount auto-applied'}
-        </div>
-
-        <Link
-          href={`/buy/${primary.slug}`}
-          target="_blank"
-          rel="noopener nofollow sponsored"
-          className="btn-yellow mt-5 inline-flex items-center gap-2"
-        >
-          {multi ? `Buy ${primary.sizeLabel} →` : `Buy ${p.name} now →`}
-        </Link>
-
-        <div className="mt-4 flex flex-wrap gap-2">
-          {p.tags.map((t) => (
-            <span
-              key={t}
-              className="rounded-full border border-brand-400 bg-brand-50 px-2.5 py-0.5 text-xs font-semibold text-ink-800"
-            >
-              {t}
-            </span>
-          ))}
-        </div>
+        {category}
+        {h1}
+        {purity}
+        {body}
+        <div className="mt-6">{priceBlock}</div>
+        {tagBar}
       </div>
     </div>
   )
 }
+
+function renderHeroBody(
+  variant: HeroVariant,
+  p: Parent,
+  tagline: string,
+  overview?: string,
+): React.ReactNode {
+  switch (variant) {
+    case 'overview-first':
+      return (
+        <>
+          {overview && <p className="mt-4 leading-relaxed text-ink-700">{overview}</p>}
+          <p className="mt-3 text-base text-ink-800 font-medium">{tagline}</p>
+        </>
+      )
+    case 'tagline-first':
+      return (
+        <>
+          <p className="mt-4 text-lg text-ink-800 font-medium">{tagline}</p>
+          {overview && <p className="mt-3 leading-relaxed text-ink-700">{overview}</p>}
+        </>
+      )
+    case 'fact-first':
+      return (
+        <>
+          <ul className="mt-4 space-y-1.5 text-sm text-ink-700">
+            <li>· Category: {p.category}</li>
+            <li>· {p.variants.length === 1 ? 'Single research size' : `${p.variants.length} research sizes`}</li>
+            <li>· Ships with lot-matched certificate of analysis</li>
+          </ul>
+          <p className="mt-3 text-base text-ink-800 font-medium">{tagline}</p>
+          {overview && <p className="mt-2 text-sm leading-relaxed text-ink-700">{overview}</p>}
+        </>
+      )
+    case 'question-first':
+      return (
+        <>
+          <p className="mt-4 text-sm font-semibold uppercase tracking-wider text-ink-500">
+            What is {p.name}?
+          </p>
+          {overview && <p className="mt-2 leading-relaxed text-ink-700">{overview}</p>}
+          <p className="mt-3 text-base text-ink-800 font-medium">{tagline}</p>
+        </>
+      )
+  }
+}
+
+// --- Section header (body-only sections use this from the page) ----------
 
 function SectionHeader({ title, eyebrow }: { title: string; eyebrow?: string }) {
   return (
@@ -238,7 +320,7 @@ function SectionHeader({ title, eyebrow }: { title: string; eyebrow?: string }) 
   )
 }
 
-// --- Value-shop: price-table lead -----------------------------------------
+// --- Section bodies -------------------------------------------------------
 
 function PriceTable({ p }: { p: Parent }) {
   const rows = p.variants
@@ -254,16 +336,15 @@ function PriceTable({ p }: { p: Parent }) {
         )
       : null
   return (
-    <section className="card p-5">
-      <div className="flex items-baseline justify-between gap-4 flex-wrap">
-        <SectionHeader title="Vial sizes and price per mg" />
-        {savingsPct !== null && savingsPct > 0 && (
+    <div className="card p-5">
+      {savingsPct !== null && savingsPct > 0 && (
+        <div className="mb-3">
           <span className="rounded-md bg-emerald-600 px-2 py-1 text-xs font-black uppercase tracking-wider text-white">
             Up to {savingsPct}% cheaper per mg
           </span>
-        )}
-      </div>
-      <div className="mt-4 overflow-x-auto">
+        </div>
+      )}
+      <div className="overflow-x-auto">
         <table className="w-full text-sm">
           <thead>
             <tr className="border-b border-ink-200 text-left text-ink-500">
@@ -304,46 +385,35 @@ function PriceTable({ p }: { p: Parent }) {
           </tbody>
         </table>
       </div>
-    </section>
+    </div>
   )
 }
-
-// --- Chip-row size picker (recon/capsule/liquid/blend/solvent/specialty) --
 
 function SizePicker({ p }: { p: Parent }) {
   if (p.variants.length === 1) return null
   return (
-    <section>
-      <SectionHeader title="Available sizes" eyebrow="In stock" />
-      <div className="mt-3 flex flex-wrap gap-2">
-        {p.variants.map((v) => (
-          <Link
-            key={v.slug}
-            href={`/buy/${v.slug}`}
-            target="_blank"
-            rel="noopener nofollow sponsored"
-            className="rounded-full border border-brand-400 bg-brand-50 px-3 py-1.5 text-sm font-semibold text-ink-800 hover:bg-brand-100"
-          >
-            {v.sizeLabel} — {formatUsd(v.pricePaid)}
-          </Link>
-        ))}
-      </div>
-    </section>
+    <div className="flex flex-wrap gap-2">
+      {p.variants.map((v) => (
+        <Link
+          key={v.slug}
+          href={`/buy/${v.slug}`}
+          target="_blank"
+          rel="noopener nofollow sponsored"
+          className="rounded-full border border-brand-400 bg-brand-50 px-3 py-1.5 text-sm font-semibold text-ink-800 hover:bg-brand-100"
+        >
+          {v.sizeLabel} — {formatUsd(v.pricePaid)}
+        </Link>
+      ))}
+    </div>
   )
 }
-
-// --- Reconstitution math (value-shop, recon-first) -----------------------
 
 function ReconMath({ p }: { p: Parent }) {
   const rows = p.variants.filter((v) => v.mg != null)
   if (rows.length === 0) return null
   return (
-    <section className="card p-5">
-      <SectionHeader
-        title="Reconstitution volumes"
-        eyebrow="Bac-water math"
-      />
-      <p className="mt-2 text-sm text-ink-600">
+    <div className="card p-5">
+      <p className="text-sm text-ink-600">
         Volumes of bacteriostatic water required to dissolve each vial at common
         research concentrations.
       </p>
@@ -373,7 +443,7 @@ function ReconMath({ p }: { p: Parent }) {
         Numbers are calculated from the stated vial mass. Verify against the supplier's
         instructions for your specific research protocol.
       </p>
-    </section>
+    </div>
   )
 }
 
@@ -382,8 +452,6 @@ function reconMl(mg: number, concentration: number): string {
   if (!isFinite(ml) || ml <= 0) return '—'
   return ml % 1 === 0 ? `${ml.toFixed(0)} mL` : `${ml.toFixed(2)} mL`
 }
-
-// --- Capsule breakdown ----------------------------------------------------
 
 function CapsuleBreakdown({ p }: { p: Parent }) {
   const rows = p.variants.map((v) => {
@@ -394,9 +462,8 @@ function CapsuleBreakdown({ p }: { p: Parent }) {
     return { v, count, per, totalMg }
   })
   return (
-    <section className="card p-5">
-      <SectionHeader title="Capsule composition" eyebrow="Oral format" />
-      <p className="mt-2 text-sm text-ink-600">
+    <div className="card p-5">
+      <p className="text-sm text-ink-600">
         Each bottle ships sealed with a lot-matched certificate of analysis covering
         per-capsule purity.
       </p>
@@ -416,11 +483,9 @@ function CapsuleBreakdown({ p }: { p: Parent }) {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
-
-// --- Liquid bottle breakdown ---------------------------------------------
 
 function BottleBreakdown({ p }: { p: Parent }) {
   const rows = p.variants.map((v) => {
@@ -432,9 +497,8 @@ function BottleBreakdown({ p }: { p: Parent }) {
     return { v, concentration, volume, totalMg }
   })
   return (
-    <section className="card p-5">
-      <SectionHeader title="Bottle breakdown and $/mL" eyebrow="Pre-dissolved liquid" />
-      <p className="mt-2 text-sm text-ink-600">
+    <div className="card p-5">
+      <p className="text-sm text-ink-600">
         Pre-mixed at the supplier's facility. Each bottle ships sealed, no
         reconstitution step required.
       </p>
@@ -460,17 +524,14 @@ function BottleBreakdown({ p }: { p: Parent }) {
           </div>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
 
-// --- Blend composition ----------------------------------------------------
-
 function BlendComposition({ p }: { p: Parent }) {
   return (
-    <section className="card p-5">
-      <SectionHeader title="Blend composition" eyebrow="Pre-mixed vial" />
-      <p className="mt-2 text-sm text-ink-600">
+    <div className="card p-5">
+      <p className="text-sm text-ink-600">
         Each vial ships as a single lyophilized cake. The supplier measures each constituent
         before co-mixing so reconstitution yields the stated mg of each peptide per mL.
       </p>
@@ -495,21 +556,15 @@ function BlendComposition({ p }: { p: Parent }) {
       <p className="mt-3 text-xs text-ink-500">
         Blend ratio is lot-verified via HPLC and documented on the per-lot certificate of analysis.
       </p>
-    </section>
+    </div>
   )
 }
-
-// --- Solvent: compatibility list -----------------------------------------
 
 function CompatibilityList({ p }: { p: Parent }) {
   const compatible = pickCompatibleCompounds(p, 12)
   return (
-    <section>
-      <SectionHeader
-        title="What reconstitutes with this vial"
-        eyebrow="Compatibility"
-      />
-      <p className="mt-2 max-w-3xl text-ink-700 leading-relaxed">
+    <div>
+      <p className="max-w-3xl text-ink-700 leading-relaxed">
         Bacteriostatic water is the standard solvent for every lyophilized peptide on
         {` ${SITE.name}`}. The 0.9% benzyl alcohol holds sterility for up to 28 days once
         the seal is broken, which matches the shelf-life of most reconstituted research
@@ -527,54 +582,40 @@ function CompatibilityList({ p }: { p: Parent }) {
           </Link>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
 
 function ShelfLife() {
   return (
-    <section className="card p-5">
-      <SectionHeader title="Shelf life and handling" eyebrow="After opening" />
-      <dl className="mt-3 grid gap-3 text-sm sm:grid-cols-2">
+    <div className="card p-5">
+      <dl className="grid gap-3 text-sm sm:grid-cols-2">
         <Row label="Sealed vial" value="24 months at room temperature, protected from light" />
         <Row label="After puncture" value="28 days at 2–8 °C with benzyl-alcohol preservative" />
         <Row label="Freezing" value="Not recommended — repeated freeze/thaw reduces sterility margin" />
         <Row label="Re-use" value="Single multi-dose vial; wipe septum with alcohol between draws" />
       </dl>
-    </section>
+    </div>
   )
 }
 
-// --- Content-backed sections ---------------------------------------------
-
-function MechanismPrimer({ mechanism }: { mechanism: string }) {
-  return (
-    <section>
-      <SectionHeader title="Mechanism in the literature" eyebrow="Primer" />
-      <p className="mt-3 text-ink-700 leading-relaxed">{mechanism}</p>
-    </section>
-  )
+function Prose({ text }: { text: string }) {
+  return <p className="text-ink-700 leading-relaxed">{text}</p>
 }
 
 function UseCases({ p, content }: { p: Parent; content: CompoundContent | null }) {
-  // Research use-cases are synthesized from the compound's highlights when
-  // available; otherwise fall back to a shape-specific line so the section
-  // never renders empty on a shape that expects it.
   const items = content?.highlights?.length
     ? content.highlights
     : defaultUseCases(p)
   return (
-    <section>
-      <SectionHeader title="Research use-cases" eyebrow="What it's used for" />
-      <ul className="mt-4 space-y-2">
-        {items.map((h, i) => (
-          <li key={i} className="flex gap-3">
-            <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-400" />
-            <span className="text-ink-700 leading-relaxed">{h}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ul className="space-y-2">
+      {items.map((h, i) => (
+        <li key={i} className="flex gap-3">
+          <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-400" />
+          <span className="text-ink-700 leading-relaxed">{h}</span>
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -586,46 +627,24 @@ function defaultUseCases(p: Parent): string[] {
   ]
 }
 
-function ProtocolNotes({ text }: { text: string }) {
+function StorageBody({ text }: { text: string }) {
   return (
-    <section>
-      <SectionHeader title="Handling in the lab" eyebrow="Protocol notes" />
-      <p className="mt-3 text-ink-700 leading-relaxed">{text}</p>
-    </section>
-  )
-}
-
-function StackingNotes({ text }: { text: string }) {
-  return (
-    <section>
-      <SectionHeader title="Stacking and paired-compound work" eyebrow="Pairing notes" />
-      <p className="mt-3 text-ink-700 leading-relaxed">{text}</p>
-    </section>
-  )
-}
-
-function Storage({ text }: { text: string }) {
-  return (
-    <section className="card bg-ink-50 p-5">
-      <SectionHeader title="Storage and shelf-life" />
-      <p className="mt-3 text-ink-700 leading-relaxed">{text}</p>
-    </section>
+    <div className="card bg-ink-50 p-5">
+      <p className="text-ink-700 leading-relaxed">{text}</p>
+    </div>
   )
 }
 
 function Highlights({ items }: { items: string[] }) {
   return (
-    <section>
-      <SectionHeader title="Key facts" eyebrow="At a glance" />
-      <ul className="mt-4 space-y-2">
-        {items.map((h, i) => (
-          <li key={i} className="flex gap-3">
-            <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-400" />
-            <span className="text-ink-700 leading-relaxed">{h}</span>
-          </li>
-        ))}
-      </ul>
-    </section>
+    <ul className="space-y-2">
+      {items.map((h, i) => (
+        <li key={i} className="flex gap-3">
+          <span className="mt-1.5 h-2 w-2 shrink-0 rounded-full bg-brand-400" />
+          <span className="text-ink-700 leading-relaxed">{h}</span>
+        </li>
+      ))}
+    </ul>
   )
 }
 
@@ -640,9 +659,8 @@ function PairWith({ p }: { p: Parent }) {
         ? `${names[0]} and ${names[1]}`
         : `${names.slice(0, -1).join(', ')} and ${names[names.length - 1]}`
   return (
-    <section className="card p-5">
-      <SectionHeader title="Often paired with" eyebrow="From the same shelf" />
-      <p className="mt-3 text-ink-800 leading-relaxed">
+    <div className="card p-5">
+      <p className="text-ink-800 leading-relaxed">
         Buyers viewing <strong>{p.name}</strong> typically also consider {list}. Each is in
         stock, sealed under nitrogen with a lot-matched CoA.
       </p>
@@ -657,23 +675,20 @@ function PairWith({ p }: { p: Parent }) {
           </Link>
         ))}
       </div>
-    </section>
+    </div>
   )
 }
 
 function Faqs({ items }: { items: { q: string; a: string }[] }) {
   return (
-    <section>
-      <SectionHeader title="Frequently asked" eyebrow="Questions we get" />
-      <div className="mt-4 divide-y divide-ink-200 card">
-        {items.map((f, i) => (
-          <details key={i} className="group p-5">
-            <summary className="cursor-pointer font-semibold text-ink-900">{f.q}</summary>
-            <p className="mt-2 text-ink-700 leading-relaxed">{f.a}</p>
-          </details>
-        ))}
-      </div>
-    </section>
+    <div className="divide-y divide-ink-200 card">
+      {items.map((f, i) => (
+        <details key={i} className="group p-5">
+          <summary className="cursor-pointer font-semibold text-ink-900">{f.q}</summary>
+          <p className="mt-2 text-ink-700 leading-relaxed">{f.a}</p>
+        </details>
+      ))}
+    </div>
   )
 }
 
@@ -681,12 +696,156 @@ function Related({ p }: { p: Parent }) {
   const related = pickRelated(p, 4)
   if (related.length === 0) return null
   return (
-    <section>
-      <SectionHeader title={`More ${p.category} compounds`} />
-      <div className="mt-4 grid grid-cols-2 gap-4 md:grid-cols-4">
-        {related.map((r) => <ProductCard key={r.slug} p={r} />)}
+    <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
+      {related.map((r) => <ProductCard key={r.slug} p={r} />)}
+    </div>
+  )
+}
+
+// --- New sections: analyticalNotes + researchFraming ---------------------
+
+function AnalyticalNotes({ p, plan }: { p: Parent; plan: PagePlan }) {
+  const solvent = plan.shape === 'solvent'
+  return (
+    <div className="card p-5">
+      <p className="text-ink-700 leading-relaxed">
+        {solvent ? (
+          <>
+            Each vial of bacteriostatic water is supplied under USP specification — 0.9%
+            benzyl alcohol preservative, endotoxin-tested, and sealed with a butyl-rubber
+            septum intended for multi-dose draws. Per-lot release paperwork is available
+            on request.
+          </>
+        ) : (
+          <>
+            Every lot of {p.name} is released against HPLC and mass-spectrometry identity
+            and purity checks. Lots ship with a COA that matches the lot number printed on
+            the vial label — verification paperwork is traceable back to the lab that
+            performed the analysis, not to an internal QA sheet.
+          </>
+        )}
+      </p>
+      <ul className="mt-3 space-y-1.5 text-sm text-ink-700">
+        <li>· Identity verified by HPLC + MS (quantitative ion match)</li>
+        <li>· Purity ≥98% by area normalisation on HPLC</li>
+        <li>· COA traceable to independent lab, not an internal QA sheet</li>
+        <li>· Lot number on COA matches lot number on vial label</li>
+      </ul>
+    </div>
+  )
+}
+
+function ResearchFraming({ p }: { p: Parent }) {
+  const cat = p.category.toLowerCase()
+  const framing: Record<string, { pitch: string; angle: string }> = {
+    'fat loss': {
+      pitch:
+        'In the fat-loss class, research reads out primarily on energy-balance and appetite-signalling endpoints. Published comparisons lean on incretin pharmacology and pharmacokinetic differences between analogs.',
+      angle:
+        'Protocols tend to separate short-acting from long-acting compounds, and single-agonist from dual-agonist work.',
+    },
+    recovery: {
+      pitch:
+        'Recovery-class research centres on soft-tissue and vascular repair. Endpoints are mechanism-level — angiogenesis, cell migration, collagen remodelling — rather than clinical outcomes.',
+      angle:
+        'Many published designs pair repair-class compounds with a complementary pathway peptide to cover both arms of the response.',
+    },
+    longevity: {
+      pitch:
+        'Longevity-class research tends to read out on pathway-level markers (senescence, mitochondrial turnover, NAD+) rather than lifespan. This keeps the class heavy on mechanism primers and light on translational claims.',
+      angle:
+        'Choice of compound usually tracks the pathway the protocol is measuring — the two decisions are effectively one.',
+    },
+    growth: {
+      pitch:
+        'Growth-axis compounds are studied primarily for their effect on pulsatile GH release and downstream IGF-1 signalling. Comparative potency mapping is the workhorse design in this class.',
+      angle:
+        'Secretagogue vs receptor-agonist choice is the first axis that separates research designs in this space.',
+    },
+    cognitive: {
+      pitch:
+        'Cognitive-research peptides span cholinergic, neuroplasticity, and cerebrovascular literature. Endpoints range from hippocampal LTP to behavioural working-memory assays.',
+      angle:
+        'Choice of administration route (systemic, ICV, intranasal) is a meaningful variable — it changes which brain regions see relevant concentrations.',
+    },
+    blends: {
+      pitch:
+        'Pre-mixed blend research is structurally distinct from single-compound work: the blend is an arm, not a starting point, and the variable being tested is the sum of two pathways.',
+      angle:
+        'Ratio matters as much as identity — the same two peptides at different ratios produce measurably different readouts.',
+    },
+  }
+  const f = framing[cat] ?? {
+    pitch: `Research in the ${cat} class spans pathway-level endpoints and pre-clinical comparison work. ${p.name} is one of the compounds researchers compare in this space.`,
+    angle:
+      'Protocol design typically weighs compound identity against the pathway the research question is measuring.',
+  }
+  return (
+    <div>
+      <p className="text-ink-700 leading-relaxed">{f.pitch}</p>
+      <p className="mt-3 text-ink-700 leading-relaxed">{f.angle}</p>
+    </div>
+  )
+}
+
+function Safety({ p, plan }: { p: Parent; plan: PagePlan }) {
+  const cat = p.category.toLowerCase()
+  const solvent = plan.shape === 'solvent'
+  const blend = plan.shape === 'blend'
+
+  if (solvent) {
+    return (
+      <div className="card border-amber-300 bg-amber-50 p-5">
+        <p className="text-ink-800 leading-relaxed">
+          Bacteriostatic water is a research solvent, not a clinical preparation. The
+          0.9% benzyl alcohol preservative is incompatible with neonatal use and with
+          some intrathecal protocols. Sterility is held by the closed-vial seal — once
+          punctured, the 28-day in-use window assumes proper septum hygiene between
+          draws. Nothing on this page is medical, clinical, or pharmacy advice.
+        </p>
       </div>
-    </section>
+    )
+  }
+
+  // Per-category caveat that varies the framing without inventing claims that don't
+  // belong to a specific compound. Each category gets language that names the actual
+  // limitation pattern for that research area.
+  const categoryCaveat: Record<string, string> = {
+    'fat loss':
+      'GLP-class compounds carry a known dose-dependent gastrointestinal profile in published research (delayed gastric emptying, nausea), and the rare-but-documented adverse signals (gallbladder events, pancreatitis flags) are why titrated escalation is the standard protocol design.',
+    recovery:
+      'Most repair-class evidence is preclinical — predominantly rodent tendon, gut, and corneal models. Human data for compounds in this class is sparse and limited to small pilot studies; cross-species extrapolation is the central caveat any honest research framing has to flag.',
+    longevity:
+      'Longevity-class endpoints are pathway-level (senescence markers, NAD+ pools, mitochondrial turnover) — not lifespan. Translating pathway-level effects into lifespan or healthspan claims is unsupported by the published literature and is exactly the inferential gap that disqualifies most longevity-marketing language.',
+    growth:
+      'Growth-axis stimulation has documented downstream effects on glucose tolerance and IGF-1 levels that compound over time. Long-horizon research designs need to track those secondary endpoints — they are the limitation most short-protocol designs ignore.',
+    cognitive:
+      'Cognitive-peptide research is heavily concentrated in single-region literature (much of it from a small number of Russian neuropharmacology groups). Replication outside those laboratories is sparse, and translation from rodent behavioural assays to human cognitive endpoints is the field-level limitation worth stating up-front.',
+    blends:
+      'Pre-mixed blends compress two protocol decisions (compound choice + ratio) into one product. That trades flexibility for convenience: the literature supporting each constituent does not automatically transfer to the blend at the supplied ratio, and additivity at the chosen ratio is itself a research question.',
+  }
+
+  const compoundFraming = blend
+    ? 'Each constituent of this blend carries its own preclinical-evidence profile. The fact that two compounds appear together in a vial is a convenience choice, not a published combination-pharmacology claim — the literature on each peptide does not automatically transfer to the blend at the ratio supplied.'
+    : `${p.name} research data sits in the preclinical and early-clinical literature. Specific dosing, schedule, and route choices in published protocols reflect those research designs — not clinical recommendations and not advice for any human use.`
+
+  const caveat = categoryCaveat[cat] ?? 'Pre-clinical evidence does not automatically generalise to other species, populations, or endpoints — every compound in this class has gaps in the published record that need to be acknowledged when designing a research protocol.'
+
+  return (
+    <div className="card border-amber-300 bg-amber-50 p-5">
+      <p className="text-ink-800 leading-relaxed">
+        {compoundFraming}
+      </p>
+      <p className="mt-3 text-ink-800 leading-relaxed">
+        {caveat}
+      </p>
+      <ul className="mt-4 space-y-1.5 text-sm text-ink-800">
+        <li>· Sold for in-vitro and laboratory research only — not for human consumption, not a medicine, not a supplement.</li>
+        <li>· Nothing on this page is medical advice, clinical dosing guidance, or a prescribing recommendation.</li>
+        <li>· The {p.name} literature is dynamic — confirm pharmacology and any cited endpoint against current peer-reviewed sources before designing a protocol.</li>
+        <li>· Lot-to-lot purity is verified by HPLC and reported on the per-lot certificate of analysis. Identity verification at the bench is still good research practice.</li>
+      </ul>
+    </div>
   )
 }
 
@@ -707,4 +866,3 @@ function formatMg(n: number): string {
   if (n < 1) return `${(n * 1000).toFixed(0)} mcg`
   return n % 1 === 0 ? `${n} mg` : `${n.toFixed(1)} mg`
 }
-

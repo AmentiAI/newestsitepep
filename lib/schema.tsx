@@ -7,26 +7,14 @@ import type { Parent } from './catalog'
  * one-Product-with-many-Offers pattern, which lets the single parent URL
  * consolidate link equity while still surfacing per-size pricing in SERPs.
  *
- * The review is an honest purity-verification attestation (HPLC ≥98%),
- * not a fabricated customer review. aggregateRating reflects that one
- * review, so the schema is eligible for rich snippets without misrepresenting
- * customer sentiment.
+ * Purity attestations live on `additionalProperty` (PropertyValue) rather than
+ * a `Review` + `aggregateRating` pair: a HPLC certificate is a measurement,
+ * not a customer review, and Google treats single-Review-from-the-seller
+ * patterns as spammy structured markup. PropertyValue is the schema-correct
+ * container for measured product attributes.
  */
 export function productJsonLd(parent: Parent, description?: string) {
   const url = `${SITE.baseUrl}/products/${parent.slug}`
-  const purityReview = {
-    '@type': 'Review',
-    author: { '@type': 'Organization', name: 'Independent HPLC Analysis' },
-    reviewRating: {
-      '@type': 'Rating',
-      ratingValue: 5,
-      bestRating: 5,
-      worstRating: 1,
-    },
-    name: `Purity Verification — ${parent.name}`,
-    reviewBody: `${parent.name} verified at ≥98% purity via high-performance liquid chromatography. Lyophilized powder meets research-grade specifications. Certificate of analysis available on request, lot-matched per vial.`,
-    datePublished: '2026-01-01',
-  }
   const offers = parent.variants.map((v) => ({
     '@type': 'Offer',
     name: v.name,
@@ -53,15 +41,30 @@ export function productJsonLd(parent: Parent, description?: string) {
     brand: { '@type': 'Brand', name: SITE.name },
     category: parent.category,
     offers,
-    review: [purityReview],
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: 5,
-      bestRating: 5,
-      worstRating: 1,
-      ratingCount: 1,
-      reviewCount: 1,
-    },
+    additionalProperty: [
+      {
+        '@type': 'PropertyValue',
+        name: 'Purity',
+        value: '≥98%',
+        unitText: 'percent',
+        measurementTechnique: 'High-performance liquid chromatography (HPLC)',
+      },
+      {
+        '@type': 'PropertyValue',
+        name: 'Certificate of analysis',
+        value: 'Lot-matched, available on request',
+      },
+      {
+        '@type': 'PropertyValue',
+        name: 'Form',
+        value: 'Lyophilized powder',
+      },
+      {
+        '@type': 'PropertyValue',
+        name: 'Intended use',
+        value: 'In vitro / laboratory research only — not for human consumption',
+      },
+    ],
   }
 }
 
@@ -87,6 +90,96 @@ export function faqJsonLd(faqs: { q: string; a: string }[]) {
       name: f.q,
       acceptedAnswer: { '@type': 'Answer', text: f.a },
     })),
+  }
+}
+
+/**
+ * Person JSON-LD for a scientific reviewer. Used on reviewer profile pages
+ * and referenced by `reviewedBy` on content they've vetted. `sameAs` must
+ * contain at least one public verification URL — absence of a verifiable
+ * source is grounds to omit the reviewer entirely rather than ship a
+ * Person schema without one.
+ */
+export function personJsonLd(r: {
+  slug: string
+  name: string
+  honorific?: string
+  postNominals?: string
+  role: string
+  affiliation: string
+  shortBio: string
+  sameAs: string[]
+}) {
+  const profileUrl = `${SITE.baseUrl}/reviewers/${r.slug}`
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Person',
+    '@id': profileUrl,
+    name: r.name,
+    honorificPrefix: r.honorific,
+    honorificSuffix: r.postNominals,
+    jobTitle: r.role,
+    affiliation: { '@type': 'Organization', name: r.affiliation },
+    description: r.shortBio,
+    url: profileUrl,
+    sameAs: r.sameAs,
+  }
+}
+
+/**
+ * Article JSON-LD for guide content. The `reviewedBy` block points at the
+ * Person schema by `@id` (the reviewer's profile URL) so Google can resolve
+ * authorship/review credentials across pages without the Person object being
+ * inlined twice. `speakable` exposes the lead paragraph to voice surfaces.
+ */
+export function articleJsonLd(opts: {
+  url: string
+  headline: string
+  description: string
+  datePublished: string
+  dateModified: string
+  reviewer?: {
+    slug: string
+    name: string
+    honorific?: string
+    postNominals?: string
+  }
+  image?: string
+}) {
+  const reviewedBy = opts.reviewer
+    ? {
+        '@type': 'Person',
+        '@id': `${SITE.baseUrl}/reviewers/${opts.reviewer.slug}`,
+        name: [opts.reviewer.honorific, opts.reviewer.name].filter(Boolean).join(' '),
+        ...(opts.reviewer.postNominals ? { honorificSuffix: opts.reviewer.postNominals } : {}),
+      }
+    : undefined
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Article',
+    mainEntityOfPage: { '@type': 'WebPage', '@id': opts.url },
+    headline: opts.headline,
+    description: opts.description,
+    url: opts.url,
+    datePublished: opts.datePublished,
+    dateModified: opts.dateModified,
+    inLanguage: 'en',
+    publisher: {
+      '@type': 'Organization',
+      name: SITE.name,
+      url: SITE.baseUrl,
+    },
+    author: {
+      '@type': 'Organization',
+      name: SITE.name,
+      url: SITE.baseUrl,
+    },
+    ...(reviewedBy ? { reviewedBy } : {}),
+    ...(opts.image ? { image: opts.image } : {}),
+    speakable: {
+      '@type': 'SpeakableSpecification',
+      cssSelector: ['h1', 'article > p:first-of-type'],
+    },
   }
 }
 

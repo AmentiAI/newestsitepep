@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuideLayout, { H2, H3, P, UL } from '@/components/GuideLayout'
+import GuideLayout, { Cite, H2, H3, P, UL } from '@/components/GuideLayout'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -27,6 +27,9 @@ export default function Page() {
       eyebrow="Fat Loss Guide"
       title="Peptides for Fat Loss: GLP-1, GIP, and Beyond"
       lead="The peptide fat-loss space has exploded. What used to be a single-drug conversation (semaglutide) is now a receptor-coverage arms race — dual agonists, triple agonists, and combinations with amylin analogs. Here's how the major players compare."
+      path="/guides/peptides-for-fat-loss"
+      datePublished="2026-04-15"
+      dateModified="2026-04-19"
       related={['semaglutide-6mg', 'tirzepatide-15mg', 'retatrutide-10mg', 'cagri-sema-blend-5mg-cagrilintide-5mg-sema-10mg']}
       crossLinks={['sema', 'stacks', 'calc', 'recon', 'wheretobuy', 'products']}
     >
@@ -34,10 +37,17 @@ export default function Page() {
       <P>
         Semaglutide is a long-acting GLP-1 receptor agonist with an engineered fatty-acid
         side chain that extends its half-life to about a week. It's the compound that put
-        the whole GLP-1 class on the map. Research models consistently show reduced
-        appetite, slower gastric emptying, and glucose-dependent insulin release. In the
-        catalogue it comes in 3, 6, 12, 20, and 30 mg vials — choose based on how long
-        your protocol runs and your target concentration.
+        the whole GLP-1 class on the map. The 68-week STEP 1 trial reported a mean weight
+        change of −14.9% vs −2.4% for placebo (
+        <Cite
+          pmid="33567185"
+          label="Wilding et al., NEJM 2021"
+          title="Once-Weekly Semaglutide in Adults with Overweight or Obesity (STEP 1)"
+        />
+        ). Research models consistently show reduced appetite, slower gastric emptying, and
+        glucose-dependent insulin release. In the catalogue it comes in 3, 6, 12, 20, and
+        30 mg vials — choose based on how long your protocol runs and your target
+        concentration.
       </P>
 
       <H2>Tirzepatide: dual GIP + GLP-1</H2>
@@ -45,25 +55,51 @@ export default function Page() {
         Tirzepatide activates both the GLP-1 and GIP receptors. GIP is a second incretin
         hormone that enhances insulin release and affects adipocyte function. The dual
         mechanism is the reason research reports stronger metabolic endpoints at lower
-        GLP-1-driven GI burden. Weekly dosing, like semaglutide. Available in 15, 30, and
-        60 mg research vials.
+        GLP-1-driven GI burden — the SURMOUNT-1 trial reported mean reductions of 16.0%,
+        21.4%, and 22.5% at the 5, 10, and 15 mg doses respectively at 72 weeks (
+        <Cite
+          pmid="35658024"
+          label="Jastreboff et al., NEJM 2022"
+          title="Tirzepatide Once Weekly for the Treatment of Obesity (SURMOUNT-1)"
+        />
+        ). Weekly dosing, like semaglutide. Available in 15, 30, and 60 mg research vials.
       </P>
 
       <H2>Retatrutide: triple agonist</H2>
       <P>
         Retatrutide goes one further: GLP-1 + GIP + glucagon receptor. The glucagon-receptor
         addition brings an energy-expenditure component on top of the appetite and
-        insulinotropic effects of the incretin pathways. In early research comparisons, the
-        broader receptor coverage produces larger effect sizes than tirzepatide in many
-        models. Available in 10, 15, 20, and 30 mg vials.
+        insulinotropic effects of the incretin pathways. The phase 2 trial reported a
+        −24.2% mean change at the 12 mg dose at 48 weeks — larger than tirzepatide at the
+        same time point in cross-trial comparison (
+        <Cite
+          pmid="37366315"
+          label="Jastreboff et al., NEJM 2023"
+          title="Triple–Hormone-Receptor Agonist Retatrutide for Obesity — A Phase 2 Trial"
+        />
+        ). Available in 10, 15, 20, and 30 mg vials.
       </P>
 
       <H2>Cagrilintide: the amylin co-agonist</H2>
       <P>
         Cagrilintide is a long-acting amylin analog. Amylin is co-secreted with insulin
-        and has separate satiety and gastric-emptying effects from GLP-1. On its own,
-        cagrilintide has modest effects. In combination with GLP-1 class compounds, it
-        produces additive endpoints. That's the logic behind the pre-blended stacks:
+        and has separate satiety and gastric-emptying effects from GLP-1. On its own, the
+        phase 2 dose-finding trial showed cagrilintide produced 6.0–10.8% weight change
+        across the 0.3–4.5 mg arms over 26 weeks (
+        <Cite
+          pmid="34798060"
+          label="Lau et al., Lancet 2021"
+          title="Once-weekly cagrilintide for weight management — phase 2 dose-finding trial"
+        />
+        ). In combination with GLP-1 class compounds it produces additive endpoints — the
+        phase 1b cagrilintide+semaglutide co-administration data is the basis for the
+        pre-blended stacks (
+        <Cite
+          pmid="33894838"
+          label="Enebo et al., Lancet 2021"
+          title="Concomitant administration of cagrilintide with semaglutide 2·4 mg — phase 1b"
+        />
+        ):
       </P>
       <UL>
         <li><strong>Cagri-Sema</strong> — cagrilintide + semaglutide. Dual satiety pathway.</li>

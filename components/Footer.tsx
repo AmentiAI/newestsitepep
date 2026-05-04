@@ -23,6 +23,7 @@ export default function Footer() {
             <li><Link href="/reconstitution-guide" className="hover:text-brand-600">Reconstitution</Link></li>
             <li><Link href="/peptide-glossary" className="hover:text-brand-600">Glossary</Link></li>
             <li><Link href="/faq" className="hover:text-brand-600">FAQ</Link></li>
+            <li><Link href="/reviewers" className="hover:text-brand-600">Scientific Reviewers</Link></li>
           </ul>
         </div>
         <div>

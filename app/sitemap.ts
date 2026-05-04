@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { parents, categories, hashSlug } from '@/lib/catalog'
+import { REVIEWERS } from '@/lib/reviewers'
 import { SITE } from '@/lib/site'
 
 const GUIDE_SLUGS = [
@@ -39,6 +40,12 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${base}/dosage-calculator`, lastModified: CONTENT_LASTMOD, priority: 0.8 },
     { url: `${base}/peptide-glossary`, lastModified: CONTENT_LASTMOD, priority: 0.7 },
     { url: `${base}/reconstitution-guide`, lastModified: CONTENT_LASTMOD, priority: 0.8 },
+    { url: `${base}/reviewers`, lastModified: CONTENT_LASTMOD, priority: 0.7 },
+    ...REVIEWERS.map((r) => ({
+      url: `${base}/reviewers/${r.slug}`,
+      lastModified: CONTENT_LASTMOD,
+      priority: 0.6,
+    })),
     ...GUIDE_SLUGS.map((s) => ({
       url: `${base}/guides/${s}`,
       lastModified: CONTENT_LASTMOD,

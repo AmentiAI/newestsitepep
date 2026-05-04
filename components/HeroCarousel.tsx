@@ -61,8 +61,14 @@ export default function HeroCarousel({ items }: { items: Parent[] }) {
                     {it.name}
                   </Link>
                   <span className="flex items-baseline gap-1.5">
-                    {multi && <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-500">from</span>}
+                    {multi && (
+                      <>
+                        <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-500">from</span>
+                        {' '}
+                      </>
+                    )}
                     <span className="text-lg font-black text-ink-900">{discountedFmt(primary.priceNum)}</span>
+                    {' '}
                     <span className="text-xs font-medium text-ink-400 line-through">{primary.price}</span>
                   </span>
                 </div>

@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuideLayout, { H2, H3, P, UL } from '@/components/GuideLayout'
+import GuideLayout, { Cite, H2, H3, P, UL } from '@/components/GuideLayout'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -27,6 +27,9 @@ export default function Page() {
       eyebrow="Compound Comparison"
       title="Semaglutide vs Tirzepatide vs Retatrutide"
       lead="Three generations of the same idea, each adding more receptors. Semaglutide activates one receptor. Tirzepatide activates two. Retatrutide activates three. Here's the detailed comparison."
+      path="/guides/semaglutide-vs-tirzepatide"
+      datePublished="2026-04-15"
+      dateModified="2026-04-19"
       related={['semaglutide-6mg', 'tirzepatide-15mg', 'retatrutide-15mg', 'cagri-sema-blend-5mg-cagrilintide-5mg-sema-10mg']}
       crossLinks={['fatloss', 'stacks', 'calc', 'recon', 'wheretobuy', 'products']}
     >
@@ -41,9 +44,16 @@ export default function Page() {
       <P>
         Semaglutide put the whole GLP-1 class on the map. It's a long-acting GLP-1 receptor
         agonist with an engineered fatty-acid side chain that extends its half-life to
-        roughly seven days — enabling once-weekly research dosing. GLP-1 receptor activation
-        slows gastric emptying, enhances glucose-dependent insulin secretion, and engages
-        central appetite-regulation pathways in the hypothalamus.
+        roughly seven days — enabling once-weekly research dosing. The 68-week STEP 1
+        trial reported a mean weight change of −14.9% versus −2.4% for placebo (
+        <Cite
+          pmid="33567185"
+          label="Wilding et al., NEJM 2021"
+          title="Once-Weekly Semaglutide in Adults with Overweight or Obesity (STEP 1)"
+        />
+        ). GLP-1 receptor activation slows gastric emptying, enhances glucose-dependent
+        insulin secretion, and engages central appetite-regulation pathways in the
+        hypothalamus.
       </P>
       <P>
         Research sizes: 3, 6, 12, 20, 30 mg. Research protocols almost universally titrate
@@ -56,7 +66,15 @@ export default function Page() {
         Tirzepatide activates both the GLP-1 and GIP receptors. GIP (glucose-dependent
         insulinotropic polypeptide) is a second incretin hormone. On its own, GIP has
         relatively modest effects — but combined with GLP-1 receptor activation, the dual
-        signal produces stronger metabolic endpoints than GLP-1 alone.
+        signal produces stronger metabolic endpoints than GLP-1 alone. The SURMOUNT-1
+        trial reported mean reductions of 16.0%, 21.4%, and 22.5% at the 5, 10, and 15 mg
+        doses respectively at 72 weeks (
+        <Cite
+          pmid="35658024"
+          label="Jastreboff et al., NEJM 2022"
+          title="Tirzepatide Once Weekly for the Treatment of Obesity (SURMOUNT-1)"
+        />
+        ).
       </P>
       <P>
         The clinical/research question with tirzepatide has always been: does the GIP
@@ -73,8 +91,15 @@ export default function Page() {
         Retatrutide goes further: GLP-1 + GIP + glucagon receptor. The glucagon receptor
         addition is mechanistically interesting because glucagon has opposite effects to
         insulin in certain tissues — raising glucose production but also increasing energy
-        expenditure. The triple-agonist design balances these effects to produce stronger
-        overall metabolic endpoints than either single or dual agonists.
+        expenditure. The phase 2 trial reported a −24.2% mean change at the 12 mg dose
+        at 48 weeks, larger than tirzepatide at the same time point in cross-trial
+        comparison (
+        <Cite
+          pmid="37366315"
+          label="Jastreboff et al., NEJM 2023"
+          title="Triple–Hormone-Receptor Agonist Retatrutide for Obesity — A Phase 2 Trial"
+        />
+        ).
       </P>
       <P>
         Research sizes: 10, 15, 20, 30 mg. Weekly dosing.
@@ -94,8 +119,14 @@ export default function Page() {
       <P>
         Cagrilintide is a long-acting amylin analog — a completely different receptor
         system. Amylin is co-secreted with insulin and regulates satiety and gastric
-        emptying through its own pathway. Combining cagrilintide with a GLP-1-class
-        compound adds a fourth receptor to the stack:
+        emptying through its own pathway (
+        <Cite
+          pmid="34798060"
+          label="Lau et al., Lancet 2021"
+          title="Once-weekly cagrilintide for weight management — phase 2 dose-finding trial"
+        />
+        ). Combining cagrilintide with a GLP-1-class compound adds a fourth receptor to
+        the stack:
       </P>
       <UL>
         <li><strong>Cagri-Sema</strong> — cagrilintide + semaglutide. Amylin + GLP-1.</li>

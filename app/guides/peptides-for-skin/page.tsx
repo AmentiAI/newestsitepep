@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import GuideLayout, { H2, H3, P, UL } from '@/components/GuideLayout'
+import GuideLayout, { Cite, H2, H3, P, UL } from '@/components/GuideLayout'
 import { SITE } from '@/lib/site'
 
 export const dynamic = 'force-static'
@@ -27,6 +27,9 @@ export default function Page() {
       eyebrow="Skin & Anti-Aging Guide"
       title="Peptides for Skin, Hair, and Anti-Aging"
       lead="Cosmetic peptide research has a much longer history than most people assume. GHK-Cu appeared in the dermatology literature in the 1970s. Here's what the current catalogue of skin-and-aging peptides actually covers and how the formats differ."
+      path="/guides/peptides-for-skin"
+      datePublished="2026-04-15"
+      dateModified="2026-04-19"
       related={['ghk-cu-50mg', 'epitalon-50mg', 'glow-blend-50mg', 'klow-blend-80mg']}
       crossLinks={['looksmaxxing', 'stacks', 'bpc', 'recon', 'glossary', 'products']}
     >
@@ -34,9 +37,21 @@ export default function Page() {
       <P>
         GHK-Cu is the backbone of cosmetic-peptide research. It's a naturally occurring
         tripeptide (glycyl-histidyl-lysine) that binds copper ions to form the biologically
-        active complex. Research describes it upregulating collagen, elastin, decorin, and
-        glycosaminoglycans — the structural proteins and polysaccharides that keep skin
-        firm and hydrated.
+        active complex. Research from the Pickart group describes it upregulating collagen,
+        elastin, decorin, and glycosaminoglycans, with broader effects across roughly a
+        third of the human "tissue remodelling" gene set (
+        <Cite
+          pmid="29986520"
+          label="Pickart et al., 2018 review"
+          title="Regenerative and Protective Actions of the GHK-Cu Peptide"
+        />
+        ;{' '}
+        <Cite
+          pmid="26236730"
+          label="Pickart et al., 2015 review"
+          title="GHK Peptide as a Natural Modulator of Multiple Cellular Pathways in Skin Regeneration"
+        />
+        ).
       </P>
       <UL>
         <li><strong>50 mg</strong> — standard research vial. Suits both injectable and topical protocols.</li>
@@ -50,10 +65,20 @@ export default function Page() {
 
       <H2>Epitalon: telomerase and circadian research</H2>
       <P>
-        Epitalon (ala-glu-asp-gly) is a synthetic tetrapeptide developed in the Russian
-        research tradition, studied for telomerase activation and pineal-axis regulation.
-        Research protocols typically use short pulsed courses (10–20 days) rather than
-        continuous dosing. Available in 10 mg and 50 mg vials.
+        Epitalon (ala-glu-asp-gly) is a synthetic tetrapeptide developed by the Khavinson
+        group at the St. Petersburg Institute of Bioregulation and Gerontology, studied
+        for telomerase activation and pineal-axis regulation. The most-cited human dataset
+        is a 6-year prospective cohort of 266 elderly patients reporting reduced mortality
+        with epithalamin/thymalin (
+        <Cite
+          pmid="14523363"
+          label="Khavinson et al., 2003"
+          title="Peptides of pineal gland and thymus prolong human life"
+        />
+        ) — the published evidence base is heavily concentrated in this single research
+        group, which is the central limitation when designing replication studies. Research
+        protocols typically use short pulsed courses (10–20 days) rather than continuous
+        dosing. Available in 10 mg and 50 mg vials.
       </P>
       <P>
         <strong>NA-Epitalon</strong> is the N-acetylated version — improved stability for
