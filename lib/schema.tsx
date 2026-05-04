@@ -15,6 +15,12 @@ import type { Parent } from './catalog'
  */
 export function productJsonLd(parent: Parent, description?: string) {
   const url = `${SITE.baseUrl}/products/${parent.slug}`
+  // Schema.org Product.image must be an absolute URL — Google's structured-data
+  // validator rejects relative paths even though og:image is normalized via
+  // metadataBase. Resolve relative `/images/...` against the canonical host.
+  const imageUrl = parent.image.startsWith('http')
+    ? parent.image
+    : `${SITE.baseUrl}${parent.image}`
   const offers = parent.variants.map((v) => ({
     '@type': 'Offer',
     name: v.name,
@@ -33,7 +39,7 @@ export function productJsonLd(parent: Parent, description?: string) {
     '@type': 'Product',
     name: parent.name,
     description: description ?? `${parent.name} — sealed vial with lot-matched CoA at ≥98% HPLC purity.`,
-    image: parent.image,
+    image: imageUrl,
     url,
     sku: parent.slug,
     mpn: parent.slug,

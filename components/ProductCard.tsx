@@ -36,19 +36,15 @@ export default function ProductCard({ p }: { p: Parent }) {
         <div className="text-[11px] font-semibold uppercase tracking-wider text-emerald-700">
           ≥98% HPLC · lot CoA
         </div>
-        <div className="mt-auto flex items-center justify-between pt-2">
-          <span className="flex items-baseline gap-1.5">
+        <div className="mt-auto flex flex-col gap-1 pt-2 sm:flex-row sm:items-center sm:justify-between sm:gap-2">
+          <span className="flex flex-wrap items-baseline gap-x-1.5 gap-y-0.5">
             {multi && (
-              <>
-                <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-500">from</span>
-                {' '}
-              </>
+              <span className="text-[10px] font-semibold uppercase tracking-wider text-ink-500">from</span>
             )}
             <span className="font-bold text-ink-900">{discountedFmt(primary.priceNum)}</span>
-            {' '}
             <span className="text-xs font-medium text-ink-400 line-through">{primary.price}</span>
           </span>
-          <span className="text-xs font-bold text-brand-600">Buy {p.name} →</span>
+          <span className="text-xs font-bold text-brand-600 sm:shrink-0">Buy →</span>
         </div>
       </div>
     </Link>

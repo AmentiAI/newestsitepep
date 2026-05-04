@@ -9,7 +9,6 @@ import ProductSearch from './ProductSearch'
 const LINKS = [
   { href: '/products', label: 'Catalogue' },
   { href: '/looksmaxxing', label: 'Looksmaxxing' },
-  { href: '/guides', label: 'Guides' },
   { href: '/dosage-calculator', label: 'Calculator' },
   { href: '/peptide-glossary', label: 'Glossary' },
 ]

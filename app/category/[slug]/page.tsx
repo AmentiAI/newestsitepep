@@ -106,7 +106,7 @@ export default function CategoryPage({ params }: { params: { slug: string } }) {
         grid
       )}
 
-      <RelatedLinks keys={['products', 'calc', 'recon', 'glossary', 'wheretobuy', 'guides']} />
+      <RelatedLinks keys={['products', 'calc', 'recon', 'glossary', 'wheretobuy']} />
 
       <JsonLd
         data={breadcrumbJsonLd([

@@ -7,52 +7,6 @@ export const revalidate = 86400
 
 const toSlug = (c: string) => c.toLowerCase().replace(/\s+/g, '-')
 
-// Editorial guide registry. Each guide is the most citable form of long-form
-// content on the site, so they get top billing in llms.txt — most LLM-agent
-// fetches lead with this file to decide which deeper URLs to crawl.
-const GUIDES: { path: string; title: string; description: string }[] = [
-  {
-    path: '/guides/what-are-peptides',
-    title: "What Are Peptides? A Beginner's Guide",
-    description: 'Definitional primer on peptides vs proteins, why size matters, and how research-peptide pharmacology differs from small-molecule drug research.',
-  },
-  {
-    path: '/guides/peptides-for-fat-loss',
-    title: 'Peptides for Fat Loss: GLP-1, GIP, and Beyond',
-    description: 'Comparison of semaglutide, tirzepatide, retatrutide, cagrilintide, and the wider metabolic-peptide lineup with inline PubMed citations to STEP 1, SURMOUNT-1, and the retatrutide phase 2 trial.',
-  },
-  {
-    path: '/guides/peptides-for-muscle-growth',
-    title: 'Peptides for Muscle Growth and Recovery',
-    description: 'Growth-hormone-axis compounds (ipamorelin, CJC-1295, IGF-1 LR3) paired with soft-tissue repair peptides (BPC-157) — how the two lanes are typically combined in published research.',
-  },
-  {
-    path: '/guides/peptides-for-skin',
-    title: 'Peptides for Skin, Hair, and Anti-Aging',
-    description: 'GHK-Cu, epitalon, and the cosmetic-peptide literature — what is well-documented, what is not, and how the formats differ.',
-  },
-  {
-    path: '/guides/peptides-for-sleep',
-    title: 'Peptides for Sleep and Cognitive Support',
-    description: 'DSIP, selank, semax, and pinealon — the narrow-but-deep sleep and nootropic peptide literature, much of it from Russian neuropharmacology groups.',
-  },
-  {
-    path: '/guides/peptide-stacks',
-    title: 'Popular Peptide Stacks Explained',
-    description: 'Why certain peptide combinations recur in research protocols — BPC-157+TB-500, ipamorelin+CJC-1295, cagri-sema, and the logic behind dual-pathway designs.',
-  },
-  {
-    path: '/guides/bpc-157-vs-tb-500',
-    title: 'BPC-157 vs TB-500: Repair Peptide Comparison',
-    description: 'Mechanism-level comparison of the two most-studied repair peptides — angiogenesis vs cell-migration pathways — with inline PubMed citations from the Sikiric, Hsieh, Goldstein, and Treadwell groups.',
-  },
-  {
-    path: '/guides/semaglutide-vs-tirzepatide',
-    title: 'Semaglutide vs Tirzepatide vs Retatrutide',
-    description: 'Single, dual, and triple receptor agonists compared — receptor coverage, dosing structure, and how the published comparative data reads.',
-  },
-]
-
 export async function GET() {
   const lines: string[] = []
   lines.push(`# ${SITE.name}`)
@@ -67,12 +21,6 @@ export async function GET() {
   lines.push('- Tracked US shipping 3–5 business days')
   lines.push('- Free US shipping on orders over $200')
   lines.push('- Laboratory-use only — not for human consumption')
-  lines.push('')
-
-  lines.push('## Guides')
-  for (const g of GUIDES) {
-    lines.push(`- [${g.title}](${SITE.baseUrl}${g.path}): ${g.description}`)
-  }
   lines.push('')
 
   lines.push('## Store classes')

@@ -21,7 +21,7 @@ export default function GuideLayout({
   eyebrow: string
   title: string
   lead: string
-  /** Site-relative path of this guide, e.g. "/guides/peptides-for-fat-loss". Used for the canonical URL in Article JSON-LD. */
+  /** Site-relative path of this page, e.g. "/looksmaxxing". Used for the canonical URL in Article JSON-LD. */
   path: string
   /** ISO 8601 date the guide was first published. */
   datePublished: string

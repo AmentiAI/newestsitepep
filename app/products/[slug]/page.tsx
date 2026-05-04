@@ -82,7 +82,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
         })}
       </div>
 
-      <RelatedLinks keys={['calc', 'recon', 'glossary', 'wheretobuy', 'stacks', 'guides']} />
+      <RelatedLinks keys={['calc', 'recon', 'glossary', 'wheretobuy']} />
 
       <JsonLd
         data={{

@@ -13,11 +13,6 @@ const ALL: Record<string, LinkItem> = {
     title: 'Looksmaxxing Peptides',
     blurb: 'Skin, pigmentation, body composition, recovery.',
   },
-  guides: {
-    href: '/guides',
-    title: 'All Guides',
-    blurb: 'In-depth explainers across the research peptide space.',
-  },
   calc: {
     href: '/dosage-calculator',
     title: 'Dosage Calculator',
@@ -37,46 +32,6 @@ const ALL: Record<string, LinkItem> = {
     href: '/where-to-buy-peptides',
     title: 'Where to Buy Peptides',
     blurb: 'Buyer\'s guide — COAs, red flags, vendor selection.',
-  },
-  stacks: {
-    href: '/guides/peptide-stacks',
-    title: 'Peptide Stacks Explained',
-    blurb: 'Why compounds are combined and the canonical stacks.',
-  },
-  sema: {
-    href: '/guides/semaglutide-vs-tirzepatide',
-    title: 'Semaglutide vs Tirzepatide vs Retatrutide',
-    blurb: 'Single, dual, and triple agonists compared.',
-  },
-  bpc: {
-    href: '/guides/bpc-157-vs-tb-500',
-    title: 'BPC-157 vs TB-500',
-    blurb: 'The canonical repair stack — mechanisms compared.',
-  },
-  fatloss: {
-    href: '/guides/peptides-for-fat-loss',
-    title: 'Peptides for Fat Loss',
-    blurb: 'GLP-1, amylin, and the incretin class.',
-  },
-  muscle: {
-    href: '/guides/peptides-for-muscle-growth',
-    title: 'Peptides for Muscle Growth',
-    blurb: 'Growth-axis and secretagogue compounds.',
-  },
-  skin: {
-    href: '/guides/peptides-for-skin',
-    title: 'Peptides for Skin',
-    blurb: 'GHK-Cu, repair peptides, pigmentation compounds.',
-  },
-  sleep: {
-    href: '/guides/peptides-for-sleep',
-    title: 'Peptides for Sleep',
-    blurb: 'DSIP, Pinealon, and sleep-axis research peptides.',
-  },
-  basics: {
-    href: '/guides/what-are-peptides',
-    title: 'What Are Peptides?',
-    blurb: 'Foundations — what a peptide is and how it differs from a protein.',
   },
 }
 

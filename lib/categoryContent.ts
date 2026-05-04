@@ -98,8 +98,8 @@ const BY_SLUG: Record<string, CategoryContent> = {
       },
     ],
     relatedReading: [
-      { label: 'Semaglutide vs tirzepatide', href: '/guides/semaglutide-vs-tirzepatide' },
-      { label: 'Peptides for fat loss', href: '/guides/peptides-for-fat-loss' },
+      { label: 'Where to buy peptides', href: '/where-to-buy-peptides' },
+      { label: 'Reconstitution guide', href: '/reconstitution-guide' },
       { label: 'Dosage calculator', href: '/dosage-calculator' },
     ],
     layout: 'framework-first',
@@ -158,9 +158,9 @@ const BY_SLUG: Record<string, CategoryContent> = {
       },
     ],
     relatedReading: [
-      { label: 'BPC-157 vs TB-500', href: '/guides/bpc-157-vs-tb-500' },
+      { label: 'Where to buy peptides', href: '/where-to-buy-peptides' },
       { label: 'Reconstitution guide', href: '/reconstitution-guide' },
-      { label: 'Peptide stacks', href: '/guides/peptide-stacks' },
+      { label: 'Peptide glossary', href: '/peptide-glossary' },
     ],
     layout: 'mechanism-first',
     h2s: {
@@ -219,7 +219,7 @@ const BY_SLUG: Record<string, CategoryContent> = {
     ],
     relatedReading: [
       { label: 'Peptide glossary', href: '/peptide-glossary' },
-      { label: 'All guides', href: '/guides' },
+      { label: 'Where to buy peptides', href: '/where-to-buy-peptides' },
       { label: 'Reconstitution guide', href: '/reconstitution-guide' },
     ],
     layout: 'usecase-first',
@@ -278,7 +278,7 @@ const BY_SLUG: Record<string, CategoryContent> = {
       },
     ],
     relatedReading: [
-      { label: 'Peptides for muscle growth', href: '/guides/peptides-for-muscle-growth' },
+      { label: 'Where to buy peptides', href: '/where-to-buy-peptides' },
       { label: 'Reconstitution guide', href: '/reconstitution-guide' },
       { label: 'Dosage calculator', href: '/dosage-calculator' },
     ],
@@ -340,7 +340,7 @@ const BY_SLUG: Record<string, CategoryContent> = {
     relatedReading: [
       { label: 'Peptide glossary', href: '/peptide-glossary' },
       { label: 'Looksmaxxing peptides', href: '/looksmaxxing' },
-      { label: 'Guides', href: '/guides' },
+      { label: 'Reconstitution guide', href: '/reconstitution-guide' },
     ],
     layout: 'primer-first',
     h2s: {
@@ -398,8 +398,8 @@ const BY_SLUG: Record<string, CategoryContent> = {
       },
     ],
     relatedReading: [
-      { label: 'BPC-157 vs TB-500', href: '/guides/bpc-157-vs-tb-500' },
-      { label: 'Peptide stacks', href: '/guides/peptide-stacks' },
+      { label: 'Where to buy peptides', href: '/where-to-buy-peptides' },
+      { label: 'Peptide glossary', href: '/peptide-glossary' },
       { label: 'Reconstitution guide', href: '/reconstitution-guide' },
     ],
     layout: 'comparison-pivot',

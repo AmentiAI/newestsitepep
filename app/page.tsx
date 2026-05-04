@@ -103,7 +103,7 @@ export default function HomePage() {
       </section>
 
       <section className="mx-auto max-w-7xl px-4 sm:px-6">
-        <RelatedLinks title="Start here" keys={['wheretobuy', 'calc', 'recon', 'glossary', 'guides', 'looksmaxxing']} />
+        <RelatedLinks title="Start here" keys={['wheretobuy', 'calc', 'recon', 'glossary', 'looksmaxxing']} />
       </section>
 
       <section className="mx-auto max-w-7xl px-6 py-16">

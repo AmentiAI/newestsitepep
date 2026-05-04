@@ -124,7 +124,7 @@ export default function Page() {
         </section>
       </div>
 
-      <RelatedLinks keys={['products', 'recon', 'calc', 'glossary', 'basics', 'stacks']} />
+      <RelatedLinks keys={['products', 'recon', 'calc', 'glossary']} />
 
       <section className="mt-10 card bg-brand-50 border-brand-400 p-6 sm:p-8">
         <h2 className="text-xl font-bold text-ink-900">Start browsing</h2>
@@ -134,7 +134,6 @@ export default function Page() {
         </p>
         <div className="mt-4 flex flex-wrap gap-3">
           <Link href="/products" className="btn-yellow">Buy research peptides →</Link>
-          <Link href="/guides" className="btn-outline">Read the guides</Link>
         </div>
       </section>
     </div>
